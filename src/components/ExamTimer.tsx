@@ -25,9 +25,10 @@ export function ExamTimer({ timeLeft, onTick, onTimeUp, active }: ExamTimerProps
     }
   }, [active, timeLeft, onTick, onTimeUp]);
 
-  const minutes = Math.floor(timeLeft / 60);
+  const hours = Math.floor(timeLeft / 3600);
+  const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;
-  const formatted = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  const formatted = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   const isWarning = timeLeft < TIMER_WARNING_SECONDS;
 
   return (
