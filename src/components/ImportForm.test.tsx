@@ -52,8 +52,14 @@ describe("validateQuestions", () => {
   });
 
   it("rejects wrong option count", () => {
-    const result = validateQuestions([makeQuestion({ options: ["A", "B", "C"] })]);
-    expect(result.errors[0].message).toContain("exactly 4");
+    expect(validateQuestions([makeQuestion({ options: ["A"] })]).errors[0].message).toContain("2-6");
+    expect(validateQuestions([makeQuestion({ options: [] })]).errors[0].message).toContain("2-6");
+  });
+
+  it("accepts 2-6 options", () => {
+    expect(validateQuestions([makeQuestion({ options: ["A", "B"] })]).valid).toHaveLength(1);
+    expect(validateQuestions([makeQuestion({ options: ["A", "B", "C"] })]).valid).toHaveLength(1);
+    expect(validateQuestions([makeQuestion({ options: ["A", "B", "C", "D", "E", "F"] })]).valid).toHaveLength(1);
   });
 
   it("rejects empty option strings", () => {
@@ -62,9 +68,17 @@ describe("validateQuestions", () => {
   });
 
   it("rejects answer out of range", () => {
-    expect(validateQuestions([makeQuestion({ answer: -1 })]).errors[0].message).toContain("0, 1, 2, or 3");
-    expect(validateQuestions([makeQuestion({ answer: 4 })]).errors[0].message).toContain("0, 1, 2, or 3");
-    expect(validateQuestions([makeQuestion({ answer: 1.5 })]).errors[0].message).toContain("0, 1, 2, or 3");
+    expect(validateQuestions([makeQuestion({ answer: -1 })]).errors[0].message).toContain("answer must be");
+    expect(validateQuestions([makeQuestion({ answer: 4 })]).errors[0].message).toContain("answer must be");
+    expect(validateQuestions([makeQuestion({ answer: 1.5 })]).errors[0].message).toContain("answer must be");
+  });
+
+  it("accepts questions without answer and explanation", () => {
+    const q = { domain_id: 1, question: "Test?", options: ["A", "B", "C", "D"] };
+    const result = validateQuestions([q]);
+    expect(result.valid).toHaveLength(1);
+    expect(result.valid[0].answer).toBeNull();
+    expect(result.valid[0].explanation).toBeNull();
   });
 
   it("rejects empty question text", () => {
@@ -72,7 +86,7 @@ describe("validateQuestions", () => {
     expect(result.errors[0].message).toContain("non-empty string");
   });
 
-  it("rejects empty explanation", () => {
+  it("rejects empty explanation when provided", () => {
     const result = validateQuestions([makeQuestion({ explanation: "" })]);
     expect(result.errors[0].message).toContain("non-empty string");
   });

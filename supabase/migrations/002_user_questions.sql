@@ -6,8 +6,8 @@ CREATE TABLE user_questions (
   domain_id SMALLINT NOT NULL REFERENCES domains(id),
   question TEXT NOT NULL,
   options JSONB NOT NULL,
-  answer SMALLINT NOT NULL,
-  explanation TEXT NOT NULL,
+  answer SMALLINT,
+  explanation TEXT,
   created_at TIMESTAMPTZ DEFAULT now()
 );
 

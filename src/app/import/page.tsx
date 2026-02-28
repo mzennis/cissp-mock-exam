@@ -35,8 +35,8 @@ export default function ImportPage() {
       domain_id: number;
       question: string;
       options: string[];
-      answer: number;
-      explanation: string;
+      answer?: number | null;
+      explanation?: string | null;
     }[]
   ) => {
     if (!user) return;
@@ -47,8 +47,8 @@ export default function ImportPage() {
       domain_id: q.domain_id,
       question: q.question,
       options: q.options,
-      answer: q.answer,
-      explanation: q.explanation,
+      answer: q.answer ?? null,
+      explanation: q.explanation ?? null,
     }));
 
     const { error } = await supabase.from("user_questions").insert(rows);
@@ -99,8 +99,8 @@ export default function ImportPage() {
     "domain_id": 1,
     "question": "What is the primary purpose of...",
     "options": ["Option A", "Option B", "Option C", "Option D"],
-    "answer": 0,
-    "explanation": "The correct answer is A because..."
+    "answer": 0,            // optional (0-based index)
+    "explanation": "..."    // optional
   }
 ]`}
           </pre>

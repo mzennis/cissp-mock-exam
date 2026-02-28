@@ -50,20 +50,26 @@ export function QuestionCard({
           let indicatorText = "text-cissp-text-secondary";
 
           if (isAnswered) {
-            if (i === question.answer) {
+            if (question.answer != null && i === question.answer) {
               bg = "bg-cissp-green/[0.12]";
               border = "border-cissp-green/40";
               text = "text-cissp-green-light";
               indicatorBg = "bg-cissp-green/30";
               indicatorText = "text-cissp-green-light";
               indicator = "\u2713";
-            } else if (i === selectedAnswer && i !== question.answer) {
-              bg = "bg-cissp-red/[0.12]";
-              border = "border-cissp-red/40";
-              text = "text-cissp-red-light";
-              indicatorBg = "bg-cissp-red/30";
-              indicatorText = "text-cissp-red-light";
-              indicator = "\u2717";
+            } else if (i === selectedAnswer && (question.answer == null || i !== question.answer)) {
+              if (question.answer != null) {
+                bg = "bg-cissp-red/[0.12]";
+                border = "border-cissp-red/40";
+                text = "text-cissp-red-light";
+                indicatorBg = "bg-cissp-red/30";
+                indicatorText = "text-cissp-red-light";
+                indicator = "\u2717";
+              } else {
+                bg = "bg-white/[0.08]";
+                border = "border-cissp-text-muted/30";
+                text = "text-cissp-text";
+              }
             }
           }
 
@@ -94,7 +100,7 @@ export function QuestionCard({
         })}
       </div>
 
-      {isAnswered && (
+      {isAnswered && question.explanation && (
         <div className="bg-cissp-teal/[0.08] border border-cissp-teal/20 rounded-xl p-5 mb-5">
           <div className="text-[11px] font-bold text-cissp-teal uppercase tracking-[0.1em] mb-2">
             Explanation

@@ -7,8 +7,8 @@ interface ImportQuestion {
   domain_id: number;
   question: string;
   options: string[];
-  answer: number;
-  explanation: string;
+  answer?: number | null;
+  explanation?: string | null;
 }
 
 interface ImportFormProps {
@@ -44,7 +44,7 @@ export function validateQuestions(
       continue;
     }
 
-    const missing = ["domain_id", "question", "options", "answer", "explanation"].filter(
+    const missing = ["domain_id", "question", "options"].filter(
       (f) => !(f in item)
     );
     if (missing.length > 0) {
@@ -62,8 +62,8 @@ export function validateQuestions(
       continue;
     }
 
-    if (!Array.isArray(item.options) || item.options.length !== 4) {
-      errors.push({ index: i, message: "options must be an array of exactly 4 strings" });
+    if (!Array.isArray(item.options) || item.options.length < 2 || item.options.length > 6) {
+      errors.push({ index: i, message: "options must be an array of 2-6 strings" });
       continue;
     }
 
@@ -72,22 +72,26 @@ export function validateQuestions(
       continue;
     }
 
-    if (typeof item.answer !== "number" || !Number.isInteger(item.answer) || item.answer < 0 || item.answer > 3) {
-      errors.push({ index: i, message: "answer must be 0, 1, 2, or 3" });
-      continue;
+    if ("answer" in item && item.answer != null) {
+      if (typeof item.answer !== "number" || !Number.isInteger(item.answer) || item.answer < 0 || item.answer >= item.options.length) {
+        errors.push({ index: i, message: `answer must be 0-${item.options.length - 1}` });
+        continue;
+      }
     }
 
-    if (typeof item.explanation !== "string" || item.explanation.trim() === "") {
-      errors.push({ index: i, message: "explanation must be a non-empty string" });
-      continue;
+    if ("explanation" in item && item.explanation != null) {
+      if (typeof item.explanation !== "string" || item.explanation.trim() === "") {
+        errors.push({ index: i, message: "explanation must be a non-empty string if provided" });
+        continue;
+      }
     }
 
     valid.push({
       domain_id: item.domain_id,
       question: item.question,
       options: item.options,
-      answer: item.answer,
-      explanation: item.explanation,
+      answer: item.answer ?? null,
+      explanation: item.explanation ?? null,
     });
   }
 

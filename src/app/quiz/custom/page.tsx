@@ -51,7 +51,7 @@ export default function CustomQuizPage() {
     (idx: number) => {
       if (isAnswered) return;
       const q = questions[currentQ];
-      const correct = idx === q.answer;
+      const correct = q.answer != null && idx === q.answer;
       setSelectedAnswer(idx);
       setIsAnswered(true);
       setAnswers((prev) => ({

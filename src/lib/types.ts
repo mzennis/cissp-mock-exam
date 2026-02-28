@@ -11,8 +11,8 @@ export interface Question {
   domain_id: number;
   question: string;
   options: string[];
-  answer: number;
-  explanation: string;
+  answer: number | null;
+  explanation: string | null;
 }
 
 export interface AnswerRecord {
