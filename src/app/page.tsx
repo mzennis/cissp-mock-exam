@@ -11,11 +11,12 @@ async function getUserQuestionCount(): Promise<number> {
   } = await supabase.auth.getUser();
   if (!user) return 0;
 
-  const { count } = await supabase
+  const { count, error } = await supabase
     .from("user_questions")
     .select("*", { count: "exact", head: true })
     .eq("user_id", user.id);
 
+  if (error) return 0;
   return count ?? 0;
 }
 
