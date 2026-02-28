@@ -57,7 +57,7 @@
       "Physical control failure"
     ],
     "answer": 1,
-    "explanation": "Log review is a detective control — it's designed to identify security events and anomalies. Failure to review logs means potential security incidents go undetected, which is a detective control deficiency."
+    "explanation": "Log review is a detective control \u2014 it's designed to identify security events and anomalies. Failure to review logs means potential security incidents go undetected, which is a detective control deficiency."
   },
   {
     "domain_id": 6,
@@ -105,7 +105,7 @@
       "Can only identify runtime errors and memory corruption"
     ],
     "answer": 1,
-    "explanation": "SAST analyzes source code, bytecode, or binaries statically — without executing the application — enabling early detection in the SDLC (shift left). DAST tests the running application by interacting with it as an attacker would, finding runtime issues SAST misses. DAST does not require source code access. Both are complementary and together with SCA (software composition analysis) form a comprehensive AppSec testing approach."
+    "explanation": "SAST analyzes source code, bytecode, or binaries statically \u2014 without executing the application \u2014 enabling early detection in the SDLC (shift left). DAST tests the running application by interacting with it as an attacker would, finding runtime issues SAST misses. DAST does not require source code access. Both are complementary and together with SCA (software composition analysis) form a comprehensive AppSec testing approach."
   },
   {
     "domain_id": 6,
@@ -165,7 +165,7 @@
       "Average time to complete employee security awareness training"
     ],
     "answer": 2,
-    "explanation": "KRIs are forward-looking metrics that signal increasing risk levels — a spike in phishing attempts is a leading indicator of elevated threat exposure. KPIs measure performance against objectives (patch compliance, SLA adherence, training completion). KRIs help management anticipate and respond to emerging risks before they become incidents."
+    "explanation": "KRIs are forward-looking metrics that signal increasing risk levels \u2014 a spike in phishing attempts is a leading indicator of elevated threat exposure. KPIs measure performance against objectives (patch compliance, SLA adherence, training completion). KRIs help management anticipate and respond to emerging risks before they become incidents."
   },
   {
     "domain_id": 6,
@@ -177,7 +177,7 @@
       "Network-level vulnerability scanning"
     ],
     "answer": 1,
-    "explanation": "XXE testing requires dynamically sending crafted XML payloads to the running application to observe its behavior — a DAST approach. While SAST can flag insecure XML parser configurations, confirming exploitability requires sending malformed input and observing responses. Log review is detective, not testing. Network scanners typically cannot test application-layer XML processing."
+    "explanation": "XXE testing requires dynamically sending crafted XML payloads to the running application to observe its behavior \u2014 a DAST approach. While SAST can flag insecure XML parser configurations, confirming exploitability requires sending malformed input and observing responses. Log review is detective, not testing. Network scanners typically cannot test application-layer XML processing."
   },
   {
     "domain_id": 6,
@@ -208,7 +208,7 @@
     "question": "During a compliance assessment, an auditor finds that a financial services firm stores credit card numbers in plaintext in their database. Under PCI DSS, this is MOST accurately classified as:",
     "options": [
       "A control deficiency requiring a compensating control",
-      "A critical finding requiring immediate remediation — storing PANs unencrypted violates PCI DSS Requirement 3",
+      "A critical finding requiring immediate remediation \u2014 storing PANs unencrypted violates PCI DSS Requirement 3",
       "An acceptable practice if the database is behind a firewall",
       "A low-risk finding because the database is internal only"
     ],
@@ -250,5 +250,293 @@
     ],
     "answer": 1,
     "explanation": "Password spraying involves trying a small number of common passwords against many different accounts from the same source, avoiding account lockout thresholds. Brute-force attacks repeatedly try many passwords against one account. Credential stuffing uses specific username/password pairs from breached databases. A DoS attack would target availability, not authentication attempts."
+  },
+  {
+    "domain_id": 6,
+    "question": "A security organization conducts an exercise where a red team simulates advanced adversary tactics while the blue team defends and detects in real time, and both teams debrief together afterward to share findings and improve controls. This exercise format is called:",
+    "options": [
+      "Red team assessment",
+      "Purple team exercise",
+      "Tabletop exercise",
+      "Capture the flag (CTF) competition"
+    ],
+    "answer": 1,
+    "explanation": "A purple team exercise is the collaborative model where red (offensive) and blue (defensive) teams work together \u2014 or sequentially with shared knowledge \u2014 to maximize detection improvement and control validation. The red team's findings are immediately shared with the blue team to tune detections. A standard red team assessment provides findings only in a final report. A tabletop exercise is discussion-based without technical execution. CTF is a skills competition, not an enterprise assessment format."
+  },
+  {
+    "domain_id": 6,
+    "question": "A CVSS v3.1 base score of 9.8 is assigned to a remote code execution vulnerability with no authentication required, no user interaction, and high impact to confidentiality, integrity, and availability. What does the temporal score allow organizations to do?",
+    "options": [
+      "Permanently override the base score based on internal risk tolerance",
+      "Adjust the effective score based on exploit code availability, remediation status, and report confidence",
+      "Calculate the financial impact of the vulnerability on the organization",
+      "Compare the vulnerability severity against organization-specific asset values"
+    ],
+    "answer": 1,
+    "explanation": "The CVSS temporal score modifies the base score based on factors that change over time: exploit code maturity (proof-of-concept vs. weaponized), remediation level (official fix available vs. workaround), and report confidence (confirmed vs. unconfirmed). The environmental score adjusts for organization-specific factors (asset value, existing controls). Financial impact is not part of CVSS scoring."
+  },
+  {
+    "domain_id": 6,
+    "question": "A SOC analyst proactively searches for evidence of C2 beaconing and lateral movement in network logs without relying on automated SIEM alerts. This practice is BEST described as:",
+    "options": [
+      "Incident response",
+      "Vulnerability scanning",
+      "Threat hunting",
+      "Security monitoring"
+    ],
+    "answer": 2,
+    "explanation": "Threat hunting is the proactive, analyst-driven search for threats that have evaded automated detection. Hunters form hypotheses based on threat intelligence and ATT&CK techniques, then investigate data to confirm or refute them. Incident response is reactive (triggered by a confirmed or suspected incident). Vulnerability scanning identifies weaknesses in systems. Security monitoring is the ongoing passive observation of alerts from automated tools."
+  },
+  {
+    "domain_id": 6,
+    "question": "An organization's DR team conducts a tabletop exercise simulating a ransomware outbreak that encrypts 60% of file servers. Which statement BEST describes the PRIMARY limitation of this exercise type?",
+    "options": [
+      "Tabletop exercises are too expensive for most organizations to conduct",
+      "The exercise validates understanding and decision-making but does not test whether technical recovery procedures actually work",
+      "Tabletop exercises require a fully operational DR site to be meaningful",
+      "Only C-level executives should participate in tabletop exercises"
+    ],
+    "answer": 1,
+    "explanation": "Tabletop exercises are discussion-based \u2014 participants walk through a scenario and discuss responses without executing technical procedures. They validate awareness, decision-making, and communication plans but cannot confirm that backup restoration actually works within the RTO, or that runbooks are accurate. Technical testing (simulation, parallel, or full interruption tests) is required to validate actual recovery capabilities. Tabletops are low-cost and valuable at all organizational levels."
+  },
+  {
+    "domain_id": 6,
+    "question": "A security team deploys synthetic transaction monitoring on a critical payment processing API. Which BEST describes the purpose of this control?",
+    "options": [
+      "To detect and block fraudulent transactions in real time using ML",
+      "To simulate real user transactions continuously and alert when response time or correctness deviates from baseline",
+      "To record all API transactions for forensic analysis",
+      "To test the payment API's resilience to SQL injection attacks"
+    ],
+    "answer": 1,
+    "explanation": "Synthetic transaction monitoring uses scripted, simulated transactions executed on a regular schedule to continuously test that a system is functioning correctly \u2014 both in availability and correctness. Deviations from expected responses or latency thresholds trigger alerts before real users are affected. This is distinct from real user monitoring (RUM), which observes actual user transactions. It is not a fraud detection, forensic logging, or security testing tool."
+  },
+  {
+    "domain_id": 6,
+    "question": "Cloud Security Posture Management (CSPM) tools primarily address which category of cloud security risk?",
+    "options": [
+      "Runtime workload threats such as malware executing inside cloud VMs",
+      "Misconfiguration of cloud services resulting in unintended exposure (e.g., public S3 buckets, open security groups)",
+      "Insider threats from cloud provider employees accessing tenant data",
+      "Application-layer vulnerabilities in code deployed to cloud functions"
+    ],
+    "answer": 1,
+    "explanation": "CSPM tools continuously scan cloud infrastructure configurations against security best practices and compliance benchmarks, flagging misconfigurations such as publicly accessible storage, overly permissive IAM policies, disabled encryption, or missing logging. Runtime threat detection is addressed by Cloud Workload Protection Platforms (CWPP). Application-layer vulnerabilities are addressed by SAST/DAST. Cloud provider insider threats are a contractual and audit concern addressed by SLAs and certifications."
+  },
+  {
+    "domain_id": 6,
+    "question": "A DevSecOps team scans all Docker images in their registry against known CVE databases before allowing deployment. Which security practice does this represent?",
+    "options": [
+      "Infrastructure as Code (IaC) scanning",
+      "Software Composition Analysis (SCA)",
+      "Container image vulnerability scanning",
+      "Dynamic application testing"
+    ],
+    "answer": 2,
+    "explanation": "Container image vulnerability scanning checks the packages, libraries, and OS components in a container image against CVE databases to identify known vulnerabilities before deployment. SCA specifically analyzes open-source dependencies in application source code. IaC scanning analyzes Terraform/CloudFormation templates for misconfigurations. DAST tests the running application. Container scanning is a distinct practice targeting the image layer."
+  },
+  {
+    "domain_id": 6,
+    "question": "A Terraform configuration that creates an EC2 instance with a public IP and allows SSH from 0.0.0.0/0 is detected before deployment. Which security practice identified this issue?",
+    "options": [
+      "Container security scanning",
+      "Software Composition Analysis (SCA)",
+      "Infrastructure as Code (IaC) scanning",
+      "Cloud Security Posture Management (CSPM)"
+    ],
+    "answer": 2,
+    "explanation": "IaC scanning (tools like Checkov, tfsec, or KICS) analyzes Terraform, CloudFormation, and other IaC templates for security misconfigurations before they are applied \u2014 shifting infrastructure security left into the development pipeline. Container scanning checks image layers. SCA checks application dependencies. CSPM detects misconfigurations in deployed cloud resources (post-deployment). IaC scanning is preventive; CSPM is detective."
+  },
+  {
+    "domain_id": 6,
+    "question": "An organization receives a Software Bill of Materials (SBOM) from a software vendor alongside their product delivery. What is the PRIMARY security use of this SBOM?",
+    "options": [
+      "To verify the vendor's compliance with GDPR data processing requirements",
+      "To identify which open-source components are included so the organization can assess exposure to known vulnerabilities and supply chain risks",
+      "To ensure the software was compiled with debug symbols stripped",
+      "To validate that the software was developed using an approved SDLC methodology"
+    ],
+    "answer": 1,
+    "explanation": "An SBOM is a machine-readable inventory of all software components (libraries, packages, versions) included in a product. When a new CVE is published (e.g., Log4Shell), an organization with an SBOM can immediately determine which of their vendor products contain the vulnerable component and prioritize remediation. GDPR compliance, compilation settings, and SDLC methodology are not addressable via SBOM."
+  },
+  {
+    "domain_id": 6,
+    "question": "During a physical security assessment, the tester successfully tailgates through a secured door immediately behind an authorized employee without using any credential. Which compensating control would MOST directly prevent this in the future?",
+    "options": [
+      "Installing cameras at all entry points",
+      "Deploying mantrap (airlock) vestibules that allow only one person through per authentication",
+      "Issuing all employees unique proximity badge colors by department",
+      "Requiring all visitors to sign a visitor log"
+    ],
+    "answer": 1,
+    "explanation": "A mantrap (airlock) physically prevents more than one person from passing per authentication cycle \u2014 the outer door must close and authenticate before the inner door opens, making tailgating mechanically impossible. Cameras detect tailgating after the fact (detective, not preventive). Badge colors may help employees notice unauthorized persons but rely on human reporting. Visitor logs apply only to guests, not employees exploiting authorized access."
+  },
+  {
+    "domain_id": 6,
+    "question": "A security assessor sends a targeted email to a financial department employee appearing to come from the CFO and requesting an urgent wire transfer. This test is BEST categorized as:",
+    "options": [
+      "Phishing simulation",
+      "Spear phishing / business email compromise (BEC) simulation",
+      "Vishing (voice phishing) test",
+      "Whaling attack test"
+    ],
+    "answer": 1,
+    "explanation": "Spear phishing targets a specific individual with personalized content (the email appears from the CFO to a specific financial employee). When it involves fraudulent wire transfer requests impersonating executives, it specifically simulates Business Email Compromise (BEC). Generic phishing sends identical emails to many targets. Vishing uses phone calls. Whaling targets C-level executives specifically as victims, not as impersonated senders."
+  },
+  {
+    "domain_id": 6,
+    "question": "An organization undergoes an ISO/IEC 27001 certification audit. The audit is conducted in two stages. What occurs during Stage 1?",
+    "options": [
+      "The auditor tests operational effectiveness of controls over a 6-month period",
+      "The auditor reviews documentation \u2014 the ISMS scope, policies, risk assessment, and Statement of Applicability (SoA)",
+      "The auditor performs penetration testing against critical systems",
+      "The auditor issues the certification after reviewing the risk register"
+    ],
+    "answer": 1,
+    "explanation": "ISO 27001 certification audits have two stages. Stage 1 (documentation review / readiness review) assesses whether the organization's ISMS documentation \u2014 scope, information security policy, risk assessment methodology, risk treatment plan, and Statement of Applicability \u2014 is complete and suitable. Stage 2 (certification audit) assesses whether controls are implemented and operating effectively. Pen testing is not a mandatory audit component. Certification follows Stage 2, not Stage 1."
+  },
+  {
+    "domain_id": 6,
+    "question": "A security team conducts a wireless security assessment and discovers that a corporate building has an access point broadcasting an SSID identical to the corporate network but not registered in the asset inventory. This is MOST likely:",
+    "options": [
+      "A misconfigured corporate access point installed by IT without documentation",
+      "An evil twin (rogue access point) attack targeting employees",
+      "A neighboring organization's AP with an accidentally identical SSID",
+      "A honeypot deployed by the security team for threat detection"
+    ],
+    "answer": 1,
+    "explanation": "An evil twin attack deploys an access point with the same SSID as the legitimate corporate network to intercept traffic from devices that auto-connect. Employees' devices may connect automatically, subjecting them to MITM attacks. While a misconfigured undocumented AP is possible, an identical SSID to the corporate network not in the asset inventory is a high-confidence indicator of an evil twin. Honeypots would be known to the security team conducting the assessment."
+  },
+  {
+    "domain_id": 6,
+    "question": "After remediating a critical SQL injection vulnerability found during a penetration test, which testing activity is MOST important to verify the fix is effective?",
+    "options": [
+      "Conduct a new full-scope penetration test of all systems",
+      "Perform targeted regression testing of the specific vulnerability to confirm the fix is effective and no new vulnerabilities were introduced",
+      "Review the developer's commit message to confirm they addressed the finding",
+      "Update the risk register to mark the vulnerability as remediated"
+    ],
+    "answer": 1,
+    "explanation": "Regression testing after remediation verifies that (1) the specific vulnerability is fixed using the same test cases that identified it, and (2) the fix did not introduce new issues. A full-scope re-test is costly and unnecessary for validating a single fix. Commit messages describe intent but do not confirm effectiveness. Risk register updates are administrative and do not validate technical remediation."
+  },
+  {
+    "domain_id": 6,
+    "question": "An organization uses the NIST Cybersecurity Framework (CSF) to assess its security program maturity. The team determines they are at Implementation Tier 2 (Risk Informed). What does moving to Tier 3 (Repeatable) require?",
+    "options": [
+      "Completing an ISO 27001 certification audit",
+      "Formalizing risk management practices into organization-wide policies with consistent application and regular review",
+      "Achieving 100% patch compliance across all systems",
+      "Deploying automated security tooling in all five CSF function areas"
+    ],
+    "answer": 1,
+    "explanation": "NIST CSF Tiers describe the rigor and sophistication of cybersecurity risk management practices. Tier 2 (Risk Informed) means practices are approved by management but not organization-wide policy. Tier 3 (Repeatable) requires formalized, consistently applied policies based on risk management processes that are regularly reviewed and updated. ISO 27001 certification and tool deployment are not CSF Tier requirements. Patch compliance is one metric but not the tier criterion."
+  },
+  {
+    "domain_id": 6,
+    "question": "A security team uses OWASP ZAP to test a web application. ZAP is configured in 'attack mode' and sends crafted payloads to all discovered endpoints. In what role does ZAP function in this configuration?",
+    "options": [
+      "Static Application Security Testing (SAST) tool",
+      "Dynamic Application Security Testing (DAST) / active scanning tool",
+      "Software Composition Analysis (SCA) tool",
+      "Infrastructure vulnerability scanner"
+    ],
+    "answer": 1,
+    "explanation": "OWASP ZAP (Zed Attack Proxy) is a DAST tool. In active/attack mode, it acts as a proxy, spiders the application, and sends crafted payloads to test for vulnerabilities like XSS, SQLi, CSRF, and misconfigurations against the running application. SAST analyzes source code without execution. SCA checks dependency vulnerabilities. Infrastructure scanners (Nessus, OpenVAS) test OS and network services, not web application logic."
+  },
+  {
+    "domain_id": 6,
+    "question": "A penetration tester uses Burp Suite Professional to intercept and modify HTTP requests between a browser and a web application. Which Burp Suite component is MOST directly used to manually modify a request before it reaches the server?",
+    "options": [
+      "Burp Scanner",
+      "Burp Intruder",
+      "Burp Proxy with Intercept enabled",
+      "Burp Repeater"
+    ],
+    "answer": 2,
+    "explanation": "Burp Proxy with intercept mode enabled captures HTTP/S traffic in real time, allowing the tester to view and manually modify requests before forwarding them. Burp Scanner performs automated vulnerability detection. Burp Intruder automates fuzzing and parameter injection with payloads. Burp Repeater allows manually resending and modifying individual captured requests \u2014 useful for testing specific endpoints but not for intercepting live browsing traffic."
+  },
+  {
+    "domain_id": 6,
+    "question": "A security assessor is evaluating a Linux server against the CIS Benchmark Level 1. They find that the /tmp partition is not mounted with the 'noexec' option. This finding is MOST accurately classified as:",
+    "options": [
+      "A vulnerability requiring immediate patching",
+      "A configuration compliance deviation from the CIS Benchmark baseline",
+      "A penetration test finding requiring exploitation evidence",
+      "A false positive generated by automated scanning"
+    ],
+    "answer": 1,
+    "explanation": "CIS Benchmarks define security configuration baselines. Mounting /tmp with 'noexec' prevents execution of binaries written to the temporary filesystem, limiting attacker capabilities after initial access. A deviation from the benchmark is a configuration compliance finding, not a CVE-based vulnerability. It requires remediation (adding the mount option) rather than a software patch. Without evidence of exploitation, it is not a pen test finding."
+  },
+  {
+    "domain_id": 6,
+    "question": "A third-party cloud service provider submits a Consensus Assessments Initiative Questionnaire (CAIQ) to a prospective customer. What is the PRIMARY purpose of the CAIQ?",
+    "options": [
+      "To provide the results of a SOC 2 Type II audit performed by an independent auditor",
+      "To allow cloud providers to self-attest their security controls mapped to the Cloud Controls Matrix (CCM), enabling customer risk assessment",
+      "To certify that the provider meets ISO 27001 requirements",
+      "To document the provider's data breach notification procedures only"
+    ],
+    "answer": 1,
+    "explanation": "The CAIQ (from the Cloud Security Alliance) is a standardized self-assessment questionnaire where cloud providers document their controls mapped to the CCM (Cloud Controls Matrix). It enables customers to assess provider security posture consistently across vendors without requiring each customer to send a unique questionnaire. It is self-attested (not independently audited like SOC 2). ISO 27001 certification requires third-party auditing. The CAIQ covers comprehensive security domains, not just breach notification."
+  },
+  {
+    "domain_id": 6,
+    "question": "During a network security assessment, a tester discovers hosts by analyzing responses to ARP broadcasts and passive traffic monitoring on the network segment. This technique is BEST described as:",
+    "options": [
+      "Active network scanning using ICMP echo requests",
+      "Passive network discovery and mapping",
+      "OS fingerprinting via TCP stack analysis",
+      "Vulnerability enumeration via service banner grabbing"
+    ],
+    "answer": 1,
+    "explanation": "Passive discovery observes existing network traffic (ARP broadcasts, multicast, broadcast traffic) without sending any probes. This avoids triggering IDS alerts that active scanning generates. Active scanning (Nmap ping sweeps, ICMP) sends packets and analyzes responses. OS fingerprinting analyzes TCP/IP stack behavior. Banner grabbing actively connects to services to read version information. Passive mapping is stealthier but provides less complete coverage."
+  },
+  {
+    "domain_id": 6,
+    "question": "Software Composition Analysis (SCA) tools are PRIMARILY used to:",
+    "options": [
+      "Analyze custom application code for logic vulnerabilities",
+      "Identify open-source and third-party dependencies with known CVEs, license compliance issues, and outdated versions",
+      "Test the running application by sending crafted HTTP requests",
+      "Scan container images for OS-level vulnerabilities"
+    ],
+    "answer": 1,
+    "explanation": "SCA tools analyze application dependency manifests (package.json, pom.xml, requirements.txt) to identify included open-source libraries, their versions, known CVEs, and license compliance issues. They do not analyze custom application logic (SAST does) or test the running application (DAST does). Container image scanning has overlap with SCA for application layers but also includes OS packages. SCA is essential for supply chain security and compliance with SBOM requirements."
+  },
+  {
+    "domain_id": 6,
+    "question": "An organization is assessed against the NIST Cybersecurity Framework (CSF). The assessor notes that the organization has no process for receiving or acting on vulnerability disclosures from external researchers. Under which CSF Function and Category does this gap MOST likely fall?",
+    "options": [
+      "Identify \u2014 Risk Assessment (ID.RA)",
+      "Protect \u2014 Protective Technology (PR.PT)",
+      "Detect \u2014 Detection Processes (DE.DP)",
+      "Respond \u2014 Response Planning (RS.RP)"
+    ],
+    "answer": 0,
+    "explanation": "NIST CSF ID.RA (Risk Assessment) includes identifying threats and vulnerabilities. Lacking a vulnerability disclosure process means external threat information is not being received or incorporated into the risk picture \u2014 a gap in the Identify function. PR.PT covers protective technology deployment. DE.DP covers detection process documentation. RS.RP covers incident response planning. Vulnerability disclosure programs feed the Identify phase by surfacing unknown risks."
+  },
+  {
+    "domain_id": 6,
+    "question": "A data flow analysis performed during a security assessment of a healthcare application reveals that patient records traverse an unencrypted internal API between the web tier and the data tier. Under HIPAA, this is MOST accurately characterized as:",
+    "options": [
+      "A violation requiring criminal prosecution of the development team",
+      "A gap in the required addressable implementation specification for transmission security under the HIPAA Security Rule",
+      "An acceptable risk if the internal network is behind a firewall",
+      "A deficiency only relevant if PHI has already been breached"
+    ],
+    "answer": 1,
+    "explanation": "HIPAA Security Rule 164.312(e)(1) requires covered entities to implement technical security measures to guard against unauthorized access to ePHI transmitted over electronic communications networks. Transmission encryption is an addressable implementation specification \u2014 organizations must implement it or document why an equivalent alternative exists. Unencrypted internal ePHI transmission does not automatically require criminal prosecution. Firewall protection does not substitute for transmission encryption. Gaps exist regardless of whether a breach has occurred."
+  },
+  {
+    "domain_id": 6,
+    "question": "A security team performs attestation reporting after completing an assessment. Which BEST describes what attestation means in this context?",
+    "options": [
+      "Publishing assessment findings publicly for transparency",
+      "A formal declaration by a responsible party that controls are implemented and operating as described, often used in compliance submissions",
+      "Providing evidence that all identified vulnerabilities have been patched",
+      "Generating automated vulnerability reports from scanning tools"
+    ],
+    "answer": 1,
+    "explanation": "Attestation is a formal, signed declaration by a responsible party (CISO, compliance officer) affirming that controls exist and are operating effectively. It is commonly used in compliance frameworks (PCI DSS SAQ, SOC 2 management assertion, FedRAMP ATOs) where the organization asserts compliance status to an auditor or regulator. It differs from third-party audit opinions. Patch evidence is a specific artifact. Scanner-generated reports are technical outputs, not attestations."
   }
 ]

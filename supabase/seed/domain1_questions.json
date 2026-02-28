@@ -394,5 +394,329 @@
     ],
     "answer": 2,
     "explanation": "Pre-employment screening encompasses background checks, reference verification, NDA execution, and initial security training conducted before an employee begins work. Termination procedures handle offboarding. Post-employment monitoring occurs during active employment. Job rotation is an ongoing detective control."
+  },
+  {
+    "domain_id": 1,
+    "question": "The NIST Risk Management Framework (RMF) consists of six steps in sequence. Which step comes FIRST after preparing the organization?",
+    "options": [
+      "Implement security controls",
+      "Categorize the information system",
+      "Assess security controls",
+      "Authorize the system to operate"
+    ],
+    "answer": 1,
+    "explanation": "The NIST RMF steps in order are: Prepare, Categorize, Select, Implement, Assess, Authorize, and Monitor. Categorization (determining the system's impact level based on data sensitivity and mission criticality) is the first substantive step after Prepare, because control selection depends on the impact level. Implementing and assessing controls come later; authorization is the penultimate step."
+  },
+  {
+    "domain_id": 1,
+    "question": "A security analyst uses FAIR (Factor Analysis of Information Risk) to model a scenario. In FAIR, 'Loss Event Frequency' is composed of which two primary factors?",
+    "options": [
+      "Threat Capability and Control Strength",
+      "Threat Event Frequency and Vulnerability",
+      "Asset Value and Exposure Factor",
+      "Probability of Occurrence and Impact Magnitude"
+    ],
+    "answer": 1,
+    "explanation": "In FAIR, Loss Event Frequency = Threat Event Frequency × Vulnerability (the probability that a threat event results in a loss). Threat Capability and Control Strength feed into Vulnerability calculation but are not themselves the two primary Loss Event Frequency components. Asset Value and Exposure Factor are SLE components from the traditional ALE model, not FAIR terminology."
+  },
+  {
+    "domain_id": 1,
+    "question": "A company suffers a data breach exposing EU residents' personal data. Under GDPR, within what timeframe must the organization notify the relevant supervisory authority?",
+    "options": [
+      "24 hours of becoming aware of the breach",
+      "72 hours of becoming aware of the breach",
+      "30 days of becoming aware of the breach",
+      "Immediately upon detection, with no defined window"
+    ],
+    "answer": 1,
+    "explanation": "GDPR Article 33 requires notification to the supervisory authority within 72 hours of becoming aware of a breach that is likely to result in risk to individuals' rights and freedoms. The 24-hour figure is stricter than GDPR requires. The 30-day window applies to some U.S. state breach notification laws, not GDPR. Late notification must be accompanied by reasons for the delay."
+  },
+  {
+    "domain_id": 1,
+    "question": "A U.S. defense contractor wants to export encryption software with a key length above 64 bits to a foreign government. Which U.S. export control regime PRIMARILY governs this transaction?",
+    "options": [
+      "ITAR (International Traffic in Arms Regulations)",
+      "EAR (Export Administration Regulations)",
+      "Wassenaar Arrangement",
+      "OFAC sanctions"
+    ],
+    "answer": 1,
+    "explanation": "The EAR, administered by the Bureau of Industry and Security (BIS), governs dual-use items including commercial encryption software. ITAR governs defense articles and services on the U.S. Munitions List — most commercial encryption is not ITAR-controlled. The Wassenaar Arrangement is a multilateral treaty that EAR partially implements. OFAC governs financial sanctions, not export licensing."
+  },
+  {
+    "domain_id": 1,
+    "question": "An organization's privacy team applies Ann Cavoukian's Privacy by Design framework. Which of the following BEST represents a core principle of Privacy by Design?",
+    "options": [
+      "Privacy controls are bolt-on features added after system deployment",
+      "Privacy is embedded into system design proactively as the default setting",
+      "Privacy protections are the sole responsibility of the legal department",
+      "Privacy is enforced only when required by applicable law"
+    ],
+    "answer": 1,
+    "explanation": "Privacy by Design's foundational principle is that privacy is proactively embedded into systems by default — not added after the fact. Its seven principles include: proactive not reactive, privacy as the default setting, privacy embedded into design, full functionality, end-to-end security, visibility/transparency, and respect for user privacy. Option A describes the opposite approach ('privacy by afterthought')."
+  },
+  {
+    "domain_id": 1,
+    "question": "A company's CISO discovers that a competitor is being sued in civil court for a data breach. As a legal proceeding, which standard of proof applies in a civil case versus a criminal case?",
+    "options": [
+      "Beyond a reasonable doubt in both civil and criminal cases",
+      "Preponderance of the evidence in civil; beyond a reasonable doubt in criminal",
+      "Clear and convincing evidence in civil; preponderance in criminal",
+      "Probable cause in civil; preponderance in criminal"
+    ],
+    "answer": 1,
+    "explanation": "Civil cases use 'preponderance of the evidence' (more likely than not, >50%). Criminal cases require 'beyond a reasonable doubt' (typically interpreted as ~95%+ certainty), the highest standard because liberty is at stake. 'Clear and convincing evidence' is an intermediate standard used in some civil contexts (e.g., fraud, termination of parental rights). Probable cause is an arrest/search standard, not a trial standard."
+  },
+  {
+    "domain_id": 1,
+    "question": "During a legal proceeding, an expert witness testifies that in their professional opinion, the defendant's system lacked adequate security controls. This is an example of which type of evidence?",
+    "options": [
+      "Direct evidence",
+      "Circumstantial evidence",
+      "Opinion evidence",
+      "Hearsay evidence"
+    ],
+    "answer": 2,
+    "explanation": "Opinion evidence (expert testimony) is allowed when a witness has specialized knowledge that assists the court in understanding technical matters — such as security control adequacy. Direct evidence proves a fact without inference (e.g., eyewitness testimony). Circumstantial evidence requires inference to connect it to a conclusion. Hearsay is an out-of-court statement offered for its truth, generally inadmissible."
+  },
+  {
+    "domain_id": 1,
+    "question": "An organization signs an agreement with a cloud vendor that defines minimum acceptable performance levels, penalties for non-compliance, and metrics for measuring service delivery. This agreement is BEST described as a:",
+    "options": [
+      "Non-Disclosure Agreement (NDA)",
+      "Memorandum of Understanding (MOU)",
+      "Service Level Agreement (SLA)",
+      "Master Service Agreement (MSA)"
+    ],
+    "answer": 2,
+    "explanation": "An SLA defines measurable service performance standards, penalties, and remedies between a service provider and customer. An NDA protects confidential information. An MOU is a non-binding statement of intent between parties. An MSA is an umbrella contract covering general terms; specific service parameters are typically defined in a separate SLA or Statement of Work."
+  },
+  {
+    "domain_id": 1,
+    "question": "The CISO of a large enterprise reports to the Board of Directors quarterly on security risk posture using metrics including number of critical vulnerabilities remediated, mean time to detect, and mean time to respond. This activity BEST represents which governance function?",
+    "options": [
+      "Risk avoidance",
+      "Security metrics and accountability reporting",
+      "Incident response management",
+      "Compliance auditing"
+    ],
+    "answer": 1,
+    "explanation": "Reporting security metrics to the board demonstrates accountability and enables informed governance decisions about security investment and risk tolerance. Mean time to detect (MTTD) and mean time to respond (MTTR) are key operational security metrics. This activity is not incident response (which handles specific events) nor compliance auditing (which assesses control adherence against standards)."
+  },
+  {
+    "domain_id": 1,
+    "question": "An organization defines the maximum risk it is willing to accept in pursuit of its business objectives before requiring additional action. This concept is BEST described as:",
+    "options": [
+      "Risk tolerance",
+      "Risk threshold",
+      "Risk appetite",
+      "Residual risk"
+    ],
+    "answer": 2,
+    "explanation": "Risk appetite is the total level of risk an organization is willing to accept to achieve its strategic objectives — a high-level, strategic concept set by senior leadership. Risk tolerance is the acceptable variation around risk appetite targets — more operational and specific. Risk threshold is the point at which risk exceeds tolerance and triggers escalation. Residual risk is the remaining risk after controls are applied."
+  },
+  {
+    "domain_id": 1,
+    "question": "A security program continuously evaluates the effectiveness of security controls, tracks changes to the system environment, and feeds findings back into the risk management process on an ongoing basis. This BEST describes which RMF activity?",
+    "options": [
+      "Security authorization",
+      "Control assessment",
+      "Continuous monitoring",
+      "Risk categorization"
+    ],
+    "answer": 2,
+    "explanation": "Continuous monitoring (the final and ongoing RMF step) involves real-time or near-real-time evaluation of security controls, system changes, and risk posture to maintain awareness and enable timely response. Security authorization is a point-in-time decision. Control assessment evaluates controls at a specific time. Risk categorization establishes impact levels upfront."
+  },
+  {
+    "domain_id": 1,
+    "question": "An organization's security documentation hierarchy flows from broad directional documents down to specific technical instructions. Which ordering CORRECTLY represents this hierarchy from most general to most specific?",
+    "options": [
+      "Standard → Policy → Guideline → Procedure → Baseline",
+      "Policy → Standard → Baseline → Procedure → Guideline",
+      "Policy → Standard → Procedure → Guideline → Baseline",
+      "Guideline → Policy → Standard → Baseline → Procedure"
+    ],
+    "answer": 1,
+    "explanation": "The correct hierarchy: Policy (high-level mandatory directive) → Standard (mandatory, specific requirements to meet policy) → Baseline (minimum security configuration) → Procedure (step-by-step instructions to implement standards) → Guideline (recommended, non-mandatory best practices). Guidelines are the only non-mandatory documents in this hierarchy."
+  },
+  {
+    "domain_id": 1,
+    "question": "A bank rotates its system administrators to different departments every six months to prevent any single administrator from building up unchecked privileged knowledge or concealing unauthorized activity. This control is PRIMARILY classified as:",
+    "options": [
+      "Preventive and corrective",
+      "Detective and preventive",
+      "Compensating and directive",
+      "Deterrent and administrative"
+    ],
+    "answer": 1,
+    "explanation": "Job rotation is both detective (rotation exposes hidden fraud or errors maintained by the departing employee) and preventive (knowing rotation will occur discourages employees from engaging in fraud). It is an administrative control category. Compensating controls replace other controls that cannot be implemented; directive controls issue mandates. Job rotation does not 'correct' problems after they occur."
+  },
+  {
+    "domain_id": 1,
+    "question": "A threat intelligence team shares structured information about a new malware campaign with partner organizations using STIX objects transmitted over TAXII. Which statement BEST describes the role of each standard?",
+    "options": [
+      "STIX defines the transport protocol; TAXII defines the data format",
+      "STIX defines the structured data format for threat intelligence; TAXII defines the transport protocol for sharing that data",
+      "Both STIX and TAXII define data formats, with TAXII used for indicators of compromise",
+      "TAXII is a threat scoring system; STIX is a network communication protocol"
+    ],
+    "answer": 1,
+    "explanation": "STIX (Structured Threat Information eXpression) is the JSON-based language for describing cyber threat intelligence objects (TTPs, indicators, campaigns, etc.). TAXII (Trusted Automated eXchange of Intelligence Information) is the application protocol that defines how STIX content is shared between organizations via HTTPS. They are complementary — STIX is what you share, TAXII is how you share it."
+  },
+  {
+    "domain_id": 1,
+    "question": "COBIT 2019 introduced a revised set of governance principles. Which of the following is a core COBIT 2019 principle that REPLACED a COBIT 5 principle?",
+    "options": [
+      "Enabling a holistic approach",
+      "Applying a single integrated framework",
+      "Tailored to enterprise needs (dynamic governance system)",
+      "Meeting stakeholder needs"
+    ],
+    "answer": 2,
+    "explanation": "COBIT 2019 replaced COBIT 5's static five principles with six new principles, including 'Dynamic Governance System' — recognizing that governance systems must adapt to changing enterprise context. COBIT 2019 principles include: Provide stakeholder value, Holistic approach, Dynamic governance system, Governance distinct from management, Tailored to enterprise needs, and End-to-end governance. 'Single integrated framework' and 'meeting stakeholder needs' echo COBIT 5 language."
+  },
+  {
+    "domain_id": 1,
+    "question": "ISO 31000:2018 is BEST characterized as:",
+    "options": [
+      "A certifiable standard for information security risk management",
+      "A universal risk management framework providing principles, framework, and process guidance applicable to any organization",
+      "A quantitative risk assessment methodology for financial institutions",
+      "A compliance standard for critical infrastructure risk management"
+    ],
+    "answer": 1,
+    "explanation": "ISO 31000 is a non-certifiable international standard providing generic risk management principles and guidelines applicable across industries, organization sizes, and risk types. Unlike ISO 27001, organizations cannot be certified against ISO 31000. It is not specific to information security — that is covered by ISO 27005. It provides a framework, not a prescriptive methodology."
+  },
+  {
+    "domain_id": 1,
+    "question": "After the Court of Justice of the EU invalidated Privacy Shield, a U.S. company needs to continue transferring EU personal data to its U.S. operations legally. What is the MOST appropriate mechanism?",
+    "options": [
+      "Self-certification under Privacy Shield 2.0",
+      "Standard Contractual Clauses (SCCs) approved by the European Commission",
+      "Obtaining a U.S. federal data transfer license",
+      "Encrypting all data before transfer, which negates GDPR applicability"
+    ],
+    "answer": 1,
+    "explanation": "Standard Contractual Clauses (SCCs) are the primary alternative for EU-to-U.S. data transfers following the Schrems II decision invalidating Privacy Shield. The EU-U.S. Data Privacy Framework (replacing Privacy Shield) was adopted in 2023, but SCCs remain the foundational transfer mechanism. Encryption does not exempt an organization from GDPR — it is a security measure, not a legal transfer mechanism. The U.S. has no federal data transfer licensing system."
+  },
+  {
+    "domain_id": 1,
+    "question": "An organization's upstream supplier provides raw materials while its downstream partner distributes finished products. A cyberattack on the upstream supplier disrupts production. From a supply chain risk perspective, the organization FIRST needs to:",
+    "options": [
+      "Immediately terminate the supplier contract to reduce exposure",
+      "Assess how the supplier compromise impacts its own systems and data",
+      "Notify all downstream partners of the potential supply chain compromise",
+      "File a claim with its cyber liability insurer"
+    ],
+    "answer": 1,
+    "explanation": "The immediate priority is understanding the blast radius — assessing whether the organization's own systems, data, or operations have been affected by the upstream compromise. Notification to downstream partners and regulators follows once the organization understands its own exposure. Terminating contracts without assessment is premature. Insurance claims are relevant but not the first step."
+  },
+  {
+    "domain_id": 1,
+    "question": "A third-party risk management team is evaluating a new cloud payroll processor. Which assessment approach provides the MOST comprehensive assurance about the vendor's security posture?",
+    "options": [
+      "Reviewing the vendor's marketing security whitepaper",
+      "Sending a security questionnaire and accepting vendor self-attestation",
+      "Reviewing a current SOC 2 Type II audit report and supplementing with on-site assessment of high-risk areas",
+      "Confirming the vendor holds any security certification"
+    ],
+    "answer": 2,
+    "explanation": "A SOC 2 Type II report provides independent auditor attestation of security control operating effectiveness over a period (typically 6-12 months), making it far more reliable than self-attestation or marketing materials. Supplementing with on-site review of high-risk areas addresses any gaps in scope. Certifications like ISO 27001 demonstrate a point-in-time snapshot. Self-attestation via questionnaires is the weakest form of assurance."
+  },
+  {
+    "domain_id": 1,
+    "question": "A security awareness training program teaches employees to recognize phone calls where callers claim to be IT support and request credentials. This training specifically targets which attack vector?",
+    "options": [
+      "Phishing",
+      "Pretexting via vishing",
+      "Spear phishing",
+      "Baiting"
+    ],
+    "answer": 1,
+    "explanation": "Vishing (voice phishing) uses phone calls, and pretexting involves creating a fabricated scenario (e.g., 'I'm from IT support') to manipulate victims. Together, this is pretexting via vishing. Email-based attacks are phishing or spear phishing. Baiting uses physical media (e.g., infected USB drives left in parking lots). Spear phishing targets specific individuals using personalized information, typically via email."
+  },
+  {
+    "domain_id": 1,
+    "question": "An organization has a formal process where risk decisions that exceed a defined threshold are escalated from IT management to the executive team and Board. The Board-approved risk level below which no escalation is required BEST represents:",
+    "options": [
+      "Risk appetite",
+      "Risk tolerance",
+      "Risk threshold",
+      "Residual risk"
+    ],
+    "answer": 2,
+    "explanation": "Risk threshold is the specific point at which risk level triggers escalation, reporting, or other action — it is the trip wire. Risk appetite is the strategic maximum risk the organization is willing to accept. Risk tolerance is the acceptable deviation around risk objectives. Residual risk is what remains after controls. Thresholds operationalize appetite by defining when action or escalation is required."
+  },
+  {
+    "domain_id": 1,
+    "question": "A financial services company undergoes an examination where regulators assess adherence to consumer protection rules. A retailer gets audited against PCI DSS. A government agency is inspected against FISMA requirements. These three scenarios all represent which type of activity?",
+    "options": [
+      "Voluntary security certifications",
+      "Regulatory compliance assessments",
+      "Internal control audits",
+      "Third-party risk evaluations"
+    ],
+    "answer": 1,
+    "explanation": "All three scenarios involve external regulatory bodies or standards assessing organizational compliance with mandatory or industry-required frameworks (banking regulations, PCI DSS for payment cards, FISMA for federal agencies). These are regulatory compliance assessments — they are externally driven and carry legal or contractual consequences for non-compliance. Internal audits are self-driven. Third-party risk evaluations assess your vendors."
+  },
+  {
+    "domain_id": 1,
+    "question": "A Chief Privacy Officer (CPO) is MOST directly responsible for which organizational function?",
+    "options": [
+      "Overseeing technical security control implementation",
+      "Managing the organization's overall IT infrastructure",
+      "Ensuring the organization's data practices comply with privacy laws and protecting individuals' privacy rights",
+      "Conducting penetration tests and vulnerability assessments"
+    ],
+    "answer": 2,
+    "explanation": "The CPO is accountable for data privacy strategy, regulatory compliance (GDPR, CCPA, HIPAA Privacy Rule, etc.), privacy program management, and advocating for individuals' privacy rights. Technical security controls are the CISO/CSO domain. IT infrastructure is the CIO/CTO domain. Penetration testing is a security operations function. The CPO and CISO roles are distinct and complementary."
+  },
+  {
+    "domain_id": 1,
+    "question": "An organization's background check policy requires criminal history, credit history, and employment verification for all employees with access to financial systems. An employee is discovered to have falsified their employment history on the application. The MOST relevant legal concept that may apply to the organization if harm results is:",
+    "options": [
+      "Negligent retention",
+      "Negligent hiring",
+      "Respondeat superior",
+      "Vicarious liability"
+    ],
+    "answer": 1,
+    "explanation": "Negligent hiring occurs when an employer fails to adequately investigate an applicant's background before hiring and that person subsequently causes harm. If the organization had a background check policy but failed to verify employment history, it could face negligent hiring liability. Negligent retention applies when a known problem employee is kept on staff. Respondeat superior makes employers liable for employee actions within the scope of employment. Vicarious liability is the broader principle encompassing both."
+  },
+  {
+    "domain_id": 1,
+    "question": "The OECD Privacy Guidelines established foundational privacy principles that influenced many national privacy laws. Which OECD principle requires that personal data be relevant to the purpose for which it is collected and not be excessive?",
+    "options": [
+      "Purpose Specification Principle",
+      "Use Limitation Principle",
+      "Data Quality Principle",
+      "Collection Limitation Principle"
+    ],
+    "answer": 2,
+    "explanation": "The OECD Data Quality Principle states that personal data should be relevant to the purposes for which it is used and should be accurate, complete, and kept up to date. The Collection Limitation Principle restricts data collection to lawful, fair means with subject knowledge/consent. The Purpose Specification Principle requires purposes to be specified at collection. The Use Limitation Principle prohibits use beyond specified purposes without consent."
+  },
+  {
+    "domain_id": 1,
+    "question": "A law enforcement investigation of an employee suspected of corporate espionage is handled by the FBI and results in criminal charges. Separately, the company pursues recovery of damages through a civil lawsuit. Which statement BEST describes this situation?",
+    "options": [
+      "Double jeopardy prevents both criminal and civil proceedings for the same act",
+      "Criminal and civil proceedings are independent; an act can be pursued in both simultaneously",
+      "Civil proceedings must wait until criminal proceedings conclude",
+      "Only the government can initiate legal action in cases involving espionage"
+    ],
+    "answer": 1,
+    "explanation": "Criminal and civil proceedings are separate legal tracks — a single act can trigger both. Double jeopardy only prohibits being tried twice for the same criminal offense; it does not apply to civil suits. Civil proceedings can run concurrently with criminal cases (though they are sometimes stayed pending criminal resolution). Private parties (companies) can initiate civil suits even when criminal charges are brought."
+  },
+  {
+    "domain_id": 1,
+    "question": "An organization signs a Memorandum of Understanding (MOU) with a partner agency to establish intent to share threat intelligence. Compared to a formal contract, an MOU is BEST characterized as:",
+    "options": [
+      "Legally binding with financial penalties for breach",
+      "A non-binding expression of intent that outlines mutual goals and responsibilities",
+      "Equivalent to an SLA in defining performance metrics",
+      "A type of NDA specifically for government agencies"
+    ],
+    "answer": 1,
+    "explanation": "An MOU is typically non-binding — it documents mutual understanding and intent between parties without creating legal obligations enforceable in court. Formal contracts (including SLAs) are legally binding. NDAs are legally binding confidentiality agreements. An MOU is used when parties want to document a cooperative relationship without full contractual commitment, common between government agencies or in early partnership stages."
   }
 ]

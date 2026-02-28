@@ -250,5 +250,293 @@
     ],
     "answer": 1,
     "explanation": "Need to know is the application of least privilege to information: even if a person has the appropriate clearance level, they may only access specific information required for their current duties. A clearance grants the maximum level of access; need to know further restricts it. MAC uses labels/clearances; DAC lets owners decide; RBAC uses job roles."
+  },
+  {
+    "domain_id": 2,
+    "question": "A data governance team reviews records and determines that a file originally classified as 'Confidential' no longer contains sensitive information after a product launch makes the data public. They formally downgrade the classification to 'Public'. This process is called:",
+    "options": [
+      "Data purging",
+      "Data archiving",
+      "Reclassification",
+      "Declassification trigger"
+    ],
+    "answer": 2,
+    "explanation": "Reclassification is the formal process of changing a data asset's classification level — either upgrading (e.g., from Internal to Confidential) or downgrading (e.g., from Confidential to Public) as circumstances change. Data purging removes data permanently. Data archiving moves data to long-term storage. A declassification trigger is a condition that initiates reclassification, not the process itself."
+  },
+  {
+    "domain_id": 2,
+    "question": "An organization's data handling policy requires that all printed documents marked 'Confidential' display a visible header and footer on every page, and must be stored in locked cabinets when not in use. These requirements PRIMARILY address which aspect of data security?",
+    "options": [
+      "Data encryption at rest",
+      "Physical marking and handling requirements",
+      "Access control enforcement",
+      "Data retention compliance"
+    ],
+    "answer": 1,
+    "explanation": "Physical marking (visible labels on documents) and handling requirements (locked storage) ensure that data classification is visible and that physical security controls match the sensitivity level. Marking allows anyone encountering the document to apply appropriate care. Encryption at rest applies to digital storage. Access control restricts who may view data. Retention defines how long data must be kept."
+  },
+  {
+    "domain_id": 2,
+    "question": "During which information lifecycle phase does an organization FIRST apply classification labels and access controls to newly generated data?",
+    "options": [
+      "Store",
+      "Share",
+      "Create",
+      "Archive"
+    ],
+    "answer": 2,
+    "explanation": "The Create phase is when data is generated or acquired, and it is the point at which classification should be assigned and initial access controls determined. Waiting until the Store phase risks data being mishandled before controls are applied. Share involves distributing data to others. Archive is long-term retention. Classify at creation ensures appropriate protection from the outset."
+  },
+  {
+    "domain_id": 2,
+    "question": "A multinational company stores customer data in a jurisdiction that prohibits transferring personal data outside its borders. The company's headquarters wants to centralize processing in a different country. This conflict is BEST described as a:",
+    "options": [
+      "Cross-border data transfer restriction governed by data sovereignty laws",
+      "Intellectual property licensing dispute",
+      "Data classification policy conflict",
+      "Cloud shared responsibility model issue"
+    ],
+    "answer": 0,
+    "explanation": "Data sovereignty refers to the principle that data is subject to the laws of the country where it is collected or stored. Many jurisdictions (e.g., Russia, China, some EU member states) impose data localization or residency requirements prohibiting or restricting cross-border transfers. This is distinct from GDPR's transfer mechanism requirements (SCCs, BCRs) and is purely about geographic restrictions imposed by law."
+  },
+  {
+    "domain_id": 2,
+    "question": "A payment processor replaces actual Primary Account Numbers (PANs) in its database with randomly generated surrogate values that have no mathematical relationship to the original numbers. The mapping is stored in a separate secure vault. This technique is BEST described as:",
+    "options": [
+      "Encryption",
+      "Tokenization",
+      "Hashing",
+      "Data masking"
+    ],
+    "answer": 1,
+    "explanation": "Tokenization replaces sensitive data with a non-sensitive surrogate (token) with no exploitable mathematical relationship to the original — the mapping lives in a separate token vault. Encryption transforms data using a key but the ciphertext retains mathematical structure. Hashing is one-way and used for integrity verification, not reversible retrieval. Data masking replaces data with realistic-looking fictitious data, typically for non-production environments."
+  },
+  {
+    "domain_id": 2,
+    "question": "A data scientist needs to share a dataset for analysis without exposing individual identities. The technique ensures that each individual's record is indistinguishable from at least k-1 other records in the dataset. This privacy technique is called:",
+    "options": [
+      "Differential privacy",
+      "Pseudonymization",
+      "k-anonymity",
+      "Data tokenization"
+    ],
+    "answer": 2,
+    "explanation": "k-anonymity ensures each record is identical to at least k-1 other records across quasi-identifier attributes, making individual re-identification difficult. Differential privacy adds mathematical noise to query results to protect individuals while preserving statistical utility. Pseudonymization replaces direct identifiers with pseudonyms but does not prevent re-identification from indirect attributes. Tokenization replaces data with surrogates in operational systems."
+  },
+  {
+    "domain_id": 2,
+    "question": "Under GDPR, pseudonymization is defined as processing personal data such that it can no longer be attributed to a specific data subject without additional information. Which statement BEST characterizes pseudonymized data under GDPR?",
+    "options": [
+      "It is fully anonymized and exempt from GDPR",
+      "It remains personal data subject to GDPR but qualifies for reduced obligations",
+      "It is equivalent to encrypted data at rest",
+      "It can be freely transferred outside the EU without additional safeguards"
+    ],
+    "answer": 1,
+    "explanation": "GDPR Recital 26 and Article 4(5) clarify that pseudonymized data is still personal data because re-identification is possible with additional information. However, pseudonymization is encouraged as a technical safeguard that can reduce certain obligations (e.g., it is a factor in assessing breach notification necessity). Anonymized data — where re-identification is genuinely impossible — falls outside GDPR scope. Pseudonymization is not equivalent to encryption, though encryption can implement it."
+  },
+  {
+    "domain_id": 2,
+    "question": "A company shares customer transaction data with a third-party analytics firm under a data processing agreement. The analytics firm may only use the data for the specified analytics purpose and must delete it after 90 days. This arrangement primarily enforces which data security principle?",
+    "options": [
+      "Data sovereignty",
+      "Data minimization and purpose limitation",
+      "Tokenization",
+      "Data classification"
+    ],
+    "answer": 1,
+    "explanation": "Purpose limitation (GDPR Article 5(1)(b)) restricts data use to the specified purpose, and data minimization ensures only necessary data is shared. The 90-day deletion requirement reflects data minimization applied to retention. Data sovereignty is a geographic jurisdiction issue. Tokenization is a technical protection mechanism. Data classification determines sensitivity levels but does not govern how third parties use shared data."
+  },
+  {
+    "domain_id": 2,
+    "question": "An organization's legal team places a litigation hold on all email communications related to an ongoing lawsuit, overriding the normal 2-year retention schedule that would have deleted those emails. This action BEST illustrates:",
+    "options": [
+      "Data classification upgrade",
+      "Records retention schedule exceptions driven by legal requirements",
+      "Data archiving for business continuity",
+      "e-Discovery initiated by the organization"
+    ],
+    "answer": 1,
+    "explanation": "A litigation hold (legal hold) is a mandatory exception to normal retention schedules, requiring preservation of potentially relevant data beyond its normal retention period. Failure to preserve data subject to a legal hold can result in spoliation sanctions. This is a records retention schedule exception, not a classification change. e-Discovery is the process of producing documents — the hold preserves them in preparation. Business continuity archiving is for recovery purposes."
+  },
+  {
+    "domain_id": 2,
+    "question": "Digital Rights Management (DRM) technology is BEST described as:",
+    "options": [
+      "A network encryption protocol for protecting data in transit",
+      "A technical control that restricts how digital content can be copied, distributed, or modified after distribution",
+      "A regulatory framework governing digital copyright enforcement",
+      "A key management system for database encryption"
+    ],
+    "answer": 1,
+    "explanation": "DRM uses technical mechanisms (encryption, license checks, usage restrictions) embedded in digital content to control how it is accessed, copied, shared, or modified — even after it has been legitimately distributed to end users. Information Rights Management (IRM) is a related concept applied to enterprise documents. DRM is not a network protocol, a regulatory framework, or a key management system specifically."
+  },
+  {
+    "domain_id": 2,
+    "question": "An organization deploys a solution that embeds persistent access policies directly into documents so that a file marked 'View Only — No Print' cannot be printed even after being emailed to an external recipient. This is BEST described as:",
+    "options": [
+      "Data Loss Prevention (DLP)",
+      "Information Rights Management (IRM)",
+      "Mandatory Access Control (MAC)",
+      "Digital watermarking"
+    ],
+    "answer": 1,
+    "explanation": "IRM (also called Enterprise DRM) embeds usage policies directly in documents — controlling viewing, printing, forwarding, copying, and expiry — enforced wherever the document travels. DLP prevents data leaving the organization but cannot control how it is used once outside. MAC enforces access based on labels at the OS/system level, not inside documents. Digital watermarking embeds hidden identifiers to track document origin but does not enforce usage restrictions."
+  },
+  {
+    "domain_id": 2,
+    "question": "An IT asset management team deploys a Configuration Management Database (CMDB) that tracks all hardware, software, configurations, and the relationships between components. The PRIMARY security value of a CMDB is:",
+    "options": [
+      "Automating patch deployment across all endpoints",
+      "Providing a single authoritative source of truth for understanding asset relationships and impact of changes",
+      "Enforcing software licensing compliance",
+      "Monitoring network traffic for anomalies"
+    ],
+    "answer": 1,
+    "explanation": "A CMDB's primary security value is visibility — knowing what assets exist, how they are configured, and how they relate to each other enables accurate risk assessment, change impact analysis, and incident response. It is not a patch management tool (though it informs patch prioritization), a license enforcement tool (though it supports audits), or a network monitoring tool."
+  },
+  {
+    "domain_id": 2,
+    "question": "A server reaches end-of-life and will be decommissioned. Before disposal, the security team must decide on a sanitization method. NIST SP 800-88 defines three sanitization categories. Which correctly orders them from LEAST to MOST thorough?",
+    "options": [
+      "Purge → Clear → Destroy",
+      "Clear → Purge → Destroy",
+      "Destroy → Purge → Clear",
+      "Clear → Destroy → Purge"
+    ],
+    "answer": 1,
+    "explanation": "NIST SP 800-88 defines: Clear (logical techniques like overwriting — protects against simple non-invasive recovery), Purge (more rigorous techniques like degaussing or block erase — protects against laboratory attack), and Destroy (physical destruction — irreversible, no residual data risk). Clear is least thorough; Destroy is most thorough. The appropriate method depends on data sensitivity and media type."
+  },
+  {
+    "domain_id": 2,
+    "question": "A forensic investigator seizes a hard drive containing potential evidence. Throughout the investigation, every person who accesses the drive signs a log documenting when they accessed it and for what purpose. This practice maintains:",
+    "options": [
+      "Data integrity through hashing",
+      "Non-repudiation of examiner actions",
+      "Chain of custody",
+      "Evidence authentication"
+    ],
+    "answer": 2,
+    "explanation": "Chain of custody documentation records every person who handled evidence, when, and why — establishing an unbroken record from collection to court presentation. If chain of custody is broken, evidence may be ruled inadmissible. Data integrity is maintained separately through cryptographic hashing. Non-repudiation relates to denying actions. Evidence authentication is the process of proving authenticity, which chain of custody supports but is a distinct concept."
+  },
+  {
+    "domain_id": 2,
+    "question": "Under PCI DSS, what is the MOST restrictive requirement regarding Primary Account Numbers (PANs) stored in systems out of scope for PCI DSS?",
+    "options": [
+      "PANs may be stored in plaintext if the system is isolated from the cardholder data environment",
+      "PANs must never be stored in systems outside the cardholder data environment without strong cryptography",
+      "PANs can be stored using reversible masking in non-PCI systems",
+      "PCI DSS has no requirements for PANs stored outside the defined cardholder data environment"
+    ],
+    "answer": 1,
+    "explanation": "PCI DSS Requirement 3 mandates that PANs must be rendered unreadable (via strong cryptography, tokenization, truncation, or hashing) wherever stored — regardless of whether the system is formally within the defined cardholder data environment (CDE). If PANs exist in out-of-scope systems, those systems become in-scope. Plaintext PANs in any system violate PCI DSS. 'Reversible masking' is not a PCI DSS approved protection method for stored PANs."
+  },
+  {
+    "domain_id": 2,
+    "question": "A healthcare organization wants to share a dataset for research without violating HIPAA. They remove 18 specific identifiers defined by HIPAA (name, address, dates, phone numbers, etc.) and confirm no expert believes re-identification risk is significant. This de-identification approach is the:",
+    "options": [
+      "Expert Determination method",
+      "Safe Harbor method",
+      "k-anonymity method",
+      "Pseudonymization method"
+    ],
+    "answer": 1,
+    "explanation": "HIPAA's Safe Harbor method requires removing all 18 specific identifier categories listed in the Privacy Rule. The Expert Determination method uses a statistical expert who applies generally accepted principles to certify re-identification risk is very small — it is more flexible but requires statistical validation. k-anonymity is a general privacy technique, not a HIPAA-defined method. Pseudonymization replaces identifiers but does not constitute HIPAA de-identification on its own."
+  },
+  {
+    "domain_id": 2,
+    "question": "In the cloud shared responsibility model for Infrastructure as a Service (IaaS), the cloud CUSTOMER is responsible for which of the following?",
+    "options": [
+      "Physical security of data center facilities",
+      "Hypervisor patching and maintenance",
+      "Guest operating system patching and application security",
+      "Network hardware redundancy and uptime"
+    ],
+    "answer": 2,
+    "explanation": "In IaaS, the cloud provider manages physical security, hypervisor/virtualization layer, and networking hardware. The customer is responsible for everything from the guest OS upward: OS patching, runtime, middleware, application code, and data. In PaaS, the provider also manages the OS and runtime. In SaaS, the provider manages almost everything and the customer is primarily responsible for data and user access management."
+  },
+  {
+    "domain_id": 2,
+    "question": "A data lake ingests raw, unstructured data from multiple sources without schema enforcement, while a data warehouse stores structured, processed data organized for analytics. From a security perspective, which statement BEST describes the key difference in protecting these environments?",
+    "options": [
+      "Data lakes require less security because they store only raw unprocessed data",
+      "Data lakes present greater classification challenges because data arrives without labels, requiring automated discovery and classification tools",
+      "Data warehouses need no access controls because data is already aggregated",
+      "Both environments are secured identically because they store the same data"
+    ],
+    "answer": 1,
+    "explanation": "Data lakes ingest raw, heterogeneous data streams without structure, making classification at ingestion difficult — sensitive data (PII, PHI, financial records) may reside undiscovered within unstructured blobs. This creates a 'data swamp' risk requiring automated data discovery and classification tools. Data warehouses contain processed, structured data that is easier to classify and control. Neither environment can operate without access controls."
+  },
+  {
+    "domain_id": 2,
+    "question": "An organization classifies its backup tapes at the same sensitivity level as the primary data they contain. A backup tape labeled 'Confidential' is sent to an offsite storage facility without encryption. Which risk does this MOST directly create?",
+    "options": [
+      "Backup tapes are inherently less sensitive than primary systems",
+      "Unencrypted backup media provides the same level of protection as encrypted online systems",
+      "A compromised or lost tape directly exposes confidential data to anyone who obtains it",
+      "Offsite storage facilities are exempt from organizational data handling policies"
+    ],
+    "answer": 2,
+    "explanation": "Backup media must receive protection commensurate with the classification of data it contains. Unencrypted 'Confidential' backup tapes sent offsite can be stolen, lost, or accessed by unauthorized personnel at the storage facility or in transit — providing direct, unprotected access to confidential data. Backup tapes are not less sensitive than primary systems; they may contain a complete copy of all organizational data. Offsite facilities are not exempt from data handling requirements."
+  },
+  {
+    "domain_id": 2,
+    "question": "A healthcare organization wants to share patient data with a research institution. Before sharing, they apply a technique that adds carefully calibrated statistical noise to the dataset, allowing accurate aggregate analysis while making it mathematically difficult to determine any specific individual's data. This technique is:",
+    "options": [
+      "k-anonymity",
+      "Data masking",
+      "Differential privacy",
+      "Tokenization"
+    ],
+    "answer": 2,
+    "explanation": "Differential privacy provides formal mathematical privacy guarantees by adding controlled noise to data or query results, ensuring that the presence or absence of any single individual cannot be determined from the output with high confidence. k-anonymity ensures records are indistinguishable from k-1 others but does not add noise. Data masking replaces values with fictitious alternatives for non-production use. Tokenization replaces data with surrogates for operational use, not for statistical analysis."
+  },
+  {
+    "domain_id": 2,
+    "question": "An end-of-life laptop used by a sales executive contains 'Internal Use Only' data. The organization's policy states that Internal data requires Clear-level sanitization before reuse. The security team performs a single-pass overwrite. According to NIST SP 800-88, is this sufficient?",
+    "options": [
+      "No, Clear requires at least 7 overwrite passes to meet DoD standards",
+      "Yes, for most modern media a single overwrite pass meets the Clear standard under NIST SP 800-88",
+      "No, Internal data always requires Purge-level sanitization regardless of reuse context",
+      "Yes, but only if followed by degaussing to ensure complete data removal"
+    ],
+    "answer": 1,
+    "explanation": "NIST SP 800-88 Rev. 1 clarifies that for modern magnetic drives and most media, a single overwrite pass is sufficient for Clear-level sanitization — the old DoD 5220.22-M seven-pass standard is outdated and unnecessary for modern drive technology. The appropriate level (Clear vs. Purge vs. Destroy) depends on data sensitivity and planned disposition, not the number of passes alone. Internal Use Only data being reused within the organization typically warrants Clear."
+  },
+  {
+    "domain_id": 2,
+    "question": "A company uses Binding Corporate Rules (BCRs) to transfer personal data between its subsidiaries in multiple countries, including non-EU countries. BCRs PRIMARILY serve what purpose?",
+    "options": [
+      "They are internal security policies for protecting data at rest",
+      "They are legally approved intra-group data transfer mechanisms under GDPR for multinational organizations",
+      "They replace the need for data processing agreements with third-party vendors",
+      "They are encryption standards mandated by EU member states for cross-border transfers"
+    ],
+    "answer": 1,
+    "explanation": "BCRs are internal corporate policies approved by EU data protection authorities that allow multinational groups to transfer personal data across borders within the corporate group, including to non-EU subsidiaries. They are only available to groups of companies under common ownership. BCRs do not cover transfers to unrelated third-party vendors — those require SCCs or other mechanisms. BCRs are legal frameworks, not technical encryption standards or internal security policies."
+  },
+  {
+    "domain_id": 2,
+    "question": "An organization deploys an asset tracking system using RFID tags on all physical IT equipment, integrated with a CMDB. When equipment leaves the building without authorization, an alert is generated. This system PRIMARILY serves which security function?",
+    "options": [
+      "Logical access control",
+      "Physical asset management and theft detection",
+      "Software license compliance",
+      "Network access control"
+    ],
+    "answer": 1,
+    "explanation": "RFID-based asset tracking integrated with a CMDB tracks the physical location and movement of IT assets, supporting physical asset management and detecting unauthorized removal (theft). This is a physical security control, not logical access control (which governs system authentication). Software license compliance tracks software installations. Network access control governs which devices may connect to the network."
+  },
+  {
+    "domain_id": 2,
+    "question": "A development team uses a copy of the production customer database — with real names and email addresses replaced by realistic-looking but fictitious values — for integration testing. This data protection technique is BEST described as:",
+    "options": [
+      "Tokenization",
+      "Data masking",
+      "Pseudonymization",
+      "Anonymization"
+    ],
+    "answer": 1,
+    "explanation": "Data masking replaces real data values with structurally similar, fictitious data for use in non-production environments (development, testing, analytics). It is not reversible in the way tokenization is (no vault to look up original values). Tokenization replaces operational data with surrogates for production use. Pseudonymization replaces direct identifiers but retains re-identification capability. Anonymization irreversibly removes identifying information — true anonymization would mean the data is no longer personal data at all, but test environments often use masking rather than full anonymization."
   }
 ]

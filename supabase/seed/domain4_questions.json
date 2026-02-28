@@ -298,5 +298,305 @@
     ],
     "answer": 1,
     "explanation": "When a CDN terminates TLS at the edge, the CDN provider has access to decrypted traffic — the organization must trust the CDN with sensitive data. This is a supply chain trust issue. Modern CDNs support HTTPS (Option A is wrong). CDNs actually provide DDoS mitigation — they do not eliminate the need for it but they help (Option C is backwards). Content purging APIs allow rapid cache invalidation (Option D is overstated)."
+  },
+  {
+    "domain_id": 4,
+    "question": "An attacker on the same LAN as a target completes the TCP three-way handshake by observing the sequence numbers and injecting packets as if they are the client. The established session is then used to send malicious commands. This attack is called:",
+    "options": [
+      "SYN flood — the attacker exhausts server connection resources",
+      "TCP session hijacking — the attacker injects packets with correct sequence numbers to take over an established session",
+      "Replay attack — the attacker re-sends previously captured valid packets",
+      "Blind spoofing — the attacker sends packets without observing any responses"
+    ],
+    "answer": 1,
+    "explanation": "TCP session hijacking occurs when an attacker, typically with access to observe traffic (on the same LAN or via ARP spoofing), captures sequence numbers from an established TCP session and injects forged packets that appear to originate from a legitimate endpoint. The attacker can then send arbitrary commands within that session. SYN flood (Option A) is a DoS attack against new connections. Replay attacks (Option C) reuse entire captured authentication exchanges, not TCP sequence injection. Blind spoofing (Option D) is much harder because the attacker cannot see sequence numbers."
+  },
+  {
+    "domain_id": 4,
+    "question": "UDP is considered less secure than TCP for many applications. From an attack surface perspective, which threat is MOST associated with UDP's stateless, connectionless nature?",
+    "options": [
+      "UDP is vulnerable to session hijacking because it uses predictable sequence numbers",
+      "UDP services are commonly exploited for amplification DDoS attacks because requests can be sent with spoofed source IPs and the server sends large responses to the victim",
+      "UDP cannot be filtered by firewalls, making all UDP traffic uncontrollable",
+      "UDP requires a three-way handshake that can be exhausted by SYN floods"
+    ],
+    "answer": 1,
+    "explanation": "UDP's stateless nature means any host can send a UDP request with a spoofed source IP. Services like DNS, NTP, and SNMP respond to small queries with much larger responses — an attacker spoofs the victim's IP as the source, directing large response volumes at the victim. The amplification factor (e.g., DNS up to 54x, NTP up to 556x) enables high-bandwidth attacks with minimal attacker resources. Option A describes TCP session hijacking, not UDP. Option C is false — firewalls can filter UDP. Option D describes TCP SYN floods."
+  },
+  {
+    "domain_id": 4,
+    "question": "A Smurf attack is a type of ICMP-based amplification DDoS. What does the attacker do, and why is it effective?",
+    "options": [
+      "The attacker sends oversized ICMP packets that crash the victim's network stack when reassembled",
+      "The attacker sends ICMP echo requests to a network's broadcast address with the victim's IP spoofed as the source, causing all hosts on the network to send ICMP replies to the victim simultaneously",
+      "The attacker sends malformed ICMP redirect messages that corrupt the victim's routing table",
+      "The attacker sends fragmented ICMP packets with overlapping offsets that crash the victim's OS"
+    ],
+    "answer": 1,
+    "explanation": "In a Smurf attack, the attacker sends ICMP echo requests (pings) to a broadcast address (e.g., 192.168.1.255) with the source IP spoofed to the victim's address. Every host on that subnet responds to the victim, multiplying the attack traffic by the number of hosts. Countermeasures include disabling directed broadcasts at routers. Option A describes Ping of Death (oversized packets). Option C describes ICMP redirect abuse. Option D describes the Teardrop attack (fragmentation overlap)."
+  },
+  {
+    "domain_id": 4,
+    "question": "BGP hijacking allows attackers to redirect internet traffic by announcing more specific or unauthorized BGP routes. Which of the following BEST describes what a BGP hijack can enable?",
+    "options": [
+      "The attacker can eavesdrop on or blackhole traffic destined for the victim's IP prefixes by convincing other ASes to route traffic through the attacker's infrastructure",
+      "The attacker can modify BGP packets in transit to change destination IP addresses in real time",
+      "BGP hijacking only affects traffic within a single autonomous system (AS)",
+      "The attacker can force DNS servers to return incorrect IP addresses by corrupting BGP routing tables"
+    ],
+    "answer": 0,
+    "explanation": "BGP hijacking exploits the lack of cryptographic verification in BGP route announcements. An attacker announces a more specific prefix (longer prefix) or the same prefix as the victim's AS. Other routers, preferring the more specific or closer route, direct traffic toward the attacker — enabling traffic interception, blackholing, or man-in-the-middle. BGP does not modify packets in transit (Option B). BGP operates between ASes globally (Option C is wrong). BGP and DNS are separate systems (Option D). RPKI (Resource Public Key Infrastructure) and BGPsec address this threat."
+  },
+  {
+    "domain_id": 4,
+    "question": "DNS amplification attacks exploit open DNS resolvers. An organization's security team discovers their DNS server is being used as an amplifier. What is the FIRST action they should take to stop participating in these attacks?",
+    "options": [
+      "Apply DNSSEC signatures to all hosted zones to prevent DNS record forgery",
+      "Configure the DNS server to restrict recursive queries to internal clients only, blocking open resolver abuse from external IPs",
+      "Implement rate limiting on all outbound HTTP traffic from the DNS server",
+      "Switch from UDP to TCP for all DNS communications to prevent spoofing"
+    ],
+    "answer": 1,
+    "explanation": "An open resolver responds to recursive queries from any source IP — attackers spoof victim IPs and direct large DNS responses at the victim. The immediate fix is to restrict recursive resolution to authorized clients (internal IP ranges) only. External clients should only be able to query authoritative records. DNSSEC (Option A) prevents record forgery but does not stop the amplification mechanism. HTTP rate limiting (Option C) is irrelevant — DNS uses UDP/TCP port 53. Forcing TCP (Option D) reduces amplification effectiveness but introduces operational issues and is not standard practice for all DNS traffic."
+  },
+  {
+    "domain_id": 4,
+    "question": "The Spanning Tree Protocol (STP) is vulnerable to attacks where a rogue device claims to be the root bridge. What is the PRIMARY security mitigation for this threat in a switched enterprise network?",
+    "options": [
+      "Disable STP entirely on all switches to eliminate the attack surface",
+      "Enable BPDU Guard on access ports facing end-user devices so that any port receiving a Bridge Protocol Data Unit is immediately placed in err-disabled state",
+      "Configure all switches to use RSTP instead of STP, which is immune to root bridge attacks",
+      "Enable port mirroring on all access ports to detect rogue BPDUs via IDS"
+    ],
+    "answer": 1,
+    "explanation": "BPDU Guard is the correct mitigation — it is configured on access (edge) ports that should never receive BPDUs (only uplink/trunk ports participate in STP elections). If a BPDU is received on a BPDU Guard-enabled port, the port is immediately shut down (err-disabled), preventing rogue root bridge attacks. Disabling STP (Option A) causes bridging loops — STP is necessary. RSTP (Option C) is faster than STP but has the same root bridge vulnerability. Port mirroring (Option D) detects attacks after the fact but does not prevent them."
+  },
+  {
+    "domain_id": 4,
+    "question": "MAC flooding is an attack against network switches. An attacker sends thousands of frames with randomized source MAC addresses. What is the intended effect, and why does it create a security risk?",
+    "options": [
+      "The switch's ARP cache overflows, causing all hosts to lose their IP-to-MAC mappings",
+      "The switch's CAM (Content Addressable Memory) table fills up, causing it to fail-open and broadcast all frames out every port like a hub, enabling passive eavesdropping",
+      "The switch CPU is overwhelmed with MAC learning operations, causing a denial of service to the management plane",
+      "The attack poisons the switch's spanning tree database, causing a network topology change"
+    ],
+    "answer": 1,
+    "explanation": "Switches maintain a CAM table mapping MAC addresses to ports. When the CAM table is full, new entries cannot be learned, so the switch floods frames out all ports (fail-open behavior) — turning the switch into a hub. An attacker on any port can now capture traffic intended for other hosts. Port security (limiting the number of MAC addresses per port) prevents this. Option A confuses the CAM table with the ARP cache. Option C describes CPU exhaustion, which is a secondary effect but not the primary attack goal. Option D describes an STP attack."
+  },
+  {
+    "domain_id": 4,
+    "question": "802.1X port-based Network Access Control with RADIUS provides authentication before granting LAN access. In an 802.1X exchange, what are the three key components and their roles?",
+    "options": [
+      "Supplicant (end device), Authenticator (switch/AP), Authentication Server (RADIUS) — the authenticator passes credentials between supplicant and server without making access decisions itself",
+      "Client, Domain Controller, DNS Server — credentials are verified against Active Directory and DNS provides IP assignment",
+      "Endpoint, Firewall, IDS — the endpoint proves identity to the firewall, which logs to the IDS",
+      "User, PKI, Certificate Authority — the user presents a certificate to the CA which grants network access"
+    ],
+    "answer": 0,
+    "explanation": "802.1X involves: (1) Supplicant — the end device seeking access; (2) Authenticator — the switch or wireless AP, which blocks traffic until authentication succeeds and passes EAP messages between supplicant and server; (3) Authentication Server — typically RADIUS, which validates credentials and returns Accept/Reject to the authenticator. The authenticator only enforces the server's decision — it does not validate credentials itself. Option B describes a domain login process. Option C describes a different security stack. Option D describes PKI certificate issuance, not 802.1X."
+  },
+  {
+    "domain_id": 4,
+    "question": "A security engineer is deploying wireless authentication and must select an EAP method. Which EAP method provides the STRONGEST mutual authentication by using client-side certificates in addition to server-side certificates?",
+    "options": [
+      "EAP-MD5 — uses MD5 challenge-response for strong mutual authentication",
+      "PEAP (Protected EAP) — creates a TLS tunnel and authenticates the client with username/password inside",
+      "EAP-TLS — requires both the server AND client to present certificates, providing strong mutual authentication",
+      "EAP-TTLS — creates a TLS tunnel using only server certificates, then authenticates the client with various inner methods"
+    ],
+    "answer": 2,
+    "explanation": "EAP-TLS is the gold standard — it requires both server and client to present valid X.509 certificates, providing true mutual authentication. Compromising credentials does not help an attacker without the client certificate. The downside is certificate infrastructure complexity. EAP-MD5 (Option A) provides no server authentication and is susceptible to dictionary attacks — it is deprecated. PEAP (Option B) and EAP-TTLS (Option D) both use only server-side certificates and authenticate clients via credentials inside the tunnel — stronger than EAP-MD5 but weaker than EAP-TLS since stolen credentials enable access."
+  },
+  {
+    "domain_id": 4,
+    "question": "WPA3-Enterprise introduces a 192-bit security mode. What is the significance of this mode compared to standard WPA3-Enterprise?",
+    "options": [
+      "The 192-bit mode uses 192-bit AES keys instead of 128-bit, doubling encryption strength for all WPA3 deployments",
+      "The 192-bit mode aligns with NSA Suite B/CNSA requirements by mandating 256-bit AES, 384-bit ECC, and 384-bit HMAC-SHA, targeting government and high-security environments",
+      "The 192-bit mode eliminates the need for a RADIUS server by using embedded certificate authorities",
+      "The 192-bit mode is backward compatible with WPA2-Enterprise, allowing mixed deployments without any configuration changes"
+    ],
+    "answer": 1,
+    "explanation": "WPA3-Enterprise 192-bit mode (formally called 'WPA3-Enterprise 192-bit Security') aligns with the CNSA (Commercial National Security Algorithm) suite used by NSA — requiring AES-256-GCMP, ECDHE with P-384, ECDSA with P-384, and SHA-384 for all cipher components. It targets government, defense, and financial organizations with the highest security requirements. Option A misidentifies the key length (it is 256-bit AES, not 192-bit). Option C is incorrect — RADIUS is still required. Option D is wrong — the 192-bit mode is not backward compatible with WPA2."
+  },
+  {
+    "domain_id": 4,
+    "question": "During a wireless security assessment, an attacker sends unsolicited messages from their Bluetooth device to nearby phones displaying pop-up text messages. No data is stolen. This attack is called:",
+    "options": [
+      "Bluesnarfing — unauthorized access to data stored on a Bluetooth device",
+      "Bluejacking — sending unsolicited messages via Bluetooth without gaining access to the device",
+      "KNOB (Key Negotiation of Bluetooth) — downgrading the encryption key length to crack communications",
+      "Bluebugging — gaining full control of a device via a Bluetooth vulnerability"
+    ],
+    "answer": 1,
+    "explanation": "Bluejacking sends unsolicited contact cards or messages via Bluetooth's Object Push Profile — it is more of a nuisance than a data threat since no unauthorized access occurs. Bluesnarfing (Option A) exploits vulnerabilities to access data (contacts, messages, calendar). KNOB attack (Option C) forces negotiation of a 1-byte entropy key, enabling brute-force decryption of Bluetooth communications. Bluebugging (Option D) achieves complete device takeover, often enabling call interception and remote command execution."
+  },
+  {
+    "domain_id": 4,
+    "question": "An organization is deploying a zero trust architecture and needs to control lateral movement between internal application servers. Which approach BEST implements microsegmentation in this context?",
+    "options": [
+      "Deploy a perimeter firewall with strict inbound rules and allow all internal east-west traffic",
+      "Implement identity-based, application-aware policies at each workload that restrict communication to only explicitly authorized service-to-service flows, regardless of network location",
+      "Place all servers in a single VLAN with host-based firewalls running on each server",
+      "Use network ACLs at the router level to block traffic between server subnets"
+    ],
+    "answer": 1,
+    "explanation": "Microsegmentation in zero trust enforces granular, workload-level policies — each application or microservice can only communicate with explicitly permitted peers, using identity and application context (not just IP and port). A compromised workload cannot reach adjacent services it has no legitimate reason to contact. Option A (perimeter-only with open internal traffic) is the legacy model zero trust replaces. Option C (host-based firewalls in a single VLAN) provides some isolation but lacks identity awareness. Option D (router ACLs between subnets) is coarse-grained and does not enforce workload-level identity."
+  },
+  {
+    "domain_id": 4,
+    "question": "In zero trust architecture, the terms 'east-west traffic' and 'north-south traffic' have distinct security implications. Which statement BEST describes why east-west traffic historically received inadequate security attention?",
+    "options": [
+      "East-west traffic is encrypted by default in all modern operating systems, so additional security is unnecessary",
+      "Perimeter-focused security models assumed internal traffic was trusted — east-west traffic between internal servers was not inspected, enabling attackers who breached the perimeter to move laterally undetected",
+      "East-west traffic uses different protocols than north-south traffic, requiring specialized equipment most organizations lack",
+      "East-west traffic represents less than 5% of typical enterprise traffic volume, making it a low-priority security concern"
+    ],
+    "answer": 1,
+    "explanation": "Traditional perimeter security (castle-and-moat model) heavily inspected north-south traffic (between internal network and internet) but implicitly trusted east-west traffic (server-to-server, application-to-database within the data center). Attackers who bypassed perimeter controls could move laterally between internal systems without triggering any security controls. Modern data centers see far more east-west than north-south traffic. Zero trust and microsegmentation directly address this gap by treating east-west traffic as untrusted and requiring explicit authorization."
+  },
+  {
+    "domain_id": 4,
+    "question": "During TLS certificate validation, a browser receives a certificate for www.bank.com. What is the COMPLETE sequence of checks the browser must perform to accept the certificate as valid?",
+    "options": [
+      "Check that the hostname matches, verify the certificate has not expired, and confirm the certificate is signed with AES-256",
+      "Verify the certificate chain to a trusted root CA, check the hostname matches the Subject/SAN, verify the validity period, check revocation status via OCSP or CRL, and confirm the signature algorithm is not deprecated",
+      "Confirm the website uses port 443 and the certificate contains the correct IP address",
+      "Check that the certificate was issued in the current calendar year and the domain is registered with ICANN"
+    ],
+    "answer": 1,
+    "explanation": "Complete TLS certificate validation requires: (1) Chain of trust — the certificate must chain to a trusted root CA via intermediate CAs; (2) Hostname validation — Subject Common Name or Subject Alternative Names must match the requested hostname; (3) Validity period — current date must be within notBefore and notAfter; (4) Revocation — OCSP or CRL check to confirm the cert hasn't been revoked; (5) Signature algorithm — no deprecated algorithms (MD5, SHA-1). Option A misidentifies AES as a certificate signature algorithm. Option C — certificates bind domain names, not IP addresses (generally). Option D — issuance year and ICANN registration are irrelevant to TLS validation."
+  },
+  {
+    "domain_id": 4,
+    "question": "HTTP Strict Transport Security (HSTS) protects against which attack, and what is the HSTS preload list's role?",
+    "options": [
+      "HSTS prevents SQL injection by enforcing parameterized queries; the preload list contains approved database drivers",
+      "HSTS prevents SSL stripping attacks by instructing browsers to always use HTTPS for a domain; the preload list ensures HSTS is enforced even on the first visit before any header is received",
+      "HSTS prevents certificate spoofing by pinning specific certificates in browser memory; the preload list is a backup certificate repository",
+      "HSTS prevents clickjacking by setting X-Frame-Options headers; the preload list contains trusted iframe sources"
+    ],
+    "answer": 1,
+    "explanation": "HSTS (Strict-Transport-Security header) tells browsers to only connect via HTTPS and to reject HTTP connections or certificate errors for the duration of the max-age value. This prevents SSL stripping attacks where an attacker downgrades HTTPS to HTTP. The gap is the first visit — an attacker could intercept before the header is received. The HSTS preload list (hstspreload.org) is a browser-embedded list of domains that are always-HTTPS before any connection, closing this first-visit gap. Option A, C, and D describe completely different security headers and mechanisms."
+  },
+  {
+    "domain_id": 4,
+    "question": "An organization deploys a forward proxy for all outbound web traffic from corporate endpoints. What is the PRIMARY security benefit, and what limitation should be understood?",
+    "options": [
+      "A forward proxy encrypts all traffic between endpoints and external websites; limitation is that it slows network performance",
+      "A forward proxy allows the organization to inspect, filter, and log all outbound web requests, enforcing acceptable use policies and blocking malicious domains; limitation is that HTTPS traffic cannot be inspected without SSL inspection (which requires deploying a trusted CA certificate to endpoints)",
+      "A forward proxy hides the internal network's IP addresses from external servers; limitation is that it requires all applications to support SOCKS proxying",
+      "A forward proxy caches frequently accessed content to reduce bandwidth; limitation is that security policies cannot be enforced on cached content"
+    ],
+    "answer": 1,
+    "explanation": "A forward proxy sits between internal clients and the internet — all outbound requests pass through it, enabling URL filtering, malware scanning, content categorization, and audit logging. The significant limitation is HTTPS: end-to-end TLS encryption prevents the proxy from seeing content without SSL/TLS inspection (MITM decryption using an internally-trusted CA certificate). This requires careful handling of certificate trust and introduces privacy considerations. Option A — the proxy does not encrypt traffic itself; it terminates and re-establishes connections. Option C describes NAT, not a proxy. Option D describes a caching proxy, not the primary security benefit."
+  },
+  {
+    "domain_id": 4,
+    "question": "A load balancer performing SSL offloading terminates TLS at the load balancer and forwards plaintext to backend servers. What is the PRIMARY security risk of this architecture, and how is it typically mitigated?",
+    "options": [
+      "SSL offloading increases latency because re-encryption is required at each backend; mitigation is to use hardware accelerators",
+      "Traffic between the load balancer and backend servers is unencrypted — if the internal network is compromised or an insider has access, sensitive data is exposed in transit; mitigation is re-encryption (SSL bridging) between the load balancer and backends on a dedicated secure VLAN",
+      "SSL offloading prevents the backend servers from knowing the client's identity; mitigation is to add client certificates at the load balancer",
+      "The load balancer becomes a single point of failure for all TLS sessions; mitigation is active-active load balancer clustering"
+    ],
+    "answer": 1,
+    "explanation": "SSL offloading improves backend performance by handling computationally expensive TLS operations at the load balancer. The security trade-off is that traffic flows unencrypted from the load balancer to backend servers. If the internal network segment is not secure, this creates an exposure window. Mitigation approaches: (1) SSL bridging — the load balancer re-encrypts traffic to backends; (2) Dedicated secure backend VLAN with strict access controls. Option A describes performance, not the primary security risk. Option C describes client authentication, a separate concern. Option D describes availability, not the security risk of offloading."
+  },
+  {
+    "domain_id": 4,
+    "question": "DNS over HTTPS (DoH) and DNS over TLS (DoT) both encrypt DNS queries. From a network security monitoring perspective, what is the MOST significant operational concern with widespread DoH adoption?",
+    "options": [
+      "DoH is vulnerable to downgrade attacks that revert queries to plaintext DNS",
+      "DoH encapsulates DNS queries within HTTPS traffic on port 443, making it difficult for network security tools to distinguish, filter, or monitor DNS queries separately from regular web traffic — potentially bypassing enterprise DNS filtering controls",
+      "DoH requires deployment of new DNS root servers and is not compatible with existing DNSSEC infrastructure",
+      "DoH increases DNS query latency to the point where web browsing performance is significantly degraded"
+    ],
+    "answer": 1,
+    "explanation": "DoH wraps DNS queries in standard HTTPS on port 443 — it is indistinguishable from web traffic to network monitoring tools and firewalls. Enterprises that use DNS-based security controls (malware domain blocking, acceptable use filtering via internal resolvers) lose visibility and enforcement when endpoints use DoH to reach external resolvers (e.g., 1.1.1.1, 8.8.8.8). DoT uses a dedicated port (853) which is easier to block and monitor. Mitigations include blocking DoH at the firewall, using MDM to configure managed endpoints to use corporate DoH resolvers. Options A, C, and D are incorrect or significantly overstated."
+  },
+  {
+    "domain_id": 4,
+    "question": "A security team uses NetFlow data from core routers to investigate a suspected data exfiltration incident. What information does NetFlow provide, and what does it NOT provide?",
+    "options": [
+      "NetFlow provides full packet capture including payload content, but does not record connection timestamps",
+      "NetFlow provides flow metadata (source/destination IP, ports, protocol, bytes transferred, duration) but does NOT capture packet payload content — it shows communication patterns without revealing data contents",
+      "NetFlow provides only SNMP trap data from network devices, not traffic flow information",
+      "NetFlow captures all traffic at Layer 2, including MAC addresses, but cannot identify application-layer protocols"
+    ],
+    "answer": 1,
+    "explanation": "NetFlow (and its variants: sFlow, IPFIX, J-Flow) exports flow metadata — the 5-tuple (src/dst IP, src/dst port, protocol), byte counts, packet counts, and timestamps. This enables detection of anomalies like large outbound transfers, unexpected connections to foreign IPs, or beaconing patterns. It does NOT capture payload content — for that, full packet capture (PCAP) tools are needed. This metadata is valuable because it can be retained long-term at low storage cost. Option A inverts the capabilities. Option C describes SNMP, a separate protocol. Option D mischaracterizes NetFlow's layer of operation."
+  },
+  {
+    "domain_id": 4,
+    "question": "An organization's SD-WAN solution connects branch offices over public internet links using IPSec tunnels. Compared to a traditional MPLS WAN, what is the MOST important security consideration the organization must address?",
+    "options": [
+      "SD-WAN cannot support QoS, so latency-sensitive applications like VoIP are insecure on SD-WAN",
+      "SD-WAN traffic traverses the public internet rather than a private carrier network, requiring robust encryption (IPSec/TLS) and centralized policy enforcement since physical network separation is no longer a security control",
+      "MPLS is more vulnerable to BGP hijacking than SD-WAN because MPLS uses the public BGP routing table",
+      "SD-WAN requires all traffic to be backhauled through headquarters, increasing latency and creating a central point of failure"
+    ],
+    "answer": 1,
+    "explanation": "Traditional MPLS WANs rely on carrier-level network separation — traffic never traverses the public internet and is inherently private. SD-WAN over public internet replaces physical separation with logical encryption. Organizations must ensure: all tunnels use strong encryption (AES-256, IKEv2), authentication is robust, and the SD-WAN controller itself is hardened and highly available. Option A — SD-WAN supports QoS and is designed for application-aware routing including VoIP. Option C — MPLS uses private routing, not public BGP for customer traffic; this is incorrect. Option D — split tunneling is a core SD-WAN feature; backhauling all traffic is optional."
+  },
+  {
+    "domain_id": 4,
+    "question": "Network Function Virtualization (NFV) replaces dedicated network appliances with software running on commodity hardware. What is the PRIMARY security implication of this architectural shift?",
+    "options": [
+      "NFV eliminates encryption overhead because virtualized functions can share CPU resources more efficiently",
+      "The attack surface expands because the security of virtual network functions depends on the underlying hypervisor and orchestration platform — a compromised hypervisor can affect all VNFs simultaneously",
+      "NFV makes network functions more secure because software can be updated faster than hardware appliances",
+      "NFV requires all traffic to be decrypted and re-encrypted at each virtual function, creating key management complexity"
+    ],
+    "answer": 1,
+    "explanation": "NFV introduces hypervisor/orchestration layer risk — all virtual network functions (virtual firewalls, IDS, load balancers) share the same underlying infrastructure. A hypervisor compromise, misconfigured management API, or orchestration platform vulnerability could affect all VNFs simultaneously. This contrasts with dedicated hardware appliances where each device is physically isolated. Hardening the NFV infrastructure (hypervisor, NFVO, VNFM) is critical. Option A is incorrect — NFV does not eliminate encryption overhead. Option C is partially true but not the primary security concern. Option D is not an inherent NFV characteristic."
+  },
+  {
+    "domain_id": 4,
+    "question": "Zigbee is a low-power wireless protocol commonly used in IoT and smart home devices. Which statement BEST describes a known security limitation of Zigbee networks?",
+    "options": [
+      "Zigbee does not support encryption and transmits all data in plaintext",
+      "Zigbee's default 'touchlink commissioning' feature can allow unauthorized devices to join a network and steal the network key if a coordinator is within RF range during pairing",
+      "Zigbee uses the same frequency as Wi-Fi (2.4 GHz) and is therefore immune to dedicated wireless attacks",
+      "Zigbee requires internet connectivity for all communications and is vulnerable to cloud provider outages"
+    ],
+    "answer": 1,
+    "explanation": "Zigbee does support AES-128 encryption, but its commissioning process has historically had weaknesses — particularly the 'touchlink' feature used in Zigbee Light Link, where devices within radio range could steal the network key during pairing by issuing a factory reset and re-commissioning sequence. This 'Zigbee Hue' attack was demonstrated against Philips Hue bulbs. Option A is wrong — Zigbee supports AES-128. Option C — sharing the 2.4 GHz band with Wi-Fi does not provide immunity; it creates interference and shared-frequency attack risks. Option D — Zigbee is designed for local mesh networking and does not inherently require internet connectivity."
+  },
+  {
+    "domain_id": 4,
+    "question": "NTP amplification attacks have been observed generating traffic ratios exceeding 550:1. Which characteristic of NTP makes it particularly susceptible to use as an amplification vector?",
+    "options": [
+      "NTP uses TCP, which allows attackers to complete three-way handshakes with spoofed IPs",
+      "NTP's monlist command returns a list of up to 600 recently contacted clients in response to a small request, enabling massive response amplification when directed at a victim via IP spoofing",
+      "NTP servers automatically broadcast time updates to all hosts, allowing attackers to inject false timing data",
+      "NTP lacks authentication by default, allowing attackers to modify time synchronization and cause certificate validation failures"
+    ],
+    "answer": 1,
+    "explanation": "NTP's monlist (or MON_GETLIST) command was designed for monitoring — it returns up to 600 IP addresses of recently queried hosts. A 234-byte request can generate a ~48KB response (amplification factor up to 556x). Attackers spoof the victim's IP as the source, directing massive responses at the victim. Mitigation: disable monlist on NTP servers (ntpd configuration: 'noquery' and 'disable monitor'), use NTPsec, and block UDP 123 at the perimeter from external sources. Option A is wrong — NTP uses UDP, not TCP. Option C describes NTP broadcast mode, a separate but distinct concern. Option D describes NTP authentication bypass, a real issue but separate from amplification."
+  },
+  {
+    "domain_id": 4,
+    "question": "A penetration tester uses a transparent proxy to intercept traffic between a client and server without modifying the client's proxy configuration. How does a transparent proxy differ from a forward proxy, and what are the security implications?",
+    "options": [
+      "A transparent proxy requires client-side certificate installation; a forward proxy does not require any client configuration",
+      "A transparent proxy intercepts traffic at the network level (typically via WCCP or policy-based routing) without client awareness or configuration; this means clients cannot detect or opt out of inspection, raising both security monitoring and privacy considerations",
+      "A transparent proxy only handles UDP traffic; a forward proxy handles TCP connections",
+      "A transparent proxy decrypts HTTPS traffic using the server's private key obtained from the CA; a forward proxy cannot inspect HTTPS"
+    ],
+    "answer": 1,
+    "explanation": "A transparent (intercepting) proxy is deployed inline — traffic is redirected to it via network-level mechanisms (WCCP, policy-based routing, or firewall DNAT rules) without any client proxy configuration. Clients are unaware their traffic is being intercepted. For HTTP this is straightforward; for HTTPS, SSL inspection requires the proxy to perform MITM using a locally-trusted CA certificate. Security implications: all outbound traffic can be inspected and filtered centrally, but users have no visibility into or control over the inspection. A forward (explicit) proxy requires clients to be configured to send traffic to it deliberately. Option A reverses the configuration requirements. Option C is incorrect — both handle TCP. Option D mischaracterizes how SSL inspection works — the proxy uses its own certificate, not the server's."
+  },
+  {
+    "domain_id": 4,
+    "question": "Certificate Transparency (CT) logs were introduced to address which weakness in the public CA ecosystem, and what obligation do browsers impose related to CT?",
+    "options": [
+      "CT logs store encrypted copies of private keys to enable certificate recovery after loss",
+      "CT logs provide a publicly auditable record of all issued certificates, detecting misissued or rogue certificates; browsers require certificates to include Signed Certificate Timestamps (SCTs) proving the certificate was submitted to CT logs before issuance",
+      "CT logs serve as a real-time revocation mechanism, replacing OCSP and CRL distribution points",
+      "CT logs enable domain owners to pre-approve all future certificates for their domain, preventing any CA from issuing without owner consent"
+    ],
+    "answer": 1,
+    "explanation": "Certificate Transparency (RFC 6962) requires CAs to submit all issued certificates to publicly auditable, append-only CT logs. Browsers (Chrome, Safari) require valid Signed Certificate Timestamps (SCTs) embedded in certificates or delivered via TLS extension, proving the cert was logged before use. This enables domain owners and security researchers to monitor logs (e.g., via crt.sh) and detect unauthorized certificate issuance. The DigiNotar and Symantec CA incidents motivated CT adoption. Option A — CT logs do not store private keys. Option C — CT does not provide revocation; OCSP/CRL remain separate. Option D describes CAA (Certification Authority Authorization) DNS records, not CT logs."
   }
 ]

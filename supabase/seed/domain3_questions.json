@@ -298,5 +298,305 @@
     ],
     "answer": 1,
     "explanation": "ECDSA (Elliptic Curve Digital Signature Algorithm) is an ECC-based algorithm. ECC provides equivalent security to RSA with much smaller key sizes — a 256-bit ECC key offers roughly the same security as a 3072-bit RSA key — resulting in faster operations and lower power consumption. ECC is not symmetric (Option C). Both are standardized (Option D is false). Option A is the opposite of ECC's advantage."
+  },
+  {
+    "domain_id": 3,
+    "question": "The Graham-Denning model defines specific rules for managing subjects, objects, and access rights. Which capability is UNIQUELY addressed by Graham-Denning that Bell-LaPadula does NOT cover?",
+    "options": [
+      "Preventing subjects from reading objects at higher classification levels",
+      "Defining how subjects can securely create, delete, and transfer access rights to other subjects",
+      "Preventing data from flowing from high-integrity to low-integrity objects",
+      "Enforcing conflict of interest policies between competing business units"
+    ],
+    "answer": 1,
+    "explanation": "Graham-Denning extends access control models by defining eight specific protection rules covering how subjects create and delete other subjects/objects, how they read and grant access rights, and how they transfer those rights. Bell-LaPadula (Option A) addresses confidentiality via classification levels. Option C describes Biba. Option D describes Brewer-Nash. Graham-Denning's contribution is the formal specification of rights administration and delegation."
+  },
+  {
+    "domain_id": 3,
+    "question": "The Harrison-Ruzzo-Ullman (HRU) model is significant in access control theory primarily because it:",
+    "options": [
+      "Proved that any access control system can be made perfectly secure through formal verification",
+      "Demonstrated that the general safety problem in access control — determining whether a subject can ever obtain a right it does not currently have — is undecidable in the general case",
+      "Introduced the concept of mandatory access control labels for classified systems",
+      "Defined the reference monitor as the mechanism for enforcing access control policy"
+    ],
+    "answer": 1,
+    "explanation": "HRU proved that for a general access control system with an arbitrary set of commands, it is undecidable (no algorithm can always determine) whether a given right can ever be leaked to an unauthorized subject. This is a theoretical limitation — security cannot be algorithmically guaranteed in all cases. Option A is the opposite conclusion. Option C describes Bell-LaPadula and MAC systems. Option D describes the reference monitor concept, a separate construct."
+  },
+  {
+    "domain_id": 3,
+    "question": "In a lattice-based access control system, a subject with a security label of (Secret, {Engineering, Finance}) attempts to access an object labeled (Secret, {Engineering}). What is the outcome according to the lattice model?",
+    "options": [
+      "Access is denied because the subject's compartment set is a superset of the object's compartment set",
+      "Access is granted because the subject's label dominates the object's label — the subject's compartments include all of the object's compartments",
+      "Access is denied because both labels are at the same classification level",
+      "Access is granted only after the subject drops the Finance compartment to match the object"
+    ],
+    "answer": 1,
+    "explanation": "In a lattice model, label A dominates label B when A's classification is >= B's classification AND A's compartment set is a superset of (or equal to) B's compartment set. (Secret, {Engineering, Finance}) dominates (Secret, {Engineering}) because the classification is equal and {Engineering, Finance} is a superset of {Engineering}. Access is therefore granted. Option A misidentifies the dominance direction. Option C ignores compartment comparison. Option D describes dynamic downgrading, which is not standard lattice access control."
+  },
+  {
+    "domain_id": 3,
+    "question": "The ring protection model assigns software to privilege rings (0 through 3). Which statement BEST describes the security significance of Ring 0?",
+    "options": [
+      "Ring 0 is the least privileged ring, reserved for user applications to prevent kernel access",
+      "Ring 0 is the most privileged ring where the kernel operates with unrestricted hardware access; a compromise here affects the entire system",
+      "Ring 0 provides memory protection for user processes but cannot access I/O devices",
+      "Ring 0 and Ring 3 have equivalent privileges in modern operating systems"
+    ],
+    "answer": 1,
+    "explanation": "Ring 0 (kernel mode) is the innermost, most privileged protection domain with unrestricted access to hardware, memory, and all CPU instructions. The OS kernel runs in Ring 0. Rings 1 and 2 are rarely used in modern x86 OSes. Ring 3 is user space — applications run here with restricted access. A kernel-level compromise (Ring 0) gives an attacker full system control, making Ring 0 protection critical. Option A has the privilege hierarchy inverted."
+  },
+  {
+    "domain_id": 3,
+    "question": "The Trusted Computing Base (TCB) is BEST defined as:",
+    "options": [
+      "All hardware, software, and firmware that is trusted by end users of a system",
+      "The totality of protection mechanisms within a system — hardware, firmware, and software — whose correct functioning is sufficient to enforce a security policy",
+      "The set of cryptographic algorithms certified by NIST for use in federal systems",
+      "The physical perimeter of a data center including access controls and guards"
+    ],
+    "answer": 1,
+    "explanation": "The TCB is the complete set of protection mechanisms (hardware, firmware, software) that must function correctly to enforce the security policy. It should be as small as possible (principle of least privilege) to reduce attack surface. If any TCB component is compromised, security guarantees fail. Option A confuses 'trusted by users' with 'trusted to enforce policy.' Option C describes FIPS approval. Option D describes a physical security perimeter."
+  },
+  {
+    "domain_id": 3,
+    "question": "A reference monitor mediates ALL access between subjects and objects in a secure system. For a reference monitor to be valid, it must satisfy which THREE properties?",
+    "options": [
+      "It must be fast, distributed, and redundant to support high availability",
+      "It must be tamper-proof, always invoked for every access, and small enough to be verified (complete mediation, isolation, and verifiability)",
+      "It must operate at the application layer, support multithreading, and log all access decisions",
+      "It must enforce Bell-LaPadula properties, support Biba, and implement Clark-Wilson transactions simultaneously"
+    ],
+    "answer": 1,
+    "explanation": "The three required properties of a reference monitor are: (1) Complete mediation — every access to every object must go through it; (2) Tamper-proof (isolation) — it cannot be modified or bypassed; (3) Verifiable (small enough to be formally analyzed). These come from the Anderson Report (1972). Option A describes availability characteristics, not reference monitor properties. Option C describes implementation details. Option D conflates the reference monitor concept with specific access control models."
+  },
+  {
+    "domain_id": 3,
+    "question": "A state machine model defines security in terms of system states and transitions. A system is secure if:",
+    "options": [
+      "It boots into an insecure state and transitions to a secure state within 30 seconds",
+      "It begins in a secure state and every allowable state transition results in another secure state",
+      "It can reach any state from any other state without violating access control rules",
+      "The number of possible states is small enough to be manually reviewed by security administrators"
+    ],
+    "answer": 1,
+    "explanation": "The state machine model defines a system as secure if it starts in a secure state and every state transition preserves security — meaning no transition can move the system into an insecure state. This forms the mathematical basis for proving security properties. Option A is incorrect — allowing insecure boot states violates the model. Option C describes reachability, not security. Option D is a practical operational concern, not the definition of a secure state machine."
+  },
+  {
+    "domain_id": 3,
+    "question": "Electronic Codebook (ECB) mode is considered the WEAKEST block cipher mode of operation. The PRIMARY reason is:",
+    "options": [
+      "ECB uses a different key for each block, creating key management complexity",
+      "ECB encrypts each block independently with the same key, so identical plaintext blocks produce identical ciphertext blocks, revealing patterns",
+      "ECB cannot handle plaintexts that are not exact multiples of the block size",
+      "ECB mode does not support AES and is limited to older DES implementations"
+    ],
+    "answer": 1,
+    "explanation": "In ECB mode, each block is encrypted independently using the same key. Identical plaintext blocks always produce identical ciphertext blocks, making patterns visible in the ciphertext. The classic illustration is encrypting a bitmap image — the structure remains recognizable. CBC, CTR, and GCM modes address this by introducing randomness (IV/nonce) and chaining. Option A is wrong — ECB uses the same key for all blocks. Option C is a property of block ciphers generally, not specific to ECB. Option D is false — ECB works with AES."
+  },
+  {
+    "domain_id": 3,
+    "question": "A security architect is selecting a block cipher mode that provides both confidentiality AND authentication in a single pass, making it suitable for TLS 1.3 and disk encryption. Which mode BEST meets this requirement?",
+    "options": [
+      "CBC (Cipher Block Chaining) with HMAC-SHA256",
+      "ECB (Electronic Codebook)",
+      "GCM (Galois/Counter Mode)",
+      "CTR (Counter Mode) with a separate MAC"
+    ],
+    "answer": 2,
+    "explanation": "GCM (Galois/Counter Mode) is an Authenticated Encryption with Associated Data (AEAD) mode that provides both confidentiality (via CTR-mode encryption) and integrity/authentication (via the GHASH function) in a single efficient pass. TLS 1.3 mandates AEAD cipher suites, and AES-GCM is the primary choice. CBC (Option A) requires a separate HMAC, adding complexity and potential padding oracle vulnerabilities. ECB (Option B) has no integrity. CTR (Option D) also requires a separate MAC — not a single-pass AEAD."
+  },
+  {
+    "domain_id": 3,
+    "question": "Diffie-Hellman (DH) key exchange allows two parties to establish a shared secret over an insecure channel WITHOUT transmitting the secret. What is DH's PRIMARY vulnerability that certificate-based authentication addresses?",
+    "options": [
+      "DH is computationally infeasible for key sizes above 2048 bits",
+      "DH is vulnerable to man-in-the-middle attacks because it provides no authentication of the parties — an attacker can intercept and substitute their own public values",
+      "DH cannot generate sufficiently random keys without a hardware random number generator",
+      "DH requires both parties to pre-share a symmetric key before the exchange can begin"
+    ],
+    "answer": 1,
+    "explanation": "DH provides key agreement but NOT authentication — either party's public value could be substituted by a MitM attacker who establishes separate DH sessions with each victim. Digital certificates (verifying each party's identity via a trusted CA) bind the DH public value to an authenticated identity. Option A is false — DH with 2048+ bits is computationally practical. Option C mischaracterizes DH randomness requirements. Option D is the opposite of DH's purpose — it eliminates the pre-shared key requirement."
+  },
+  {
+    "domain_id": 3,
+    "question": "An application implements certificate pinning to prevent TLS MitM attacks. What does certificate pinning do, and what is its MAIN operational risk?",
+    "options": [
+      "It pins the server's MAC address to prevent ARP spoofing; the risk is that MAC addresses change when hardware is replaced",
+      "It embeds an expected certificate or public key in the application; the risk is that legitimate certificate rotation breaks the application until it is updated",
+      "It requires certificate transparency logs for all connections; the risk is privacy exposure of browsing history",
+      "It forces use of EV certificates only; the risk is that DV certificates used by CDNs are rejected"
+    ],
+    "answer": 1,
+    "explanation": "Certificate pinning embeds a trusted certificate or public key hash in the application (mobile app, browser plugin, etc.). On connection, the app verifies the server presents the pinned certificate — even a legitimate CA-issued certificate for the same domain is rejected if not pinned. The operational risk is that certificate renewal or rotation (which is routine) will break the application until a new version with updated pins is deployed. This creates a significant operational burden, especially for mobile apps with slow update cycles."
+  },
+  {
+    "domain_id": 3,
+    "question": "Perfect Forward Secrecy (PFS) ensures that compromise of a server's long-term private key does NOT allow decryption of previously recorded sessions. How does PFS achieve this?",
+    "options": [
+      "By using a longer private key (4096-bit RSA) that cannot be cracked within the session lifetime",
+      "By generating a unique ephemeral key pair for each session so that the session key is never derivable from the long-term key",
+      "By encrypting session keys with the client's public key so only the client can decrypt past sessions",
+      "By rotating the long-term server private key daily to limit the window of exposure"
+    ],
+    "answer": 1,
+    "explanation": "PFS uses ephemeral Diffie-Hellman (ECDHE or DHE) to generate a fresh key pair for each session. The session key is derived from ephemeral values that are discarded after the session ends — the long-term private key is only used for authentication, not key derivation. Compromising the long-term key later cannot recover past ephemeral keys. Option A does not achieve PFS — a brute-forced key can still decrypt recorded sessions. Option C still links past sessions to the client's key. Option D (daily rotation) is operational hygiene but not PFS."
+  },
+  {
+    "domain_id": 3,
+    "question": "Homomorphic encryption is MOST valuable in which scenario?",
+    "options": [
+      "Encrypting data at rest on a database server to prevent physical theft of storage media",
+      "Allowing a cloud provider to perform computations on encrypted data without ever decrypting it, preserving data confidentiality even from the processor",
+      "Generating message authentication codes for verifying data integrity in transit",
+      "Encrypting individual database columns while maintaining query performance comparable to plaintext"
+    ],
+    "answer": 1,
+    "explanation": "Homomorphic encryption allows arithmetic operations to be performed on ciphertext such that the result, when decrypted, matches the result of those operations on the plaintext. This enables a cloud provider to process sensitive data (medical records, financial models) without ever seeing it. Option A describes standard encryption at rest. Option C describes HMAC/MACs. Option D describes deterministic encryption (like AES-SIV) or encrypted database schemes — not homomorphic encryption, which has much higher computational overhead."
+  },
+  {
+    "domain_id": 3,
+    "question": "Shor's algorithm poses a CRITICAL threat to which categories of cryptographic algorithms, and what is the recommended post-quantum mitigation?",
+    "options": [
+      "Symmetric encryption (AES) and hash functions (SHA-256); mitigation is to switch to RSA-4096",
+      "RSA and Elliptic Curve Cryptography (public-key systems); mitigation is to adopt NIST-approved post-quantum algorithms such as CRYSTALS-Kyber and CRYSTALS-Dilithium",
+      "All cryptography including symmetric and asymmetric; mitigation is to use quantum key distribution (QKD) exclusively",
+      "Only DES and 3DES; modern AES-256 and RSA-2048 are quantum-resistant"
+    ],
+    "answer": 1,
+    "explanation": "Shor's algorithm runs on a quantum computer and can efficiently solve the integer factorization problem (breaking RSA) and the discrete logarithm problem (breaking DH, ECDH, ECDSA). Symmetric ciphers and hashes are affected only by Grover's algorithm, which requires doubling key length — AES-256 remains adequate. NIST selected CRYSTALS-Kyber (key encapsulation) and CRYSTALS-Dilithium (signatures) as post-quantum standards. Option C overstates the threat to symmetric crypto. Option D is wrong — RSA and ECC are specifically threatened by Shor's algorithm."
+  },
+  {
+    "domain_id": 3,
+    "question": "Key stretching algorithms such as PBKDF2, bcrypt, and scrypt are used for password storage. What is the PRIMARY security property they provide that a simple SHA-256 hash does NOT?",
+    "options": [
+      "They produce longer output hashes that are harder to store in rainbow tables",
+      "They are intentionally computationally expensive and configurable, making brute-force and dictionary attacks orders of magnitude slower",
+      "They use asymmetric cryptography internally, requiring a public/private key pair for verification",
+      "They automatically salt passwords without any developer intervention, eliminating the need to store salt values"
+    ],
+    "answer": 1,
+    "explanation": "Key stretching algorithms apply iterative hashing (PBKDF2 with iterations), Blowfish key setup (bcrypt), or memory-hard operations (scrypt, Argon2) to make each hash computation expensive. An attacker who steals the hash database faces the same cost per guess that the legitimate system faces per login. SHA-256 is designed to be fast, making GPU-based attacks trivially fast. Option A — output length is not the limiting factor. Option C is wrong — all these are symmetric/hash-based. Option D is false — salts must still be stored with the hash."
+  },
+  {
+    "domain_id": 3,
+    "question": "An organization is procuring TLS certificates. They need visible assurance to website visitors that the business identity has been verified. Which certificate type BEST meets this requirement?",
+    "options": [
+      "Domain Validated (DV) certificate",
+      "Wildcard certificate (*.example.com)",
+      "Extended Validation (EV) certificate",
+      "Code signing certificate"
+    ],
+    "answer": 2,
+    "explanation": "Extended Validation (EV) certificates require the CA to conduct rigorous verification of the legal entity's existence, jurisdiction, and authorization. Historically, browsers displayed the organization name in the address bar (the green bar). DV certificates (Option A) only verify domain control — no identity verification occurs. Wildcard certificates (Option B) cover subdomains but say nothing about identity verification level. Code signing certificates (Option D) are for signing software executables, not web server identity."
+  },
+  {
+    "domain_id": 3,
+    "question": "A software vendor signs their application installer using a code signing certificate. What security property does this provide to end users?",
+    "options": [
+      "It encrypts the installer so only licensed users can decrypt and run it",
+      "It provides assurance that the code originated from the identified publisher and has not been tampered with since signing",
+      "It guarantees the software contains no vulnerabilities or malware",
+      "It prevents the software from being installed on unauthorized systems without an internet connection to verify the signature"
+    ],
+    "answer": 1,
+    "explanation": "Code signing creates a digital signature over the software package using the vendor's private key. Users (and OS security controls like Windows SmartScreen) can verify the signature to confirm the code came from the identified publisher (authenticity) and that no bytes have changed since signing (integrity). It does NOT guarantee security — signed malware exists. Option A confuses code signing with DRM/licensing. Option D describes online activation, not code signing."
+  },
+  {
+    "domain_id": 3,
+    "question": "Steganography differs from cryptography in that steganography:",
+    "options": [
+      "Uses stronger mathematical algorithms than cryptography to protect data",
+      "Hides the existence of a message within another medium (image, audio), whereas cryptography makes the content unintelligible but the existence of a message is visible",
+      "Is illegal in most jurisdictions because it cannot be detected by law enforcement",
+      "Always provides stronger confidentiality than encryption because the hidden message cannot be found"
+    ],
+    "answer": 1,
+    "explanation": "Steganography (security through obscurity) conceals the fact that communication is occurring at all by hiding a message within an innocuous carrier (image, audio, video). Cryptography makes the message unreadable but the encrypted data is visible. Combining both provides defense in depth — a hidden AND encrypted message. Option A is wrong — steganography does not use cryptographic algorithms. Option C is false — steganography itself is not illegal. Option D is incorrect — steganalysis tools can detect statistical anomalies indicating hidden content."
+  },
+  {
+    "domain_id": 3,
+    "question": "A media company embeds invisible watermarks in digital content before distribution to individual licensees. The PRIMARY security purpose of this digital watermarking is:",
+    "options": [
+      "Preventing unauthorized users from viewing the content by requiring online authentication",
+      "Enabling forensic tracing of the content source to identify which licensee leaked or redistributed it without authorization",
+      "Encrypting the content so it cannot be copied without the decryption key",
+      "Compressing the file size so that unauthorized redistribution is less practical"
+    ],
+    "answer": 1,
+    "explanation": "Digital watermarking embeds a unique, imperceptible identifier (different per licensee) into content for forensic purposes — when leaked content is found, the watermark identifies the specific licensee who distributed it. This deters leaking and enables legal action. Unlike DRM (Option A), watermarking does not block access — it traces after the fact. Option C describes encryption, not watermarking. Option D is unrelated to watermarking."
+  },
+  {
+    "domain_id": 3,
+    "question": "In a birthday attack against a hash function, an attacker exploits which mathematical property? A 128-bit hash function becomes practically vulnerable at approximately how many hash computations?",
+    "options": [
+      "The pigeonhole principle; the function becomes vulnerable after 2^128 computations",
+      "The birthday paradox; the probability of a collision reaches 50% after approximately 2^64 computations (square root of the hash space)",
+      "The discrete logarithm problem; the function becomes vulnerable after 2^32 computations",
+      "The meet-in-the-middle principle; the function becomes vulnerable after 2^16 computations"
+    ],
+    "answer": 1,
+    "explanation": "The birthday attack exploits the birthday paradox: the probability that two random inputs share the same hash output (collision) reaches approximately 50% after sqrt(N) attempts, where N is the total number of possible outputs. For a 128-bit hash (2^128 outputs), collisions appear after approximately 2^64 computations — this is why MD5 (128-bit) and SHA-1 (160-bit) are weak, and why SHA-256 (requiring 2^128 birthday attack work) is currently acceptable. Meet-in-the-middle (Option D) applies to key recovery in multi-key schemes."
+  },
+  {
+    "domain_id": 3,
+    "question": "Crime Prevention Through Environmental Design (CPTED) is applied to a new office building design. Which scenario BEST illustrates CPTED principles?",
+    "options": [
+      "Installing surveillance cameras inside server rooms and requiring biometric access",
+      "Designing landscaping, lighting, and sight lines so that potential intruders feel observed and natural access control guides occupants to legitimate entry points",
+      "Requiring all visitors to sign in at a reception desk and wear visitor badges",
+      "Implementing a mantrap (airlock) with card access and a guard post at the main entrance"
+    ],
+    "answer": 1,
+    "explanation": "CPTED uses the built environment itself — natural surveillance (clear sight lines, strategic lighting), natural access control (landscaping, pathways guiding to authorized entries), and territorial reinforcement (clearly delineated space) — to deter crime without overt security measures. Option A (server room cameras) and Option D (mantrap) are technological/mechanical controls, not CPTED. Option C (visitor sign-in) is a procedural control. CPTED is about environmental design shaping behavior."
+  },
+  {
+    "domain_id": 3,
+    "question": "A data center installs a halon alternative fire suppression system. Which of the following is the MOST appropriate reason to choose a clean agent system (e.g., FM-200 or Novec 1230) over a wet pipe sprinkler system in a server room?",
+    "options": [
+      "Clean agents are less expensive to install and maintain than wet pipe systems",
+      "Clean agents extinguish fires without leaving residue or water damage, protecting sensitive electronic equipment that would be destroyed by water",
+      "Wet pipe systems cannot detect fires in enclosed server cabinets, making clean agents the only compliant option",
+      "Clean agents are required by NFPA 75 for all data centers with more than 100 servers"
+    ],
+    "answer": 1,
+    "explanation": "Clean agents (FM-200/HFC-227ea, Novec 1230) suppress fires chemically or by heat absorption without leaving water, foam, or particulate residue — critical for protecting irreplaceable electronic equipment. Wet pipe sprinklers introduce water damage that often causes more destruction than a small fire. Clean agents are not necessarily cheaper (Option A is false — they are generally more expensive). Option C is incorrect — detection is a separate system. Option D misrepresents NFPA 75 requirements."
+  },
+  {
+    "domain_id": 3,
+    "question": "TEMPEST standards address which specific physical security threat?",
+    "options": [
+      "Unauthorized physical access to server rooms through tailgating",
+      "Eavesdropping on electromagnetic emissions from electronic equipment to reconstruct processed data without physical access",
+      "Protecting network cables from physical tapping by wrapping them in shielded conduit",
+      "Preventing static electricity discharge that can damage sensitive components"
+    ],
+    "answer": 1,
+    "explanation": "TEMPEST (a U.S. government codename, not an acronym) refers to standards and techniques for limiting and controlling compromising electromagnetic emanations (EME) from electronic devices. CRT monitors, keyboards, and network cables emit RF signals that can be captured remotely to reconstruct displayed data or keystrokes. Faraday cages, TEMPEST-certified equipment, and shielded rooms mitigate this. Option A is tailgating (physical access control). Option C is cable shielding (a different threat). Option D is ESD protection."
+  },
+  {
+    "domain_id": 3,
+    "question": "An IoT device manufacturer ships all units with the same default credentials and no mechanism to update firmware. A security assessor identifies this as a fundamental design flaw. Which TWO security principles are MOST violated?",
+    "options": [
+      "Non-repudiation and availability",
+      "Secure defaults and the ability to patch (updatability); hardcoded shared credentials eliminate individual accountability and prevent remediation of vulnerabilities",
+      "Separation of duties and dual control",
+      "Defense in depth and data classification"
+    ],
+    "answer": 1,
+    "explanation": "IoT security fundamentals require: (1) Secure defaults — unique per-device credentials, not shared; (2) Updatability — a mechanism to patch firmware vulnerabilities discovered post-deployment. Hardcoded shared credentials mean compromise of one device compromises all identical devices. No update mechanism means known vulnerabilities can never be fixed. Options A, C, and D describe important principles but are not the primary violations in this specific scenario — the scenario directly maps to secure default configuration and patch management capability."
+  },
+  {
+    "domain_id": 3,
+    "question": "The information flow model of security is MOST concerned with:",
+    "options": [
+      "Tracking who accessed which objects and at what time",
+      "Ensuring that information does not flow from high-security objects to low-security objects in ways that violate the security policy, regardless of the mechanism",
+      "Verifying that all access requests pass through the reference monitor",
+      "Preventing subjects from accumulating more privileges over time"
+    ],
+    "answer": 1,
+    "explanation": "The information flow model (associated with Denning's work) focuses on the direction and path of information movement between security levels — specifically preventing unauthorized downward flow (high to low classification) regardless of the method (direct copy, covert channel, inference). It complements access control models by addressing not just who can access what, but whether information can move between security domains at all. Option A describes audit/accountability. Option C describes the reference monitor concept. Option D describes privilege creep, which is related to access control management."
   }
 ]

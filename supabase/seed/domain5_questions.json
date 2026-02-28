@@ -21,7 +21,7 @@
       "Confidentiality, integrity, availability"
     ],
     "answer": 1,
-    "explanation": "The three authentication factors are: Type 1 — something you know (password, PIN), Type 2 — something you have (token, smart card), Type 3 — something you are (biometrics). MFA combines two or more different factor types."
+    "explanation": "The three authentication factors are: Type 1 \u2014 something you know (password, PIN), Type 2 \u2014 something you have (token, smart card), Type 3 \u2014 something you are (biometrics). MFA combines two or more different factor types."
   },
   {
     "domain_id": 5,
@@ -63,13 +63,13 @@
     "domain_id": 5,
     "question": "A Type I error in biometric systems refers to:",
     "options": [
-      "A false acceptance — unauthorized person is granted access",
-      "A false rejection — authorized person is denied access",
+      "A false acceptance \u2014 unauthorized person is granted access",
+      "A false rejection \u2014 authorized person is denied access",
       "A system failure that locks out all users",
       "An error in the enrollment process"
     ],
     "answer": 1,
-    "explanation": "Type I error = False Rejection Rate (FRR) — an authorized person is incorrectly denied access. Type II error = False Acceptance Rate (FAR) — an unauthorized person is incorrectly granted access. The Crossover Error Rate (CER) is where FRR equals FAR."
+    "explanation": "Type I error = False Rejection Rate (FRR) \u2014 an authorized person is incorrectly denied access. Type II error = False Acceptance Rate (FAR) \u2014 an unauthorized person is incorrectly granted access. The Crossover Error Rate (CER) is where FRR equals FAR."
   },
   {
     "domain_id": 5,
@@ -201,7 +201,7 @@
       "Multifactor authentication using three factors"
     ],
     "answer": 1,
-    "explanation": "Smart card (something you have) + PIN (something you know) = two-factor authentication combining two different factor types. True MFA requires two or more DIFFERENT factor types — combining two Type 1 factors (e.g., two passwords) is not MFA. Without biometrics, this is 2FA, not 3FA."
+    "explanation": "Smart card (something you have) + PIN (something you know) = two-factor authentication combining two different factor types. True MFA requires two or more DIFFERENT factor types \u2014 combining two Type 1 factors (e.g., two passwords) is not MFA. Without biometrics, this is 2FA, not 3FA."
   },
   {
     "domain_id": 5,
@@ -213,7 +213,7 @@
       "Silver ticket attacks against specific services"
     ],
     "answer": 2,
-    "explanation": "The KRBTGT account hash is used to sign all TGTs in the domain. Possessing it allows an attacker to forge valid TGTs (golden tickets) for any user, including non-existent accounts, with any group membership — effectively granting persistent domain admin access. This is the most severe Kerberos compromise possible. Silver tickets only work for specific services. Kerberoasting doesn't require KDC compromise."
+    "explanation": "The KRBTGT account hash is used to sign all TGTs in the domain. Possessing it allows an attacker to forge valid TGTs (golden tickets) for any user, including non-existent accounts, with any group membership \u2014 effectively granting persistent domain admin access. This is the most severe Kerberos compromise possible. Silver tickets only work for specific services. Kerberoasting doesn't require KDC compromise."
   },
   {
     "domain_id": 5,
@@ -225,7 +225,7 @@
       "Multi-factor authentication enrollment"
     ],
     "answer": 1,
-    "explanation": "Timely deprovisioning — disabling or removing all access immediately upon termination — directly eliminates the risk of former employees accessing systems. Periodic access reviews catch dormant or inappropriate access but have a lag window. Separation of duties and MFA don't address the terminated user risk specifically."
+    "explanation": "Timely deprovisioning \u2014 disabling or removing all access immediately upon termination \u2014 directly eliminates the risk of former employees accessing systems. Periodic access reviews catch dormant or inappropriate access but have a lag window. Separation of duties and MFA don't address the terminated user risk specifically."
   },
   {
     "domain_id": 5,
@@ -249,7 +249,7 @@
       "Attribute-Based Access Control (ABAC)"
     ],
     "answer": 2,
-    "explanation": "Under MAC, access is determined by the system based on labels and classification levels — not by the object owner. Even file creators cannot grant permissions beyond their clearance level. DAC allows file owners to set permissions on their own files. RBAC grants access based on roles, but owners typically retain control. ABAC uses policy-driven attributes."
+    "explanation": "Under MAC, access is determined by the system based on labels and classification levels \u2014 not by the object owner. Even file creators cannot grant permissions beyond their clearance level. DAC allows file owners to set permissions on their own files. RBAC grants access based on roles, but owners typically retain control. ABAC uses policy-driven attributes."
   },
   {
     "domain_id": 5,
@@ -273,7 +273,7 @@
       "Enforcing password complexity requirements"
     ],
     "answer": 1,
-    "explanation": "Session timeout and reauthentication after inactivity mitigate risks from unattended sessions — such as an attacker or unauthorized person using an already-authenticated workstation. This is a session management control. It does not prevent brute-force attacks (account lockout does), phishing (user education/MFA does), or enforce password complexity (password policy does)."
+    "explanation": "Session timeout and reauthentication after inactivity mitigate risks from unattended sessions \u2014 such as an attacker or unauthorized person using an already-authenticated workstation. This is a session management control. It does not prevent brute-force attacks (account lockout does), phishing (user education/MFA does), or enforce password complexity (password policy does)."
   },
   {
     "domain_id": 5,
@@ -310,5 +310,293 @@
     ],
     "answer": 1,
     "explanation": "Credential stuffing attacks use username/password pairs from breached databases (commonly from personal service breaches) against enterprise systems. Password reuse means a compromise of a low-security personal service can directly lead to corporate account compromise. This is why password managers and unique passwords per service are essential."
+  },
+  {
+    "domain_id": 5,
+    "question": "A security engineer deploys a Privileged Access Management (PAM) solution that vaults all administrator credentials, rotates them automatically after each use, and records all privileged sessions. Which risk does this MOST directly mitigate?",
+    "options": [
+      "Unauthorized access by external attackers using phishing credentials",
+      "Insider threat and lateral movement using shared or static privileged credentials",
+      "Data exfiltration via encrypted channels to external hosts",
+      "Privilege escalation via OS-level kernel exploits"
+    ],
+    "answer": 1,
+    "explanation": "PAM solutions vault credentials so admins never see actual passwords (eliminating credential sharing and theft), rotate passwords automatically (limiting the value of stolen credentials), and record sessions for accountability. This directly addresses insider threat and lateral movement using static admin credentials. Phishing is addressed by MFA. Data exfiltration channels require DLP/network controls. Kernel exploits require endpoint hardening and patching."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization's Identity Governance and Administration (IGA) platform is configured to automatically disable accounts that have not logged in for 90 days and notify managers of roles granted beyond the standard access model. Which IGA capability does this describe?",
+    "options": [
+      "Role mining from existing access patterns",
+      "Automated access request workflows",
+      "Lifecycle management with access analytics and policy enforcement",
+      "Federated provisioning across cloud providers"
+    ],
+    "answer": 2,
+    "explanation": "IGA lifecycle management combines automated account actions (disable dormant accounts) with access analytics (comparing actual access against the access model) and policy enforcement (notifying managers of violations). Role mining uses existing access data to define roles. Access request workflows handle provisioning requests. Federated provisioning handles cross-cloud identity synchronization \u2014 none of these describe the combination of automated enforcement and analytics shown."
+  },
+  {
+    "domain_id": 5,
+    "question": "An authentication system assigns a higher risk score to login attempts from new geographies, unrecognized devices, or unusual hours and requires step-up authentication only when the score exceeds a threshold. This is BEST described as:",
+    "options": [
+      "Multi-factor authentication",
+      "Risk-based (adaptive) authentication",
+      "Continuous authentication",
+      "Context-aware authorization"
+    ],
+    "answer": 1,
+    "explanation": "Risk-based (adaptive) authentication dynamically adjusts authentication requirements based on contextual risk signals \u2014 geography, device recognition, time of access, behavior anomalies. MFA is a fixed additional factor regardless of context. Continuous authentication monitors throughout a session rather than only at login. Context-aware authorization applies contextual rules to access decisions post-authentication, not to the authentication mechanism itself."
+  },
+  {
+    "domain_id": 5,
+    "question": "FIDO2 / WebAuthn replaces passwords with public key cryptography tied to a hardware authenticator or platform authenticator. Which attack does this MOST effectively eliminate compared to traditional passwords?",
+    "options": [
+      "Brute-force attacks against the authentication server",
+      "Phishing and credential theft via man-in-the-middle attacks",
+      "Session hijacking after successful authentication",
+      "Physical theft of the authenticator device"
+    ],
+    "answer": 1,
+    "explanation": "FIDO2/WebAuthn keys are scoped to the specific origin (domain) and use challenge-response cryptography \u2014 the private key never leaves the device and a phishing site cannot harvest usable credentials because the key is bound to the legitimate domain. This eliminates phishing and MITM credential theft. Brute-force doesn't apply since there's no password on the server. Session hijacking is a separate post-authentication concern. Physical theft is a risk mitigated by device PIN/biometric protection."
+  },
+  {
+    "domain_id": 5,
+    "question": "Active Directory (AD) uses which underlying directory protocol for LDAP-based queries, and what is the default unencrypted port?",
+    "options": [
+      "X.500 DAP on port 389",
+      "LDAP on port 389",
+      "LDAP on port 636 (LDAPS)",
+      "Kerberos on port 88"
+    ],
+    "answer": 1,
+    "explanation": "Active Directory implements LDAP (derived from X.500 DAP) for directory queries on port 389 (unencrypted) and port 636 for LDAPS (LDAP over TLS). X.500 DAP is the original protocol but is rarely used directly; LDAP is the lightweight, TCP/IP-based successor. Kerberos (port 88) handles authentication in AD, not directory queries."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization discovers that several service accounts used by automated batch jobs have passwords that have never been rotated in 5 years and are shared across 12 different systems. What is the PRIMARY security risk of this configuration?",
+    "options": [
+      "Service accounts cannot be used for MFA enrollment",
+      "A single compromised credential provides persistent, wide-scope access with no rotation to force re-authentication",
+      "Batch jobs will fail if passwords expire automatically",
+      "Shared accounts violate RBAC principles but pose no additional credential risk"
+    ],
+    "answer": 1,
+    "explanation": "Static, shared service account credentials that never rotate create a high-value, long-lived target. Compromise of one system that knows the password gives an attacker access to all 12 systems. No rotation means the attacker retains access indefinitely. Service accounts should use unique, vaulted, rotated credentials per system (managed service accounts, or PAM-managed secrets). MFA for service accounts is a separate operational concern. Batch job continuity is an operational concern that proper secret management addresses without static passwords."
+  },
+  {
+    "domain_id": 5,
+    "question": "Which NIST SP 800-63 assurance level requires in-person or remote identity proofing with validation of government-issued ID and biometric comparison for identity verification?",
+    "options": [
+      "IAL1 \u2014 self-asserted identity with no proofing",
+      "IAL2 \u2014 remote or in-person proofing with document and biometric validation",
+      "IAL3 \u2014 in-person proofing only with supervised biometric collection",
+      "AAL3 \u2014 hardware cryptographic authenticator required"
+    ],
+    "answer": 2,
+    "explanation": "NIST SP 800-63A defines three Identity Assurance Levels (IAL). IAL1 requires no identity proofing. IAL2 permits remote or in-person proofing and requires validation of government-issued identity evidence with biometric comparison. IAL3 requires in-person (or supervised remote) proofing with physical document inspection. AAL3 is an authenticator assurance level (authentication strength), not an identity proofing level."
+  },
+  {
+    "domain_id": 5,
+    "question": "An API gateway authenticates clients using API keys passed in request headers. A security review finds keys are long-lived, not scoped to specific endpoints, and logged in plaintext in server logs. What is the MOST effective remediation strategy?",
+    "options": [
+      "Switch from header-based to query-parameter API keys to avoid logging",
+      "Implement short-lived JWT tokens with scoped claims, mTLS for high-value clients, and mask keys in logs",
+      "Enforce HTTPS to protect API keys in transit",
+      "Rotate API keys quarterly on a scheduled basis"
+    ],
+    "answer": 1,
+    "explanation": "Long-lived, unscoped API keys logged in plaintext represent multiple compounding risks. Short-lived JWTs with scoped claims limit blast radius and time window. mTLS adds mutual authentication for high-value integrations. Masking/hashing keys in logs prevents log-based exfiltration. Moving keys to query parameters makes logging worse, not better. HTTPS is already assumed and doesn't address key management. Quarterly rotation leaves a 90-day compromise window."
+  },
+  {
+    "domain_id": 5,
+    "question": "During a quarterly access certification campaign, a manager approves all access for their team without reviewing individual entitlements, a behavior known as:",
+    "options": [
+      "Toxic combinations",
+      "Rubber-stamping (rubber stamp approval)",
+      "Privilege escalation",
+      "Access creep enablement"
+    ],
+    "answer": 1,
+    "explanation": "Rubber-stamping is the practice of approving access certifications without meaningful review, defeating the purpose of the certification process. It is a significant governance risk because inappropriate or excessive access is validated rather than corrected. Organizations address this with automated detection of bulk approvals, peer reviews of manager decisions, and accountability reporting. Toxic combinations refer to incompatible access rights creating SoD conflicts. Access creep is the result, not the behavior."
+  },
+  {
+    "domain_id": 5,
+    "question": "A multinational organization uses AWS across 50 accounts. They want to prevent any individual account from enabling public S3 buckets or disabling CloudTrail, regardless of local IAM policies. Which AWS feature BEST enforces these controls at scale?",
+    "options": [
+      "IAM permission boundaries on each account's admin role",
+      "AWS Service Control Policies (SCPs) applied at the AWS Organizations level",
+      "AWS Config rules with auto-remediation in each account",
+      "S3 Block Public Access enabled individually per account"
+    ],
+    "answer": 1,
+    "explanation": "SCPs applied at the AWS Organizations root or OU level act as guardrails that cannot be overridden by any IAM policy within member accounts, including root users. They enforce what actions are allowed regardless of local IAM. Permission boundaries apply to individual IAM entities within an account but cannot override the account root. AWS Config rules detect and remediate drift but have a detection lag. S3 Block Public Access is an account-level setting that local admins can change."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization adopts a Zero Standing Privileges (ZSP) model. What is the PRIMARY operational mechanism that makes ZSP feasible without disrupting system administration tasks?",
+    "options": [
+      "Permanent service accounts with vaulted passwords",
+      "Just-in-time (JIT) privilege elevation with time-limited, task-scoped access granted on demand",
+      "Eliminating all privileged access and delegating tasks to vendors",
+      "Rotating privileged accounts daily using scheduled scripts"
+    ],
+    "answer": 1,
+    "explanation": "ZSP means no persistent privileged access exists \u2014 privileges are granted on-demand via JIT, scoped to specific tasks, and expire automatically. PAM tools enable this by approving elevation requests, recording sessions, and revoking access after task completion. Permanent service accounts contradict ZSP. Eliminating all privileged access is operationally infeasible. Daily rotation is better than never rotating but still maintains standing access throughout each day."
+  },
+  {
+    "domain_id": 5,
+    "question": "A break-glass account is created for a production database in case all normal administrative paths fail. Which controls are MOST essential for a properly governed break-glass procedure?",
+    "options": [
+      "The break-glass password should be simple and memorable for rapid access",
+      "The account should be pre-authorized for use by any senior administrator",
+      "The password should be sealed, access should trigger immediate alerts, and all actions should be fully audited with post-use review",
+      "Break-glass accounts should be disabled until an incident is declared by the CISO"
+    ],
+    "answer": 2,
+    "explanation": "Break-glass accounts require: (1) sealed/escrowed credentials (envelope in safe, PAM vault) to detect unauthorized access, (2) immediate alerting upon any use so the security team is aware, (3) comprehensive session recording and audit logging, and (4) post-incident review of all actions taken. Simple passwords increase unauthorized use risk. Open authorization to all senior admins defeats accountability. Requiring CISO declaration may be too slow for a true emergency."
+  },
+  {
+    "domain_id": 5,
+    "question": "An Identity Analytics system flags a user whose access patterns show logins at 3 AM, bulk downloads of 10,000 files, and lateral access to systems outside their normal job function. This capability is MOST aligned with which technology?",
+    "options": [
+      "Security Information and Event Management (SIEM)",
+      "User and Entity Behavior Analytics (UEBA)",
+      "Data Loss Prevention (DLP)",
+      "Privileged Access Management (PAM)"
+    ],
+    "answer": 1,
+    "explanation": "UEBA uses machine learning to establish behavioral baselines for individual users and entities, then alerts on deviations \u2014 anomalous login times, unusual data access patterns, and lateral movement outside normal job scope. SIEM correlates events from log sources but typically uses rule-based detection without the individual behavioral baseline modeling UEBA provides. DLP controls data movement at egress points. PAM manages privileged accounts specifically."
+  },
+  {
+    "domain_id": 5,
+    "question": "Which X.509 certificate type binds an individual's identity and security attributes (such as security clearance) to their public key, separate from their authentication certificate?",
+    "options": [
+      "Root CA certificate",
+      "Wildcard SSL/TLS certificate",
+      "Attribute certificate (AC)",
+      "Code signing certificate"
+    ],
+    "answer": 2,
+    "explanation": "Attribute certificates (defined in X.509 and RFC 5755) bind attributes \u2014 such as role, clearance level, or group membership \u2014 to an entity's identity without containing a public key themselves. They are issued by an Attribute Authority (AA) and reference the subject's public key certificate. This separates identity from privilege, enabling fine-grained authorization. Root CA certificates establish trust anchors. Wildcard certs cover subdomain TLS. Code signing certs authenticate software origin."
+  },
+  {
+    "domain_id": 5,
+    "question": "A role engineering project analyzes existing user-to-resource access assignments across 5,000 users to identify common access patterns and define roles. This bottom-up approach to role creation is called:",
+    "options": [
+      "Role-based access control design",
+      "Role mining",
+      "Access recertification",
+      "Entitlement management"
+    ],
+    "answer": 1,
+    "explanation": "Role mining is a data-driven, bottom-up approach that analyzes existing access assignments to discover patterns and derive role definitions reflecting actual job functions. Top-down role engineering defines roles based on job descriptions from management. Access recertification reviews whether existing access is still appropriate. Entitlement management is the broader discipline of managing what access rights exist \u2014 role mining is a specific technique within it."
+  },
+  {
+    "domain_id": 5,
+    "question": "XACML (eXtensible Access Control Markup Language) implements which authorization model, and what is the role of the Policy Decision Point (PDP)?",
+    "options": [
+      "RBAC model; the PDP assigns roles to users based on their job title",
+      "ABAC model; the PDP evaluates policies against request attributes and returns a permit/deny decision",
+      "MAC model; the PDP compares security labels between subject and object",
+      "DAC model; the PDP checks ACLs on behalf of the resource owner"
+    ],
+    "answer": 1,
+    "explanation": "XACML implements an ABAC authorization framework. In the XACML architecture, the Policy Decision Point (PDP) receives access requests with subject, resource, action, and environment attributes; evaluates applicable policies; and returns a permit/deny/indeterminate response. The Policy Enforcement Point (PEP) enforces the decision. The Policy Information Point (PIP) supplies additional attributes. XACML is not limited to RBAC, MAC, or DAC."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization's cloud IAM policy allows developers read-only access to all S3 buckets in production but grants them full write access to S3 in the development environment. Developers complain they cannot test against production data. The security team should FIRST:",
+    "options": [
+      "Grant developers full S3 access to production temporarily",
+      "Evaluate whether data masking or synthetic data in the dev environment would satisfy testing needs without production access",
+      "Create a separate IAM role with read access to specific production buckets",
+      "Enable AWS CloudTrail to monitor any developer access to production"
+    ],
+    "answer": 1,
+    "explanation": "The correct first step is to determine whether the actual need (realistic test data) can be met without production access \u2014 through data masking, anonymization, or synthetic data generation. This eliminates the risk entirely. Granting production access violates least privilege and segregation of environments. Creating a read-only production role may be warranted but should only be considered after confirming that non-production alternatives cannot satisfy the need. CloudTrail is detective, not a preventive solution to the access question."
+  },
+  {
+    "domain_id": 5,
+    "question": "Identity as a Service (IDaaS) providers offer SSO, MFA, and lifecycle management from the cloud. Which risk is MOST unique to IDaaS compared to on-premises identity infrastructure?",
+    "options": [
+      "Single point of failure for authentication if the IDaaS provider experiences an outage",
+      "Inability to support SAML or OIDC federation protocols",
+      "Higher cost than on-premises Active Directory implementations",
+      "Lack of MFA support for mobile authenticator apps"
+    ],
+    "answer": 0,
+    "explanation": "IDaaS centralizes authentication in a third-party cloud service, making the entire organization's ability to authenticate dependent on that provider's availability. An IDaaS outage can prevent all users from logging into any system. Mitigations include SLAs, offline fallback authentication, and local cached credentials. Modern IDaaS providers fully support SAML, OIDC, and MFA. Cost and feature comparisons vary and are not unique risks."
+  },
+  {
+    "domain_id": 5,
+    "question": "In a multi-tenant SaaS application, which design pattern MOST effectively ensures that tenant A cannot access tenant B's data even if they share the same database schema?",
+    "options": [
+      "Encrypting all tenant data with the same platform-managed key",
+      "Enforcing tenant ID filtering in every database query with row-level security (RLS) and tenant context propagation",
+      "Using separate database schemas for each tenant",
+      "Relying on application-layer session isolation without database controls"
+    ],
+    "answer": 1,
+    "explanation": "Row-level security (RLS) enforces tenant isolation at the database level \u2014 even if application code has a bug that omits a tenant filter, the database enforces the restriction based on the active tenant context. This provides defense in depth. Separate schemas are the strongest isolation but costly at scale. Shared encryption keys do not provide access isolation. Application-layer-only isolation is a single point of failure \u2014 one missed WHERE clause leaks cross-tenant data."
+  },
+  {
+    "domain_id": 5,
+    "question": "Continuous authentication differs from traditional session-based authentication in that it:",
+    "options": [
+      "Requires users to enter their password every 5 minutes during a session",
+      "Continuously monitors behavioral signals throughout a session and can re-challenge or terminate the session if anomalies are detected",
+      "Uses biometric data only at the initial login event",
+      "Eliminates the need for MFA by using longer session tokens"
+    ],
+    "answer": 1,
+    "explanation": "Continuous authentication maintains assurance of user identity throughout a session by analyzing ongoing behavioral signals (typing patterns, mouse dynamics, application usage) and risk indicators. If anomaly scores exceed thresholds, the system can silently re-challenge, require step-up MFA, or terminate the session. This addresses session hijacking after initial authentication. It does not require repeated password prompts. MFA remains relevant for the initial authentication event."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization wants to store and manage passwords for 500 privileged accounts, generate unique random passwords per system, and provide session recording for audit. A standalone credential spreadsheet protected by a master password is proposed. What is the MOST significant objection to this approach?",
+    "options": [
+      "Spreadsheets cannot store passwords longer than 15 characters",
+      "A spreadsheet lacks access controls, audit logging, automatic rotation, and session recording \u2014 a purpose-built PAM solution is required",
+      "The master password would need to be changed quarterly",
+      "Spreadsheets are not compatible with Active Directory"
+    ],
+    "answer": 1,
+    "explanation": "A credential spreadsheet provides none of the required capabilities: no granular access control (who accessed which credential), no audit trail, no automatic rotation, no session recording, no MFA enforcement for access, and no ability to detect or respond to credential use anomalies. A single spreadsheet compromise exposes all 500 accounts. Purpose-built PAM solutions provide all these controls. Character limits, quarterly rotation, and AD compatibility are not the primary objections."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization is implementing a cloud IAM strategy using Azure Active Directory (now Entra ID). Developers in a subsidiary need read access to a subset of Azure resources in the parent tenant. Which feature MOST cleanly provides cross-tenant access without creating duplicate guest accounts?",
+    "options": [
+      "Azure AD B2C with external identity providers",
+      "Azure AD cross-tenant access settings with B2B direct connect",
+      "Creating shadow accounts in the parent tenant for each subsidiary developer",
+      "Federating both tenants to a single on-premises Active Directory"
+    ],
+    "answer": 1,
+    "explanation": "Azure AD cross-tenant access settings (B2B direct connect) allow organizations to configure trust between tenants, enabling users from one tenant to access resources in another without guest accounts. Azure AD B2C is for customer-facing external identity scenarios, not enterprise-to-enterprise. Shadow accounts duplicate identities and create management overhead. On-premises federation doesn't address cloud-native multi-tenant IAM."
+  },
+  {
+    "domain_id": 5,
+    "question": "A security team implements context-aware access control that denies access to the finance application if the user's device does not have full-disk encryption enabled and the OS is not patched within 30 days. This control is BEST described as:",
+    "options": [
+      "Network Access Control (NAC) enforcing endpoint compliance",
+      "Mandatory Access Control based on device classification labels",
+      "Policy-based access control using device health as an access condition",
+      "Role-based access control with device-specific role assignments"
+    ],
+    "answer": 2,
+    "explanation": "Context-aware (policy-based) access control evaluates multiple real-time conditions \u2014 in this case, device encryption status and patch currency \u2014 as prerequisites for access. Device health signals from an MDM or endpoint agent are evaluated alongside identity at each access attempt. NAC enforces network-level admission but does not integrate with application access control at this granularity. MAC uses classification labels, not live device health. RBAC assigns permissions by role, not device condition."
+  },
+  {
+    "domain_id": 5,
+    "question": "During an access certification campaign, an IGA system flags a conflict where a single user has both 'Create Vendor' and 'Approve Payment' permissions in the ERP system. This is BEST described as:",
+    "options": [
+      "Privilege creep requiring deprovisioning review",
+      "A toxic combination representing a Segregation of Duties (SoD) violation",
+      "An excessive privilege finding requiring least-privilege remediation",
+      "A dormant account requiring reactivation review"
+    ],
+    "answer": 1,
+    "explanation": "A toxic combination (SoD conflict) occurs when a single user holds two or more permissions that together could enable fraud without a second person's involvement \u2014 here, creating a fictitious vendor and then approving payments to that vendor. IGA tools maintain SoD rule sets and flag these during certifications. Privilege creep describes accumulated excess permissions. Excessive privilege is a broader term. Dormant accounts are inactive accounts, not SoD conflicts."
   }
 ]

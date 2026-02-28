@@ -286,5 +286,317 @@
     ],
     "answer": 1,
     "explanation": "RAID 1 (mirroring) can tolerate only one drive failure. During rebuild, the surviving drive is under stress (100% read load) and at elevated failure risk. A second failure before rebuild completes causes total data loss. This is why 3-2-1 backup strategies are critical — RAID is not a backup. RAID 6 can tolerate 2 simultaneous failures. RAID controllers cannot dynamically switch RAID levels."
+  },
+  {
+    "domain_id": 7,
+    "question": "A SOC team is structured with Tier 1 analysts performing initial triage and alert review, Tier 2 analysts conducting deeper investigation of escalated incidents, and Tier 3 analysts performing threat hunting and advanced forensics. A Tier 1 analyst receives an alert for unusual outbound traffic. They cannot determine if it is malicious. What should happen NEXT?",
+    "options": [
+      "Tier 1 should immediately contain the affected system by isolating it from the network",
+      "Tier 1 should escalate to Tier 2 with all collected context for deeper investigation",
+      "Tier 1 should close the alert as a false positive to manage alert volume",
+      "Tier 1 should contact the affected user directly to ask if they initiated the traffic"
+    ],
+    "answer": 1,
+    "explanation": "Tier 1 analysts triage and enrich alerts, then escalate events they cannot resolve to Tier 2. Escalation with full context (log samples, affected asset details, initial analysis) enables Tier 2 to conduct efficient deeper investigation. Immediate containment without Tier 2 analysis may disrupt legitimate business activity. Closing as false positive without analysis risks missing real incidents. Direct user contact without coordination may alert an insider threat actor."
+  },
+  {
+    "domain_id": 7,
+    "question": "A SOAR platform automatically executes a playbook in response to a phishing alert: it quarantines the email across all mailboxes, extracts URLs, checks them against threat intelligence, and blocks malicious domains at the proxy — all within 90 seconds. Which SOAR capability does this demonstrate?",
+    "options": [
+      "Threat intelligence correlation",
+      "Security orchestration and automated response workflow",
+      "SIEM log correlation and alerting",
+      "Endpoint detection and response (EDR)"
+    ],
+    "answer": 1,
+    "explanation": "SOAR (Security Orchestration, Automation, and Response) platforms integrate with multiple security tools and automate multi-step response workflows (playbooks) without analyst intervention. This orchestration across email security, threat intelligence feeds, and web proxy demonstrates SOAR's core value — reducing MTTR through automation. SIEM correlates events and generates alerts but does not execute response actions. EDR operates on endpoints specifically. Threat intelligence correlation is one step within the playbook, not the full capability shown."
+  },
+  {
+    "domain_id": 7,
+    "question": "An analyst reviews a threat intelligence report describing a ransomware group's use of specific file hashes, IP addresses, and domain names. These are BEST classified as:",
+    "options": [
+      "Indicators of Attack (IOA)",
+      "Indicators of Compromise (IOC)",
+      "Tactics, Techniques, and Procedures (TTPs)",
+      "Common Vulnerability and Exposures (CVE)"
+    ],
+    "answer": 1,
+    "explanation": "Indicators of Compromise (IOCs) are forensic artifacts — file hashes, IP addresses, domain names, registry keys — that indicate a system may have been compromised. They are reactive (found after compromise). Indicators of Attack (IOAs) describe attacker behaviors and techniques in progress (more proactive). TTPs are higher-level descriptions of how attackers operate (MITRE ATT&CK techniques). CVEs are vulnerability identifiers, not threat indicators."
+  },
+  {
+    "domain_id": 7,
+    "question": "The MITRE ATT&CK framework organizes adversary behavior into Tactics, Techniques, and Sub-techniques. How do security operations teams PRIMARILY use ATT&CK for detection engineering?",
+    "options": [
+      "To assign CVE severity scores to identified vulnerabilities",
+      "To map detection rules and SIEM queries to specific adversary techniques, identifying coverage gaps",
+      "To generate automated incident reports for regulatory compliance",
+      "To conduct code reviews for secure software development"
+    ],
+    "answer": 1,
+    "explanation": "ATT&CK provides a common language for adversary behavior. Security teams map their SIEM detection rules, EDR signatures, and behavioral analytics to ATT&CK techniques to visualize detection coverage and identify gaps (techniques with no detection). This threat-informed defense approach prioritizes detection engineering based on actual adversary TTPs. CVE scoring uses CVSS. ATT&CK is not a compliance or code review tool."
+  },
+  {
+    "domain_id": 7,
+    "question": "The Diamond Model of intrusion analysis focuses on four core features of an adversarial event. Which of the following correctly lists all four?",
+    "options": [
+      "Attacker, malware, network, data",
+      "Adversary, capability, infrastructure, victim",
+      "Reconnaissance, exploitation, exfiltration, persistence",
+      "Threat actor, vulnerability, exploit, target"
+    ],
+    "answer": 1,
+    "explanation": "The Diamond Model defines four core features of every intrusion event: Adversary (who), Capability (what tool/technique), Infrastructure (how — C2, delivery channels), and Victim (target). Meta-features (timestamp, phase, result) provide additional context. This model helps analysts pivot between features to correlate campaigns and attribute attacks. The other options mix kill chain phases, CVSS concepts, or informal terminology not from the Diamond Model."
+  },
+  {
+    "domain_id": 7,
+    "question": "In the Lockheed Martin Cyber Kill Chain, an attacker delivers a malicious macro-enabled Office document via a spear phishing email. At which kill chain phase does successful opening and macro execution occur?",
+    "options": [
+      "Delivery",
+      "Exploitation",
+      "Installation",
+      "Command and Control"
+    ],
+    "answer": 1,
+    "explanation": "Kill chain phases in sequence: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, C2, Actions on Objectives. Delivery is when the email is sent to the victim. Exploitation occurs when the victim opens the document and the macro executes — exploiting the user's action and potentially vulnerabilities in the Office application. Installation follows exploitation when a payload (e.g., RAT) is written to disk. C2 is established after installation."
+  },
+  {
+    "domain_id": 7,
+    "question": "A security analyst submits a suspicious executable to a sandboxed environment and observes it creating registry run keys, contacting an external IP, and encrypting files in the user's Documents folder. This is an example of:",
+    "options": [
+      "Static malware analysis",
+      "Dynamic malware analysis",
+      "Reverse engineering via disassembly",
+      "Signature-based antivirus scanning"
+    ],
+    "answer": 1,
+    "explanation": "Dynamic malware analysis executes the sample in a controlled environment (sandbox) and observes runtime behavior — process creation, network connections, file system changes, registry modifications. Static analysis examines the binary without execution (strings, imports, disassembly). Reverse engineering via disassembly is a form of static analysis. Signature-based AV matches known byte patterns without behavioral observation."
+  },
+  {
+    "domain_id": 7,
+    "question": "A network forensics analyst captures full packet data during a suspected data exfiltration incident. Which artifact would MOST conclusively prove that sensitive data was exfiltrated via HTTP POST?",
+    "options": [
+      "NetFlow records showing high volume outbound traffic to an external IP",
+      "Full packet capture (PCAP) containing the HTTP POST request body with the actual data transmitted",
+      "DNS query logs for the destination domain",
+      "IDS alert triggered on the destination IP's reputation"
+    ],
+    "answer": 1,
+    "explanation": "Full packet capture (PCAP) contains the complete network conversation including payload content. HTTP POST request bodies in a PCAP can contain the actual exfiltrated data, providing conclusive evidence of what was transmitted. NetFlow provides metadata (volume, direction, ports) but not payload content. DNS logs show name resolution but not data content. IDS alerts identify suspicious traffic but do not contain the exfiltrated data itself."
+  },
+  {
+    "domain_id": 7,
+    "question": "Forensic investigators discover that an attacker used timestomping to modify file metadata on a compromised Windows system. What is the PRIMARY impact of this anti-forensics technique on an investigation?",
+    "options": [
+      "It prevents recovery of deleted files from unallocated disk space",
+      "It disrupts timeline analysis by making malicious files appear to have been created before the attack",
+      "It encrypts file contents to prevent forensic examination",
+      "It overwrites the Master Boot Record to prevent system boot"
+    ],
+    "answer": 1,
+    "explanation": "Timestomping modifies NTFS timestamps (created, modified, accessed, MFT changed) to make malicious files appear benign or pre-existing. This disrupts timeline analysis — a core forensic technique that reconstructs event sequences. Investigators counter this by comparing NTFS timestamps with MFT timestamps and prefetch/event log evidence. Deleted file recovery relies on unallocated cluster analysis. File encryption and MBR destruction are separate techniques."
+  },
+  {
+    "domain_id": 7,
+    "question": "A financial institution uses an active-active disaster recovery configuration for its online banking platform. How does this differ from an active-passive configuration?",
+    "options": [
+      "Active-active replicates data but does not process transactions at the secondary site",
+      "Active-active runs production workloads simultaneously at multiple sites, with no failover delay, while active-passive maintains a standby that activates only upon failure",
+      "Active-passive provides lower RTO than active-active",
+      "Active-active requires only one data center, reducing costs"
+    ],
+    "answer": 1,
+    "explanation": "Active-active runs live production workloads simultaneously across multiple sites, providing near-zero RTO (traffic is simply rerouted) but at higher cost (both sites must handle full production load). Active-passive maintains a standby site that must be activated upon failure, introducing a failover delay. Active-active provides lower RTO than active-passive, not higher. Both require multiple data centers."
+  },
+  {
+    "domain_id": 7,
+    "question": "An organization's business continuity plan sets an RPO of 1 hour for the customer database. Backups are performed every 6 hours. Which statement is accurate?",
+    "options": [
+      "The backup strategy meets the RPO requirement",
+      "The backup strategy fails to meet the RPO — up to 6 hours of data could be lost, exceeding the 1-hour RPO",
+      "RPO is irrelevant when backups are performed regularly",
+      "The RPO should be extended to 6 hours to match the backup schedule"
+    ],
+    "answer": 1,
+    "explanation": "RPO defines the maximum acceptable data loss measured in time. A 6-hour backup interval means that in a worst case, up to 6 hours of transactions since the last backup could be lost. This far exceeds the 1-hour RPO. Solutions include more frequent backups, continuous data replication, or database transaction log shipping. Extending the RPO changes the business requirement and may not be acceptable to stakeholders."
+  },
+  {
+    "domain_id": 7,
+    "question": "A crisis communication plan defines which spokesperson speaks to the media during a major security breach and requires legal review before any external statements. Which risk does this MOST directly mitigate?",
+    "options": [
+      "Reputational and legal risk from inconsistent, premature, or legally inappropriate public disclosures",
+      "Technical risk of continued data exfiltration during the incident",
+      "Regulatory risk of late breach notification to authorities",
+      "Operational risk of IT staff being distracted from remediation"
+    ],
+    "answer": 0,
+    "explanation": "A crisis communication plan controls the message — ensuring a single, legally vetted spokesperson prevents inconsistent statements that could increase liability, worsen reputational damage, or reveal information that complicates legal proceedings. Regulatory notification timelines are addressed by an incident response plan with legal counsel involvement, not the communication plan specifically. Technical remediation is an IR concern. IT distraction is a resource management concern."
+  },
+  {
+    "domain_id": 7,
+    "question": "A configuration management database (CMDB) lists all IT assets including servers, applications, network devices, and their relationships. During an incident where a critical database server is compromised, how does the CMDB MOST directly aid the response?",
+    "options": [
+      "It provides the cryptographic hashes of all files on the database server for integrity verification",
+      "It identifies all systems, applications, and services dependent on the compromised server, enabling accurate impact assessment",
+      "It stores backup copies of the database for rapid restoration",
+      "It automatically patches the compromised server with the latest security updates"
+    ],
+    "answer": 1,
+    "explanation": "A CMDB maps Configuration Items (CIs) and their relationships. During an incident, this enables the team to quickly identify the blast radius — which applications query the database, which business processes depend on it, which other servers it communicates with. This drives containment scope and business impact assessment decisions. CMDBs store configuration metadata, not file hashes, backup data, or patching capabilities."
+  },
+  {
+    "domain_id": 7,
+    "question": "Which vulnerability management approach prioritizes patches FIRST based on whether a vulnerability is actively exploited in the wild and the internet-facing exposure of the affected asset, rather than patching in CVSS score order?",
+    "options": [
+      "Compliance-based patching (patch all critical CVEs within 30 days)",
+      "Risk-based vulnerability prioritization using threat intelligence and asset exposure",
+      "Vendor-advisory-based patching (patch in order of vendor severity rating)",
+      "Age-based patching (oldest vulnerabilities first)"
+    ],
+    "answer": 1,
+    "explanation": "Risk-based prioritization combines CVSS scores with real-world context: known exploitability (CISA KEV, exploit DB), asset exposure (internet-facing vs. internal), asset criticality, and business impact. A CVSS 7.0 vulnerability actively exploited against an internet-facing server is higher priority than a CVSS 9.8 vulnerability only exploitable from a physically isolated internal system with no active exploit. Compliance-based, vendor-advisory, and age-based approaches ignore this context."
+  },
+  {
+    "domain_id": 7,
+    "question": "In ITIL-aligned security operations, what is the PRIMARY difference between an incident and a problem?",
+    "options": [
+      "Incidents are caused by external attackers; problems are caused by internal failures",
+      "An incident is an unplanned disruption requiring immediate restoration; a problem is the underlying root cause of one or more incidents",
+      "Problems are escalated incidents that cannot be resolved within SLA",
+      "Incidents are always security-related; problems relate to availability only"
+    ],
+    "answer": 1,
+    "explanation": "ITIL distinguishes incident management (restoring normal service as quickly as possible — workarounds acceptable) from problem management (identifying and eliminating the root cause to prevent recurrence). The same root cause (problem) can generate many incidents. Incident management focuses on speed; problem management focuses on permanence. Neither is restricted to security or external causes."
+  },
+  {
+    "domain_id": 7,
+    "question": "A Privileged Access Workstation (PAW) is a dedicated, hardened workstation used exclusively for administrative tasks. Which threat does PAW MOST directly mitigate?",
+    "options": [
+      "Credential theft from administrator accounts via malware or pass-the-hash attacks originating from general-purpose user endpoints",
+      "Network-level attacks against administrative protocols such as RDP and SSH",
+      "Physical theft of administrator laptops",
+      "Insider threats where administrators deliberately abuse their access"
+    ],
+    "answer": 0,
+    "explanation": "PAWs operate on a clean, hardened OS used only for administrative tasks — no email, web browsing, or general applications that could introduce malware. This prevents attackers from stealing admin credentials or tokens from a compromised general-purpose workstation (where most endpoint malware operates). Network protocol attacks require network-level controls. Physical theft is addressed by device encryption. Insider threats require behavioral monitoring and least-privilege controls."
+  },
+  {
+    "domain_id": 7,
+    "question": "A threat intelligence platform ingests feeds from ISACs, commercial vendors, and government sources. Analysts use it to pivot from an observed IOC to related infrastructure. Which capability does this MOST describe?",
+    "options": [
+      "SIEM correlation rule management",
+      "Threat intelligence enrichment and pivoting",
+      "Automated vulnerability scanning",
+      "Endpoint detection and response (EDR)"
+    ],
+    "answer": 1,
+    "explanation": "Threat intelligence platforms (TIPs) aggregate, normalize, and enrich indicators from multiple sources. Pivoting — using one known IOC (e.g., a C2 IP) to discover related indicators (domains, other IPs, malware hashes, actor profiles) — is a core TIP capability for threat hunting and attribution. SIEM correlates log events for alerting. Vulnerability scanners identify system weaknesses. EDR monitors endpoints for malicious behavior."
+  },
+  {
+    "domain_id": 7,
+    "question": "An organization's BCP requires that all critical business processes continue within 72 hours of a major disaster, even if IT systems are unavailable. Which BCP element specifically addresses continuing operations without primary IT infrastructure?",
+    "options": [
+      "Disaster Recovery Plan (DRP)",
+      "Manual fallback procedures and workarounds documented in the BCP",
+      "Recovery Point Objective (RPO) for database backups",
+      "Hot site activation procedure"
+    ],
+    "answer": 1,
+    "explanation": "BCPs address business process continuity, not just IT system recovery. Manual fallback procedures document how critical processes (e.g., order taking by phone, manual ledger entries) can continue when IT systems are unavailable — addressing business continuity beyond what DR covers. The DRP focuses on restoring IT systems. RPO is a data loss metric. Hot site activation is an IT recovery mechanism that still requires technology to function."
+  },
+  {
+    "domain_id": 7,
+    "question": "A global organization's crisis management plan designates a single executive as the 'Crisis Commander' with authority to activate DR sites, authorize emergency spending, and communicate with regulators without requiring committee approval. What governance principle does this address?",
+    "options": [
+      "Dual control to prevent unauthorized resource commitment",
+      "Unity of command — a single decision authority during crisis to enable rapid response",
+      "Segregation of duties for financial authorization",
+      "Mandatory access control for sensitive communications"
+    ],
+    "answer": 1,
+    "explanation": "Unity of command is a crisis management principle where a single authority has decision-making power to eliminate delays caused by committee processes during time-critical situations. Normal governance (dual control, CAB approval) is deliberately suspended for crisis response speed. This is documented in advance with defined activation criteria to prevent abuse. Dual control and SoD are appropriate for normal operations but impede crisis response time."
+  },
+  {
+    "domain_id": 7,
+    "question": "During cloud forensics, an investigator needs to acquire evidence from a virtual machine instance that has since been terminated by auto-scaling. Which is the MOST significant challenge unique to cloud forensics in this scenario?",
+    "options": [
+      "Cloud providers refuse to cooperate with legal requests",
+      "Evidence may have been permanently destroyed when the ephemeral instance was terminated, and cloud providers control the physical infrastructure",
+      "Cloud VMs cannot be forensically imaged due to hypervisor restrictions",
+      "Log retention policies always purge evidence within 24 hours"
+    ],
+    "answer": 1,
+    "explanation": "Cloud forensics challenges include: (1) ephemeral instances that auto-terminate destroy volatile evidence, (2) multi-tenancy means forensic tools cannot access physical hardware, (3) evidence is spread across multiple geographic regions, (4) reliance on cloud provider cooperation for infrastructure-level evidence. Pre-incident logging architecture (CloudTrail, VPC Flow Logs, snapshots) is essential for cloud forensic readiness. Cloud providers do cooperate with legal requests via proper channels. Log retention is configurable."
+  },
+  {
+    "domain_id": 7,
+    "question": "An organization maintains a Configuration Management Database (CMDB) that is frequently out of date because IT staff skip the update process when making changes. This creates a problem with which security operations capability?",
+    "options": [
+      "The SIEM cannot ingest logs without accurate CMDB data",
+      "Incident response, vulnerability management, and impact assessment rely on accurate asset inventory — an outdated CMDB creates blind spots and incorrect blast radius estimates",
+      "Patch management automatically updates the CMDB, making manual updates unnecessary",
+      "The CMDB only needs to be accurate for annual compliance audits"
+    ],
+    "answer": 1,
+    "explanation": "An accurate CMDB is foundational for multiple security operations: incident response (what depends on this asset?), vulnerability management (which systems have the vulnerable software?), and change management (what is the authorized configuration baseline?). An outdated CMDB means IR teams may miss affected systems, vulnerability scanners may miss undocumented assets, and patch management may leave unknown systems unpatched. SIEM log ingestion is asset-agnostic. Patch management cannot auto-update the CMDB without discovery integration."
+  },
+  {
+    "domain_id": 7,
+    "question": "An analyst is performing capacity management for a security monitoring infrastructure. They project that log volume will grow 200% over the next 12 months. Which action MOST directly addresses this from a security operations continuity perspective?",
+    "options": [
+      "Reduce the number of log sources to keep volume manageable",
+      "Plan SIEM storage, compute, and ingestion license capacity ahead of growth to prevent alert drops and data loss",
+      "Increase alert thresholds to reduce the number of events requiring analysis",
+      "Compress all log data to reduce storage requirements"
+    ],
+    "answer": 1,
+    "explanation": "Capacity management in security operations ensures that SIEM infrastructure (storage, processing, licensing) scales ahead of actual growth. When SIEM storage or ingestion limits are exceeded, events may be dropped or overwritten — creating the same detection blind spot as a log source failure. Reducing log sources reduces visibility. Increasing thresholds reduces detection fidelity. Compression reduces storage cost but does not address compute or ingestion throughput limits."
+  },
+  {
+    "domain_id": 7,
+    "question": "A problem management investigation reveals that multiple separate incidents over 6 months were all caused by the same misconfigured firewall rule. The correct ITIL response is to:",
+    "options": [
+      "Open a new incident ticket for each future occurrence",
+      "Create a Known Error record, implement a permanent fix, and close the problem after verifying the fix eliminates future incidents",
+      "Escalate all future incidents to Tier 3 for manual analysis",
+      "Accept the risk since the misconfiguration has not caused a confirmed breach"
+    ],
+    "answer": 1,
+    "explanation": "ITIL Problem Management involves identifying root causes of recurring incidents. Once a root cause is identified, it becomes a Known Error with a documented workaround. A permanent fix is then implemented and the problem is closed after confirming the fix resolves the issue. Opening new incident tickets for each occurrence treats symptoms, not the cause. Tier 3 escalation is a workaround, not a fix. Risk acceptance without fix perpetuates the security exposure."
+  },
+  {
+    "domain_id": 7,
+    "question": "A ransomware attack encrypts a hospital's primary file servers at 2 AM. The incident response team's FIRST priority after initial detection and verification should be:",
+    "options": [
+      "Restore all systems from backups immediately to resume operations",
+      "Contain the incident by isolating affected systems from the network to prevent further spread",
+      "Notify the hospital's board of directors and issue a public statement",
+      "Identify the ransomware variant and the attacker's identity before taking action"
+    ],
+    "answer": 1,
+    "explanation": "Containment is the immediate priority after detection and verification — isolating affected systems prevents ransomware from spreading to additional servers, backup systems, or connected facilities. Restoration begins after eradication (removing malware) to avoid re-encryption. Board notification and public statements follow containment and come after internal escalation to management. Identifying the variant aids recovery decisions but can occur in parallel with containment, not before it."
+  },
+  {
+    "domain_id": 7,
+    "question": "An organization's disaster recovery plan specifies that the DR site must be geographically separated from the primary site by at least 100 miles. Which risk does this geographic separation requirement MOST directly address?",
+    "options": [
+      "The risk of network latency between the primary and DR sites affecting replication",
+      "The risk of a regional disaster (earthquake, hurricane, flooding) affecting both sites simultaneously",
+      "The risk of a cyberattack propagating from the primary to the DR site",
+      "The risk of DR site staff lacking familiarity with primary site operations"
+    ],
+    "answer": 1,
+    "explanation": "Geographic separation mitigates the risk of a single regional physical disaster simultaneously affecting both the primary and DR sites. A hurricane making landfall could flood facilities within a 50-mile radius — 100-mile separation provides meaningful buffer. Cyberattacks propagate over network connections regardless of geographic distance. Network latency is a replication concern addressed by bandwidth and protocol, not distance alone. Staff familiarity is an operational concern addressed by training and documentation."
+  },
+  {
+    "domain_id": 7,
+    "question": "An eDiscovery process has five stages. A legal team requests all emails mentioning a specific employee over a 3-year period. Which stage processes the raw collected email data into a reviewable, de-duplicated format?",
+    "options": [
+      "Identification — locating potentially relevant data sources",
+      "Preservation — applying legal hold to prevent deletion",
+      "Processing — converting, de-duplicating, and indexing raw data for review",
+      "Production — delivering data to opposing counsel in required format"
+    ],
+    "answer": 2,
+    "explanation": "eDiscovery processing takes raw collected data (PST files, mail archives) and performs format conversion, de-duplication, near-duplicate identification, metadata extraction, full-text indexing, and filtering for date ranges and custodians — producing a reviewable dataset. Identification finds where relevant data exists. Preservation prevents destruction. Production delivers the final reviewed set to opposing counsel in the specified format (TIFF, native, load file)."
   }
 ]

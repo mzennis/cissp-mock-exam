@@ -238,5 +238,305 @@
     ],
     "answer": 1,
     "explanation": "Without mandatory code review and automated security testing gates, the CI/CD pipeline provides no preventive controls against malicious insiders or compromised developer accounts pushing vulnerable or backdoored code to production. Branch protection rules, mandatory pull request reviews, automated SAST/SCA/secret scanning gates, and signed commits are essential pipeline security controls. Infrastructure costs, deletions, and race conditions are secondary concerns compared to this security control bypass."
+  },
+  {
+    "domain_id": 8,
+    "question": "Microsoft SDL (Security Development Lifecycle) and OWASP SAMM are both secure SDLC frameworks. What is the PRIMARY distinction between them?",
+    "options": [
+      "Microsoft SDL applies only to Microsoft technologies; OWASP SAMM is technology-agnostic",
+      "Microsoft SDL is a prescriptive process with defined security activities per phase; OWASP SAMM is a maturity model for assessing and improving software security practices",
+      "OWASP SAMM focuses only on web applications; Microsoft SDL covers all software types",
+      "Microsoft SDL requires formal certification; OWASP SAMM is self-assessed"
+    ],
+    "answer": 1,
+    "explanation": "Microsoft SDL defines specific security activities per development phase (requirements, design, implementation, verification, release). OWASP SAMM (Software Assurance Maturity Model) is a maturity framework for assessing current practices and defining improvement roadmaps across five business functions. Both are technology-agnostic and applicable to all software types. Neither requires formal certification — both are frameworks organizations implement internally."
+  },
+  {
+    "domain_id": 8,
+    "question": "A development team uses STRIDE during threat modeling for a new payment processing service. An attacker is able to modify transaction amounts in transit by exploiting a lack of message integrity checks. Which STRIDE category does this threat belong to?",
+    "options": [
+      "Spoofing",
+      "Tampering",
+      "Repudiation",
+      "Elevation of privilege"
+    ],
+    "answer": 1,
+    "explanation": "STRIDE: Spoofing (identity), Tampering (data), Repudiation (deny actions), Information Disclosure (data exposure), Denial of Service (availability), Elevation of Privilege (unauthorized access). Modifying transaction data in transit is Tampering. Mitigations include message authentication codes (HMAC), digital signatures, and TLS with integrity verification. Spoofing would involve impersonating another party. Repudiation would be denying that a transaction occurred."
+  },
+  {
+    "domain_id": 8,
+    "question": "OWASP Top 10 2021 ranks A01 as Broken Access Control. Which of the following is the BEST example of this vulnerability class?",
+    "options": [
+      "An application storing passwords in MD5 without salting",
+      "A user modifying a URL parameter from /account?id=123 to /account?id=124 and accessing another user's account",
+      "An application using a self-signed certificate for HTTPS",
+      "A session token that does not expire after logout"
+    ],
+    "answer": 1,
+    "explanation": "Broken Access Control (A01:2021) encompasses failures where users can act outside their intended permissions. Accessing another user's account by manipulating an object identifier (IDOR) is a canonical example. Weak password hashing is A02 (Cryptographic Failures). Self-signed certificates relate to transport security. Non-expiring session tokens relate to session management (also A07 Identification and Authentication Failures) — not access control of protected resources."
+  },
+  {
+    "domain_id": 8,
+    "question": "OWASP A08:2021 is 'Software and Data Integrity Failures.' Which real-world attack BEST exemplifies this category?",
+    "options": [
+      "An attacker exploiting a SQL injection to extract the database",
+      "An attacker inserting malicious code into a software update mechanism that lacks integrity verification, as occurred in the SolarWinds supply chain attack",
+      "An attacker performing brute-force against the admin login page",
+      "An attacker using XXE to read internal files from the server"
+    ],
+    "answer": 1,
+    "explanation": "A08 Software and Data Integrity Failures covers situations where code and infrastructure are not protected against integrity violations — including insecure deserialization, CI/CD pipeline compromises, and unsigned software updates. The SolarWinds attack, where attackers injected malicious code into signed build artifacts that were distributed to customers, is the definitive modern example. SQL injection is A03 Injection. Brute-force is A07. XXE falls under A05 Security Misconfiguration or A03 Injection."
+  },
+  {
+    "domain_id": 8,
+    "question": "A web application that processes user-submitted HTML templates renders them server-side. An attacker submits the template string '{{7*7}}' and sees '49' returned in the response. This indicates which vulnerability?",
+    "options": [
+      "Reflected Cross-Site Scripting (XSS)",
+      "Server-Side Template Injection (SSTI)",
+      "Server-Side Request Forgery (SSRF)",
+      "XML External Entity (XXE) injection"
+    ],
+    "answer": 1,
+    "explanation": "Server-Side Template Injection (SSTI) occurs when user input is embedded in a server-side template engine (Jinja2, Twig, Freemarker) without sanitization. The template expression {{7*7}} being evaluated to 49 confirms the engine is processing user input as code. SSTI can lead to remote code execution. XSS executes JavaScript in the browser, not server-side. SSRF causes server-side HTTP requests. XXE exploits XML parsers specifically."
+  },
+  {
+    "domain_id": 8,
+    "question": "A Time-of-Check to Time-of-Use (TOCTOU) race condition vulnerability occurs when:",
+    "options": [
+      "An application checks permissions at startup but not during execution",
+      "The state of a resource changes between the security check and the use of that resource, allowing an attacker to exploit the window between check and use",
+      "Two threads access the same memory address simultaneously, causing corruption",
+      "A session token is reused after it should have expired"
+    ],
+    "answer": 1,
+    "explanation": "TOCTOU is a class of race condition where an attacker manipulates a resource (e.g., a file) after it has been checked (access control verified) but before it is used (the operation executes). Example: check that /tmp/safe-file is benign, attacker replaces it with a symlink to /etc/passwd, then the program uses it. Mitigations include atomic operations, using file descriptors instead of filenames after check, and minimizing the check-to-use window."
+  },
+  {
+    "domain_id": 8,
+    "question": "Memory-safe languages like Rust eliminate entire classes of vulnerabilities compared to C/C++. Which vulnerability class is MOST directly prevented by Rust's ownership model and borrow checker?",
+    "options": [
+      "SQL injection and XSS",
+      "Buffer overflows, use-after-free, and null pointer dereferences",
+      "Logic errors and business rule bypass",
+      "Insecure cryptographic implementations"
+    ],
+    "answer": 1,
+    "explanation": "Rust's ownership model, borrow checker, and memory safety guarantees prevent buffer overflows (bounds checking at compile time), use-after-free (ownership prevents accessing freed memory), and null pointer dereferences (Option type instead of nullable pointers) — all enforced at compile time without runtime overhead. SQL injection and XSS are application-logic issues not related to memory management. Logic errors and cryptographic misuse are not addressed by memory safety."
+  },
+  {
+    "domain_id": 8,
+    "question": "An OAuth 2.0 authorization code flow implementation does not use PKCE (Proof Key for Code Exchange). A mobile application is using this flow. Which attack does the absence of PKCE enable?",
+    "options": [
+      "Token replay attacks using expired access tokens",
+      "Authorization code interception by a malicious app registered with the same custom URI scheme",
+      "Cross-site request forgery against the token endpoint",
+      "JWT algorithm confusion using the 'none' algorithm"
+    ],
+    "answer": 1,
+    "explanation": "On mobile platforms, multiple apps can register the same custom URI scheme (e.g., myapp://callback). Without PKCE, a malicious app can intercept the authorization code returned to the redirect URI and exchange it for tokens. PKCE binds the code to a code verifier known only to the legitimate client — even if an attacker intercepts the code, they cannot exchange it without the verifier. CSRF against the token endpoint uses a state parameter. JWT algorithm confusion is a separate JWT implementation vulnerability."
+  },
+  {
+    "domain_id": 8,
+    "question": "A JWT is signed using the RS256 algorithm (RSA). An attacker changes the 'alg' header to 'HS256' (HMAC) and signs the token using the server's RSA public key as the HMAC secret. The server accepts the token. Which JWT vulnerability does this demonstrate?",
+    "options": [
+      "Token expiration bypass",
+      "Algorithm confusion (algorithm substitution) attack",
+      "Weak key derivation in JWT generation",
+      "CSRF via JWT header injection"
+    ],
+    "answer": 1,
+    "explanation": "Algorithm confusion (alg confusion) exploits servers that use the 'alg' field from the JWT header to determine the verification algorithm. The server's RSA public key is known (public), so when the server switches to HS256 mode using the public key as the HMAC secret, the attacker can forge valid tokens. The fix is to hardcode the expected algorithm server-side and never trust the 'alg' field from the token. The 'none' algorithm attack sets alg to none to bypass all verification."
+  },
+  {
+    "domain_id": 8,
+    "question": "A developer publishes an internal package named 'company-auth-lib' to a public PyPI registry, knowing that a victim organization's pip install will prefer the higher-versioned public package over their private registry package. This attack is called:",
+    "options": [
+      "Typosquatting",
+      "Dependency confusion (namespace confusion)",
+      "Supply chain poisoning via compromised maintainer account",
+      "Malicious code injection via pull request"
+    ],
+    "answer": 1,
+    "explanation": "Dependency confusion exploits the fact that many package managers prefer public registries over private ones when the same package name exists in both. By publishing a higher-versioned package with the internal package name to a public registry, the attacker's code is automatically fetched during builds. Typosquatting uses similar-looking names (e.g., 'reqeusts' vs 'requests'). Maintainer account compromise is a different vector. This attack was demonstrated by Alex Birsan in 2021 against major tech companies."
+  },
+  {
+    "domain_id": 8,
+    "question": "Code signing is used to verify software integrity and authenticity. Which of the following BEST describes what code signing proves when a binary's signature is valid?",
+    "options": [
+      "The software contains no security vulnerabilities",
+      "The software was signed by the identified publisher and has not been modified since signing",
+      "The software was reviewed by a third-party security auditor",
+      "The software complies with all applicable regulatory requirements"
+    ],
+    "answer": 1,
+    "explanation": "Code signing uses the publisher's private key to create a digital signature over the binary. Verification with the corresponding public key proves (1) the software originated from that specific publisher (authenticity) and (2) the binary has not been modified since signing (integrity). It does not prove absence of vulnerabilities, third-party review, or regulatory compliance. A signed malware sample is still malware — code signing provides no security quality assurance."
+  },
+  {
+    "domain_id": 8,
+    "question": "A web application uses stored procedures for all database operations rather than dynamically generated SQL queries. Which security benefit does this PRIMARILY provide?",
+    "options": [
+      "Stored procedures automatically encrypt sensitive data before storage",
+      "Stored procedures eliminate SQL injection risk by separating query logic from user-supplied data, and restrict database permissions to only the procedures needed",
+      "Stored procedures provide better performance, which reduces the attack window",
+      "Stored procedures prevent privilege escalation within the database server"
+    ],
+    "answer": 1,
+    "explanation": "Stored procedures precompile SQL logic in the database, and user input is passed as typed parameters rather than concatenated into queries. Combined with granting the application account EXECUTE permission only on specific procedures (not direct table SELECT/INSERT/UPDATE/DELETE), this enforces least privilege and eliminates injection. They do not automatically encrypt data. Performance benefits are real but security-irrelevant. Privilege escalation requires additional database-level controls."
+  },
+  {
+    "domain_id": 8,
+    "question": "An AWS Lambda function is triggered by API Gateway and has an IAM execution role with administrator access. The function processes user-uploaded files. What is the PRIMARY security concern with this configuration?",
+    "options": [
+      "Lambda functions cannot be monitored with CloudWatch",
+      "The overly permissive execution role violates least privilege — a compromised function can access all AWS resources in the account",
+      "Lambda functions are inherently insecure and should not process user input",
+      "API Gateway does not support TLS for Lambda invocations"
+    ],
+    "answer": 1,
+    "explanation": "Lambda functions should have execution roles scoped to only the specific AWS resources and actions they require. An administrator role means that a compromised function (via code injection in the uploaded file processing) could read any S3 bucket, access any secret in Secrets Manager, query any DynamoDB table, or pivot to other services. Lambda functions support CloudWatch logging, can process user input safely, and API Gateway enforces TLS. The IAM role is the critical security issue."
+  },
+  {
+    "domain_id": 8,
+    "question": "A Terraform template provisions infrastructure and is stored in a Git repository. A security scan finds that an AWS access key ID and secret are hardcoded in the template. Which is the MOST effective remediation?",
+    "options": [
+      "Encrypt the Terraform file at rest in the repository",
+      "Remove credentials from the template, rotate the exposed keys immediately, use IAM roles or secrets manager references, and add pre-commit hooks to block secret commits",
+      "Move the credentials to a terraform.tfvars file and add it to .gitignore",
+      "Restrict repository access to senior engineers only"
+    ],
+    "answer": 1,
+    "explanation": "Hardcoded credentials in IaC are a critical finding. The correct response is multi-step: (1) Rotate the exposed credentials immediately (treat as compromised since they may already be in git history), (2) Remove from code and git history (git-filter-branch or BFG), (3) Use IAM instance profiles/roles or reference secrets from AWS Secrets Manager, (4) Add pre-commit secret scanning hooks (e.g., git-secrets, trufflehog) to prevent recurrence. Moving to tfvars with .gitignore is better but still stores secrets on disk. Repository access restriction is insufficient."
+  },
+  {
+    "domain_id": 8,
+    "question": "A team implements a CSRF protection mechanism that embeds a unique, unpredictable token in every HTML form and validates it on the server upon submission. An attacker attempts a CSRF attack from their malicious site. Why does this defense succeed?",
+    "options": [
+      "The browser's same-origin policy prevents the attacker's site from making POST requests",
+      "The attacker's forged request cannot include the valid CSRF token because it cannot read it from the victim's page due to the same-origin policy",
+      "The server's TLS certificate prevents the attacker's request from reaching the server",
+      "CSRF tokens are encrypted, preventing the attacker from forging them"
+    ],
+    "answer": 1,
+    "explanation": "CSRF tokens work in conjunction with the browser's same-origin policy. The attacker can cause the victim's browser to send a cross-origin request, but the attacker's malicious JavaScript cannot read the CSRF token embedded in the victim's page (cross-origin reads are blocked by SOP). Without reading the token, the attacker cannot include a valid token in their forged request, causing the server to reject it. The SOP does not block cross-origin POST requests by default — that's the reason CSRF is possible in the first place."
+  },
+  {
+    "domain_id": 8,
+    "question": "A blue-green deployment strategy runs two identical production environments (blue currently active, green idle). When a new version is deployed to green and validated, traffic is switched from blue to green. What is the PRIMARY security benefit of this approach?",
+    "options": [
+      "It eliminates the need for security testing before deployment",
+      "Immediate rollback to the known-good blue environment is possible if the green deployment introduces a security regression or vulnerability",
+      "It doubles the security scanning coverage by running two environments",
+      "It prevents zero-day exploits by keeping the blue environment isolated"
+    ],
+    "answer": 1,
+    "explanation": "Blue-green deployments provide an instantaneous rollback path — if a security issue, regression, or vulnerability is discovered after switching traffic to green, traffic is immediately switched back to blue with no downtime or data loss. This de-risks deployments significantly. It does not eliminate pre-deployment testing (security testing is still required on green before switching). Running two environments doesn't double coverage. Isolation of blue from external traffic reduces its attack surface but doesn't prevent zero-days."
+  },
+  {
+    "domain_id": 8,
+    "question": "GraphQL APIs present unique security challenges compared to REST APIs. Which GraphQL-specific vulnerability allows an attacker to retrieve the complete schema of all types, fields, and relationships in an API?",
+    "options": [
+      "Mass assignment via GraphQL mutations",
+      "Introspection queries enabling API schema enumeration",
+      "Broken object level authorization in GraphQL resolvers",
+      "Batch query injection via aliases"
+    ],
+    "answer": 1,
+    "explanation": "GraphQL introspection is a built-in feature that allows clients to query the schema itself (using __schema and __type queries). In production, introspection should be disabled to prevent attackers from mapping the entire API surface, discovering sensitive types and fields, and crafting targeted attacks. Mass assignment and authorization failures are also GraphQL risks but are not introspection-specific. Batching attacks (using aliases to send many queries in one request) bypass rate limiting."
+  },
+  {
+    "domain_id": 8,
+    "question": "Insecure deserialization (OWASP A08:2021) is dangerous primarily because:",
+    "options": [
+      "Serialized data is always transmitted in plaintext, enabling interception",
+      "Deserializing attacker-controlled data can trigger arbitrary code execution if the deserialization library processes embedded executable logic or gadget chains",
+      "Serialization increases application memory usage, creating denial of service opportunities",
+      "Deserialized objects bypass input validation since they are not treated as strings"
+    ],
+    "answer": 1,
+    "explanation": "Insecure deserialization occurs when an application deserializes data from an untrusted source. Many serialization libraries (Java ObjectInputStream, Python pickle, PHP unserialize) can execute code during deserialization if the serialized payload contains malicious gadget chains. Attackers craft payloads that trigger RCE when deserialized. Defenses include avoiding native deserialization of untrusted data, using data-only formats (JSON with schema validation), integrity-signing serialized objects, and running deserialization in isolated contexts."
+  },
+  {
+    "domain_id": 8,
+    "question": "A development team adopts canary deployments, routing 5% of production traffic to a new application version before a full rollout. Which security benefit does this approach provide?",
+    "options": [
+      "Canary deployments eliminate the need for pre-production security testing",
+      "Security regressions or vulnerabilities in the new version are exposed to limited real traffic, enabling detection and rollback before the full user base is affected",
+      "Canary deployments provide automatic rollback if a CVE is published against the new version",
+      "The 5% canary traffic is isolated from real user data for privacy compliance"
+    ],
+    "answer": 1,
+    "explanation": "Canary deployments limit the blast radius of a bad release — including one with a newly introduced security vulnerability. If the canary exhibits anomalous error rates, security alerts, or unexpected behavior, it is rolled back before 100% of users are impacted. This is a risk reduction strategy, not a replacement for pre-production security testing. Rollback is triggered by monitoring, not automatic CVE detection. Canary traffic uses real production traffic and data (same environment)."
+  },
+  {
+    "domain_id": 8,
+    "question": "Database Activity Monitoring (DAM) is deployed to monitor all SQL queries against a production database containing PII. An employee with legitimate SELECT access begins running queries that extract all rows from the customer table at 11 PM. Which DAM capability is MOST relevant to detecting this threat?",
+    "options": [
+      "Blocking SQL injection attacks in real time",
+      "Detecting anomalous query patterns that deviate from the user's established baseline behavior",
+      "Encrypting data returned by SELECT queries",
+      "Enforcing row-level security on the customer table"
+    ],
+    "answer": 1,
+    "explanation": "DAM monitors database traffic and can establish behavioral baselines per user — typical queries, volumes, times of access. Bulk extraction at unusual hours deviates from baseline and triggers an alert. DAM can detect threats from users with legitimate access (insider threat) that network security controls cannot see. WAFs and parameterized queries prevent SQLi. Encryption protects data at rest and in transit. Row-level security enforces access control — DAM is a detective control layered on top."
+  },
+  {
+    "domain_id": 8,
+    "question": "An ORM (Object-Relational Mapper) is used instead of raw SQL for all database operations in a web application. Which security benefit does ORM usage PRIMARILY provide, and what limitation remains?",
+    "options": [
+      "ORMs eliminate all XSS risks; limitation is that they do not support complex queries",
+      "ORMs use parameterized queries by default, significantly reducing SQL injection risk; limitation is that raw query escape hatches (native queries) can reintroduce injection if misused",
+      "ORMs encrypt all data before storing it; limitation is performance overhead",
+      "ORMs enforce role-based access control at the database level; limitation is that they require admin privileges"
+    ],
+    "answer": 1,
+    "explanation": "ORMs generate parameterized SQL, making standard CRUD operations injection-safe by default. The critical limitation is that most ORMs provide escape hatches for complex queries (e.g., SQLAlchemy's text(), Hibernate's nativeQuery, Django's raw()) — if developers use these with unsanitized input, SQL injection is reintroduced. Security training must cover both ORM benefits and safe usage of raw query features. ORMs do not address XSS, encryption, or RBAC."
+  },
+  {
+    "domain_id": 8,
+    "question": "A CI/CD pipeline secret scanning tool detects an AWS access key committed to a feature branch 3 days ago. The key has not yet been rotated. What is the CORRECT order of remediation steps?",
+    "options": [
+      "Remove the key from the branch, then rotate it, then audit for unauthorized usage",
+      "Rotate (invalidate) the key immediately, then audit CloudTrail for unauthorized usage during the exposure window, then remove it from git history using rewrite tools",
+      "Open a ticket to remove the key at the next sprint, then rotate it before production deployment",
+      "Rotate the key, close the branch, and consider the issue resolved"
+    ],
+    "answer": 1,
+    "explanation": "The correct priority is: (1) Rotate/invalidate the key immediately — the secret is compromised from the moment it was committed and may already be exploited. Removing it from code first leaves the secret valid during the window it takes to do git history rewriting. (2) Audit CloudTrail for the 3-day exposure window to determine if unauthorized usage occurred. (3) Purge from git history (BFG Repo Cleaner, git-filter-repo). Deferring rotation to a sprint or next deployment is unacceptable for a compromised credential."
+  },
+  {
+    "domain_id": 8,
+    "question": "A WebSocket connection is established between a browser and a server for a real-time trading application. An attacker on the same network attempts to inject malicious frames into the WebSocket connection. Which security control MOST effectively prevents this?",
+    "options": [
+      "Using JSON instead of XML for WebSocket message payloads",
+      "Establishing WebSocket connections over WSS (WebSocket Secure / TLS) and validating the Origin header during the handshake",
+      "Requiring re-authentication for every WebSocket message",
+      "Limiting WebSocket connections to 10 concurrent sessions per user"
+    ],
+    "answer": 1,
+    "explanation": "WSS (wss://) wraps the WebSocket connection in TLS, preventing network-level interception and injection by attackers on the same network. Validating the Origin header during the WebSocket upgrade handshake prevents cross-site WebSocket hijacking — an unauthorized site cannot establish a WebSocket connection to your server using a victim's credentials. JSON vs XML is a data format choice with no direct bearing on transport security. Per-message re-authentication is operationally infeasible for real-time connections. Session limits address DoS, not injection."
+  },
+  {
+    "domain_id": 8,
+    "question": "A security architect reviews a feature flag implementation where a new payment processing module is enabled via a configuration toggle for 10% of users in production. The feature flag configuration is stored in a publicly readable S3 bucket. What is the PRIMARY security concern?",
+    "options": [
+      "Feature flags increase application complexity and should be avoided",
+      "Publicly readable flag configuration exposes system architecture details and may allow attackers to identify partially deployed features with known vulnerabilities or manipulate flag state",
+      "The 10% rollout percentage is too low for meaningful security testing",
+      "Feature flags bypass the change management process"
+    ],
+    "answer": 1,
+    "explanation": "Feature flag configurations stored in publicly readable locations expose sensitive system information: what features exist (reconnaissance), which are disabled (potential vulnerabilities not yet fully hardened), and flag evaluation logic (potential bypass opportunities). If flag state can be manipulated by an attacker, they may be able to enable or disable security controls. Flag configurations should have appropriate access controls matching the sensitivity of the features they control. The rollout percentage and change management concerns are secondary."
+  },
+  {
+    "domain_id": 8,
+    "question": "The PASTA (Process for Attack Simulation and Threat Analysis) threat modeling methodology is risk-centric and consists of seven stages. Which characteristic BEST distinguishes PASTA from STRIDE?",
+    "options": [
+      "PASTA is tool-based and automated; STRIDE is purely manual",
+      "PASTA aligns threat analysis with business objectives and quantifies attack likelihood and impact from an attacker's perspective; STRIDE categorizes threats by type without inherent risk quantification",
+      "STRIDE produces attack trees; PASTA produces data flow diagrams",
+      "PASTA is used only for web applications; STRIDE is used for all software types"
+    ],
+    "answer": 1,
+    "explanation": "PASTA is a risk-centric, attacker-centric methodology that walks through seven stages from defining business objectives to simulating attacks and performing risk analysis — producing a risk-scored output aligned to business impact. STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege) categorizes threats by type but does not inherently quantify risk or business impact. Both produce DFDs and both are applicable across software types. Neither is solely automated."
   }
 ]
