@@ -1,0 +1,242 @@
+[
+  {
+    "domain_id": 8,
+    "question": "Which of the following is the MOST effective way to prevent SQL injection attacks?",
+    "options": [
+      "Input validation using blacklists",
+      "Parameterized queries (prepared statements)",
+      "Encrypting the database",
+      "Using a web application firewall only"
+    ],
+    "answer": 1,
+    "explanation": "Parameterized queries (prepared statements) separate SQL code from data, making SQL injection virtually impossible. Input validation helps but can be bypassed. WAFs add defense in depth but shouldn't be the primary control."
+  },
+  {
+    "domain_id": 8,
+    "question": "In the SDLC, at which phase should security requirements be defined?",
+    "options": [
+      "Implementation/Coding",
+      "Testing",
+      "Requirements gathering/Planning",
+      "Deployment"
+    ],
+    "answer": 2,
+    "explanation": "Security requirements should be defined during the requirements/planning phase — the earliest stage. Identifying security needs early (shift left) is more cost-effective than addressing them later in the development lifecycle."
+  },
+  {
+    "domain_id": 8,
+    "question": "What is a buffer overflow vulnerability?",
+    "options": [
+      "When a database query returns too many results",
+      "When a program writes more data to a buffer than it can hold, potentially overwriting adjacent memory",
+      "When network bandwidth exceeds capacity",
+      "When log files grow too large"
+    ],
+    "answer": 1,
+    "explanation": "A buffer overflow occurs when a program writes data beyond the allocated memory buffer, potentially overwriting adjacent memory. Attackers can exploit this to inject malicious code or crash the system. Mitigations include bounds checking and ASLR."
+  },
+  {
+    "domain_id": 8,
+    "question": "What is the purpose of code review in secure software development?",
+    "options": [
+      "To test the application under load",
+      "To examine source code for security flaws, logic errors, and coding standards violations",
+      "To deploy code to production",
+      "To generate user documentation"
+    ],
+    "answer": 1,
+    "explanation": "Code review (static analysis when automated) examines source code to identify security vulnerabilities, logic errors, and standards violations before deployment. It's a preventive control in the SDLC that catches issues early."
+  },
+  {
+    "domain_id": 8,
+    "question": "Which OWASP Top 10 category addresses the risk of using components with known vulnerabilities?",
+    "options": [
+      "Injection",
+      "Broken Authentication",
+      "Vulnerable and Outdated Components",
+      "Security Misconfiguration"
+    ],
+    "answer": 2,
+    "explanation": "OWASP specifically calls out using components (libraries, frameworks, modules) with known vulnerabilities as a major risk. Organizations should maintain an inventory of components, monitor for vulnerabilities, and patch promptly."
+  },
+  {
+    "domain_id": 8,
+    "question": "A web application reflects user-supplied input from a URL parameter directly into the HTML response without encoding. An attacker sends a link with malicious JavaScript embedded in the parameter. This is BEST described as:",
+    "options": [
+      "SQL injection via URL parameter",
+      "Reflected Cross-Site Scripting (XSS)",
+      "Server-Side Request Forgery (SSRF)",
+      "Cross-Site Request Forgery (CSRF)"
+    ],
+    "answer": 1,
+    "explanation": "Reflected XSS occurs when user-supplied input is immediately returned in the HTTP response without proper encoding, executing in the victim's browser. Stored XSS persists in the database. CSRF tricks authenticated users into performing unintended actions. SSRF causes the server to make requests to internal resources. SQL injection targets database queries, not HTML output."
+  },
+  {
+    "domain_id": 8,
+    "question": "In a DevSecOps pipeline, security scanning is integrated into the CI/CD workflow. At which stage should SAST tools MOST appropriately run?",
+    "options": [
+      "During pre-production load testing",
+      "After deployment to the production environment",
+      "During the build stage before deployment artifacts are created",
+      "Only during scheduled quarterly security assessments"
+    ],
+    "answer": 2,
+    "explanation": "SAST should run during the build stage (or even at commit time via pre-commit hooks) to provide immediate feedback to developers — embodying 'shift left' security. Running SAST in production provides no value. Quarterly assessments are too infrequent for a CI/CD pipeline. Post-deployment for production misses the preventive opportunity and increases remediation cost significantly."
+  },
+  {
+    "domain_id": 8,
+    "question": "Which OWASP Top 10 vulnerability occurs when an application fetches a remote resource at a URL controlled by the attacker, allowing access to internal services behind a firewall?",
+    "options": [
+      "Insecure Direct Object Reference (IDOR)",
+      "Cross-Site Request Forgery (CSRF)",
+      "Server-Side Request Forgery (SSRF)",
+      "XML External Entity (XXE) injection"
+    ],
+    "answer": 2,
+    "explanation": "SSRF allows attackers to induce the server to make HTTP requests to arbitrary destinations, including internal services (AWS metadata endpoint, internal APIs) that are not directly accessible from the internet. XXE exploits XML parsers to access local files or internal services. IDOR exposes direct access to objects via manipulable references. CSRF exploits the trust a site has in the user's browser."
+  },
+  {
+    "domain_id": 8,
+    "question": "A database security technique creates separate virtual tables showing different subsets of data based on user clearance level, ensuring that users at lower classification levels cannot detect the existence of higher-classified records. This is called:",
+    "options": [
+      "Database partitioning",
+      "Polyinstantiation",
+      "Data masking",
+      "View-based access control"
+    ],
+    "answer": 1,
+    "explanation": "Polyinstantiation allows multiple versions of the same record to exist at different classification levels. A user at a lower clearance sees a record with lower-classified data, while a higher-cleared user sees the full record. This prevents inference attacks where the absence of a record reveals the existence of classified information. View-based access control restricts columns/rows but doesn't create separate instances to prevent inference."
+  },
+  {
+    "domain_id": 8,
+    "question": "An organization acquires a commercial off-the-shelf (COTS) software package for managing employee records. Which supply chain security concern is MOST critical during acquisition?",
+    "options": [
+      "Whether the software supports dark mode for accessibility",
+      "Reviewing the vendor's software development practices, vulnerability disclosure program, and patch history",
+      "Ensuring the software is written in a compiled language rather than interpreted",
+      "Confirming the software uses the latest version of TLS for all connections"
+    ],
+    "answer": 1,
+    "explanation": "Software supply chain security requires evaluating the vendor's secure development practices (SDLC maturity), how they handle vulnerability disclosure, and their track record of timely patches. Compromised COTS software (e.g., SolarWinds) can introduce backdoors and vulnerabilities into the organization's environment. TLS version is a configuration concern that can be verified and remediated. Language choice and UI features are secondary to the vendor's security practices."
+  },
+  {
+    "domain_id": 8,
+    "question": "Which HTTP security header MOST effectively prevents a web application from loading content (scripts, styles, images) from unauthorized external domains, mitigating XSS attacks?",
+    "options": [
+      "X-Frame-Options",
+      "Content-Security-Policy (CSP)",
+      "Strict-Transport-Security (HSTS)",
+      "X-Content-Type-Options"
+    ],
+    "answer": 1,
+    "explanation": "Content-Security-Policy (CSP) allows a server to specify which sources are authorized for each type of content, blocking execution of inline scripts and loading resources from unauthorized domains. X-Frame-Options prevents clickjacking by controlling iframe embedding. HSTS forces HTTPS connections. X-Content-Type-Options prevents MIME-type sniffing. CSP is the primary defense against XSS through content source restriction."
+  },
+  {
+    "domain_id": 8,
+    "question": "In an Agile development environment, security requirements should MOST appropriately be handled by:",
+    "options": [
+      "Deferring all security work to a dedicated security sprint at the end of each release",
+      "Incorporating security user stories and abuse cases into the product backlog, with security acceptance criteria in each sprint",
+      "Conducting a single security architecture review before development begins",
+      "Outsourcing security testing entirely to a third-party vendor between major releases"
+    ],
+    "answer": 1,
+    "explanation": "Security must be embedded throughout Agile sprints via security user stories, abuse cases, and security acceptance criteria — not deferred to a security sprint. A single upfront review misses vulnerabilities introduced during development. Outsourcing security testing between releases creates a lag that contradicts continuous delivery principles. Security should be a definition-of-done requirement for every sprint."
+  },
+  {
+    "domain_id": 8,
+    "question": "A REST API endpoint accepts a user ID and returns the corresponding user's profile without verifying that the requesting user has permission to view that profile. What OWASP API security risk does this represent?",
+    "options": [
+      "Broken Function Level Authorization",
+      "Broken Object Level Authorization (BOLA/IDOR)",
+      "Excessive Data Exposure",
+      "Mass Assignment"
+    ],
+    "answer": 1,
+    "explanation": "Broken Object Level Authorization (BOLA), also known as Insecure Direct Object Reference (IDOR), occurs when an API fails to verify that the requesting user has permission to access the specific object being requested. An attacker can enumerate IDs to access other users' data. Broken Function Level Authorization involves accessing admin functions. Excessive Data Exposure returns more fields than needed. Mass Assignment allows overwriting internal fields via API body parameters."
+  },
+  {
+    "domain_id": 8,
+    "question": "Which container security control MOST effectively prevents a compromised container from affecting the host OS or other containers?",
+    "options": [
+      "Using the latest base image version",
+      "Running containers with a read-only filesystem",
+      "Enforcing namespace isolation and seccomp profiles to restrict system calls",
+      "Scanning container images for known CVEs before deployment"
+    ],
+    "answer": 2,
+    "explanation": "Namespace isolation (PID, network, mount, user namespaces) and seccomp profiles restrict what system calls a container can make, creating strong boundaries between containers and the host. Read-only filesystems prevent file modifications but don't limit syscalls. Image scanning identifies known vulnerabilities but doesn't contain a runtime compromise. Using the latest image reduces known vulnerabilities but is not a runtime isolation control."
+  },
+  {
+    "domain_id": 8,
+    "question": "A microservices architecture exposes 20 internal services that communicate via REST APIs. An attacker compromises one service and begins making API calls to other services. Which control MOST effectively limits the blast radius of this compromise?",
+    "options": [
+      "Encrypting all inter-service communication with TLS",
+      "Implementing service mesh with mutual TLS (mTLS) and per-service authorization policies",
+      "Rate limiting all external API endpoints",
+      "Deploying all microservices in the same network segment"
+    ],
+    "answer": 1,
+    "explanation": "A service mesh with mTLS enforces mutual authentication between services (each service must prove its identity) and per-service authorization policies (service A may only call specific endpoints on service B). This limits lateral movement even after a service compromise. TLS alone encrypts traffic but doesn't authenticate service identities or enforce least-privilege API access. Rate limiting controls volume, not authorization. Same-network deployment increases blast radius."
+  },
+  {
+    "domain_id": 8,
+    "question": "Which Waterfall SDLC phase is most analogous to the 'threat modeling' activity in secure development?",
+    "options": [
+      "Implementation",
+      "Testing",
+      "Design",
+      "Maintenance"
+    ],
+    "answer": 2,
+    "explanation": "Threat modeling (identifying threats, attack vectors, and required mitigations) is a design-phase activity. It analyzes the system architecture to identify security risks before code is written, aligning with the design phase where system structure is defined. Implementing threat mitigations happens during implementation. Verification of controls occurs in testing. Maintenance addresses post-deployment issues."
+  },
+  {
+    "domain_id": 8,
+    "question": "A developer uses the following code to build a database query: query = 'SELECT * FROM users WHERE id = ' + userInput. Which secure coding fix is MOST appropriate?",
+    "options": [
+      "Wrap the query in a try-catch block to handle errors",
+      "Replace with a parameterized query: 'SELECT * FROM users WHERE id = ?' with userInput as a bound parameter",
+      "Convert userInput to uppercase before concatenation",
+      "Limit the length of userInput to 10 characters"
+    ],
+    "answer": 1,
+    "explanation": "String concatenation to build SQL queries is the root cause of SQL injection. Parameterized queries (prepared statements) separate the query structure from the data — the database driver handles proper escaping automatically, making injection impossible regardless of input content. Try-catch handles runtime errors but doesn't prevent injection. Case conversion and length limits are easily bypassed by crafted SQL payloads."
+  },
+  {
+    "domain_id": 8,
+    "question": "An API implements rate limiting at 100 requests per minute per IP address. An attacker uses a botnet of 1,000 IPs, each sending 99 requests per minute, to perform credential stuffing. What additional control would MOST effectively detect and block this distributed attack?",
+    "options": [
+      "Increasing the rate limit to 500 requests per minute",
+      "Implementing CAPTCHA only on the login endpoint",
+      "Correlating login failure rates across multiple IPs and accounts, combined with device fingerprinting and behavioral analytics",
+      "Blocking all traffic from non-domestic IP addresses"
+    ],
+    "answer": 2,
+    "explanation": "Distributed attacks deliberately stay below per-IP rate limits. Effective defense requires cross-IP correlation (detecting that 1,000 IPs are all targeting the same accounts), device fingerprinting (detecting reuse of the same browser fingerprint from different IPs), and behavioral analytics (detecting non-human patterns). CAPTCHA helps but can be solved by bot farms. Blocking non-domestic IPs is an overly broad control that blocks legitimate users. Raising rate limits would have no effect on a distributed attack."
+  },
+  {
+    "domain_id": 8,
+    "question": "Database views can be used as a security control. Which of the following BEST describes how views enforce data access control?",
+    "options": [
+      "Views encrypt data at rest, preventing unauthorized access to the database files",
+      "Views restrict users to seeing only the rows and columns they are authorized to access, without exposing the full underlying table",
+      "Views create audit logs of all access to sensitive data",
+      "Views enforce referential integrity between related tables"
+    ],
+    "answer": 1,
+    "explanation": "Database views create virtual tables that expose only the subset of columns and rows that a user is authorized to see. Users query the view without access to the underlying table, effectively implementing column-level and row-level access controls. Views do not encrypt data or create audit logs (triggers do). Referential integrity is enforced by foreign key constraints, not views."
+  },
+  {
+    "domain_id": 8,
+    "question": "A security architect is reviewing a CI/CD pipeline where developers can push code directly to the main branch without peer review, and automated tests are optional. Which risk does this MOST directly introduce?",
+    "options": [
+      "Increased infrastructure costs due to frequent deployments",
+      "Malicious or vulnerable code can reach production without detection, bypassing all preventive controls",
+      "Source code may be accidentally deleted from the repository",
+      "Deployment pipelines may experience race conditions"
+    ],
+    "answer": 1,
+    "explanation": "Without mandatory code review and automated security testing gates, the CI/CD pipeline provides no preventive controls against malicious insiders or compromised developer accounts pushing vulnerable or backdoored code to production. Branch protection rules, mandatory pull request reviews, automated SAST/SCA/secret scanning gates, and signed commits are essential pipeline security controls. Infrastructure costs, deletions, and race conditions are secondary concerns compared to this security control bypass."
+  }
+]

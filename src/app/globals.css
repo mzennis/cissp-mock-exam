@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-cissp-dark: #0D1B2A;
+  --color-cissp-mid: #1B2838;
+  --color-cissp-accent: #1B4965;
+  --color-cissp-teal: #6AB1C2;
+  --color-cissp-green: #4CAF50;
+  --color-cissp-green-light: #A5D6A7;
+  --color-cissp-red: #E57373;
+  --color-cissp-red-light: #EF9A9A;
+  --color-cissp-text: #F0F0F0;
+  --color-cissp-text-secondary: #8BA4B5;
+  --color-cissp-text-muted: #6A8A9A;
+  --color-cissp-text-dim: #5A7A8A;
+  --color-cissp-card: rgba(255, 255, 255, 0.04);
+  --color-cissp-card-hover: rgba(255, 255, 255, 0.08);
+  --color-cissp-border: rgba(255, 255, 255, 0.08);
+  --color-cissp-border-hover: rgba(255, 255, 255, 0.15);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cissp-dark);
+  color: var(--color-cissp-text);
 }

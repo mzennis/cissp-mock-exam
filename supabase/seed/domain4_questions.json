@@ -1,0 +1,302 @@
+[
+  {
+    "domain_id": 4,
+    "question": "At which layer of the OSI model do routers primarily operate?",
+    "options": [
+      "Layer 2 — Data Link",
+      "Layer 3 — Network",
+      "Layer 4 — Transport",
+      "Layer 7 — Application"
+    ],
+    "answer": 1,
+    "explanation": "Routers operate at Layer 3 (Network layer) of the OSI model, making forwarding decisions based on IP addresses. Switches operate at Layer 2, and firewalls can operate at multiple layers depending on their type."
+  },
+  {
+    "domain_id": 4,
+    "question": "Which protocol provides both authentication and encryption for VPN connections and operates at Layer 3?",
+    "options": [
+      "SSL/TLS",
+      "IPSec",
+      "PPTP",
+      "SSH"
+    ],
+    "answer": 1,
+    "explanation": "IPSec operates at the Network layer (Layer 3) and provides both authentication (AH — Authentication Header) and encryption (ESP — Encapsulating Security Payload). SSL/TLS operates at layers 5-7, SSH at the Application layer."
+  },
+  {
+    "domain_id": 4,
+    "question": "What is the PRIMARY purpose of network segmentation?",
+    "options": [
+      "To increase network speed",
+      "To reduce broadcast domains and limit the scope of security incidents",
+      "To eliminate the need for firewalls",
+      "To simplify network management"
+    ],
+    "answer": 1,
+    "explanation": "Network segmentation divides a network into smaller segments to reduce broadcast domains, contain breaches, limit lateral movement of attackers, and improve overall security posture. It's a key component of defense in depth."
+  },
+  {
+    "domain_id": 4,
+    "question": "Which type of firewall inspects traffic at the application layer and can make decisions based on content?",
+    "options": [
+      "Packet-filtering firewall",
+      "Stateful inspection firewall",
+      "Application-layer gateway (proxy firewall)",
+      "Circuit-level gateway"
+    ],
+    "answer": 2,
+    "explanation": "Application-layer gateways (proxy firewalls) operate at Layer 7 and can inspect the actual content/payload of traffic. Packet filters work at Layer 3, stateful firewalls track connections at Layer 4, and circuit-level gateways work at Layer 5."
+  },
+  {
+    "domain_id": 4,
+    "question": "In a DNS poisoning attack, what does the attacker manipulate?",
+    "options": [
+      "ARP cache tables",
+      "DNS cache with false domain-to-IP mappings",
+      "Routing tables between networks",
+      "MAC address tables on switches"
+    ],
+    "answer": 1,
+    "explanation": "DNS poisoning (or DNS cache poisoning) involves corrupting the DNS resolver's cache with fraudulent IP address mappings, redirecting users to malicious sites. DNSSEC was designed to mitigate this type of attack."
+  },
+  {
+    "domain_id": 4,
+    "question": "What is the function of the ARP protocol, and why is it a security concern?",
+    "options": [
+      "It maps IP addresses to MAC addresses; it's vulnerable because it has no authentication",
+      "It encrypts data at Layer 2; it's vulnerable to key theft",
+      "It routes packets between subnets; it's vulnerable to route injection",
+      "It assigns IP addresses dynamically; it's vulnerable to rogue servers"
+    ],
+    "answer": 0,
+    "explanation": "ARP (Address Resolution Protocol) maps IP addresses to MAC addresses on a local network. It lacks authentication, making it vulnerable to ARP spoofing/poisoning where an attacker sends fake ARP replies to redirect traffic."
+  },
+  {
+    "domain_id": 4,
+    "question": "A network administrator needs to identify the OSI layer responsible for establishing, managing, and terminating sessions between applications. Which layer is this?",
+    "options": [
+      "Layer 4 — Transport",
+      "Layer 5 — Session",
+      "Layer 6 — Presentation",
+      "Layer 7 — Application"
+    ],
+    "answer": 1,
+    "explanation": "Layer 5 (Session layer) establishes, manages, and terminates communication sessions between applications. It handles dialog control and synchronization. Transport (Layer 4) handles end-to-end delivery and segmentation. Presentation (Layer 6) handles data formatting, encryption/decryption, and translation. Application (Layer 7) provides user-facing services."
+  },
+  {
+    "domain_id": 4,
+    "question": "Which OSI layer is responsible for data formatting, encryption, and translation between different data representations such as ASCII and EBCDIC?",
+    "options": [
+      "Layer 4 — Transport",
+      "Layer 5 — Session",
+      "Layer 6 — Presentation",
+      "Layer 7 — Application"
+    ],
+    "answer": 2,
+    "explanation": "Layer 6 (Presentation layer) handles data format translation, encoding (ASCII, EBCDIC, Unicode), and encryption/decryption at the session boundary before passing to the application. SSL/TLS is often placed at this layer conceptually. Transport handles segmentation, Session handles dialog control, and Application provides user-facing protocols like HTTP and SMTP."
+  },
+  {
+    "domain_id": 4,
+    "question": "Which network device operates at OSI Layer 1 and simply repeats all signals to every port, creating a single collision domain?",
+    "options": [
+      "Switch",
+      "Router",
+      "Hub",
+      "Bridge"
+    ],
+    "answer": 2,
+    "explanation": "A hub operates at Layer 1 (Physical layer) and broadcasts all received signals out every port — all connected devices share one collision domain. Switches operate at Layer 2 and use MAC addresses to forward frames to specific ports, creating separate collision domains per port. Routers operate at Layer 3. Bridges operate at Layer 2 but connect separate segments."
+  },
+  {
+    "domain_id": 4,
+    "question": "The TCP/IP model collapses the OSI model into four layers. Which TCP/IP layer encompasses OSI layers 5, 6, and 7?",
+    "options": [
+      "Network Access layer",
+      "Internet layer",
+      "Transport layer",
+      "Application layer"
+    ],
+    "answer": 3,
+    "explanation": "The TCP/IP Application layer encompasses OSI Session (5), Presentation (6), and Application (7) layers. The TCP/IP Internet layer maps to OSI Network (3). TCP/IP Transport maps to OSI Transport (4). TCP/IP Network Access (Link) maps to OSI Physical (1) and Data Link (2). Understanding this mapping is critical for protocol placement questions."
+  },
+  {
+    "domain_id": 4,
+    "question": "A Next-Generation Firewall (NGFW) differs from a traditional stateful firewall PRIMARILY because it:",
+    "options": [
+      "Only inspects packet headers and does not maintain state",
+      "Integrates deep packet inspection, application awareness, and intrusion prevention into a single platform",
+      "Operates exclusively at Layer 2 and cannot route traffic",
+      "Replaces the need for network segmentation and VLANs"
+    ],
+    "answer": 1,
+    "explanation": "NGFWs combine stateful inspection with deep packet inspection (DPI), application-layer visibility (identifying apps regardless of port), user-identity awareness, and built-in IPS capabilities. Traditional stateful firewalls (Option A describes packet filters) track connection state but cannot identify applications. Options C and D are incorrect — NGFWs are Layer 3+ and do not eliminate the need for segmentation."
+  },
+  {
+    "domain_id": 4,
+    "question": "A Web Application Firewall (WAF) is MOST effective at protecting against which category of attacks?",
+    "options": [
+      "DDoS volumetric attacks that saturate network bandwidth",
+      "OWASP Top 10 attacks such as SQL injection and cross-site scripting (XSS)",
+      "ARP spoofing on the local LAN segment",
+      "Rogue wireless access points"
+    ],
+    "answer": 1,
+    "explanation": "A WAF is specifically designed to inspect HTTP/HTTPS traffic at Layer 7 and detect/block application-layer attacks including SQL injection, XSS, CSRF, and other OWASP Top 10 vulnerabilities. DDoS volumetric attacks (Option A) require dedicated DDoS mitigation services. ARP spoofing (Option C) and rogue APs (Option D) are Layer 2 and physical concerns outside WAF scope."
+  },
+  {
+    "domain_id": 4,
+    "question": "An organization wants to use SSL VPN for remote workers rather than IPSec VPN. What is the PRIMARY operational advantage of SSL VPN?",
+    "options": [
+      "SSL VPN provides stronger encryption than IPSec",
+      "SSL VPN uses TCP port 443, which traverses most firewalls and NAT without special configuration",
+      "SSL VPN operates at Layer 3 and can encrypt all network traffic at the IP level",
+      "SSL VPN is only appropriate for site-to-site connections between fixed offices"
+    ],
+    "answer": 1,
+    "explanation": "SSL VPN's primary operational advantage is that it uses HTTPS (port 443), which is almost universally permitted through corporate firewalls and works through NAT without requiring special configuration. IPSec requires UDP 500/4500 and ESP protocol, which many firewalls block. IPSec is generally stronger for site-to-site (Option D is reversed). Option C describes IPSec tunnel mode, not SSL VPN."
+  },
+  {
+    "domain_id": 4,
+    "question": "VLAN hopping is an attack that allows an attacker to send traffic to VLANs they are not authorized to access. The MOST common technique exploits:",
+    "options": [
+      "Weak WPA2 passwords on wireless networks adjacent to the VLAN",
+      "Switch spoofing or double tagging to negotiate trunk links with a switch",
+      "OSPF route injection to redirect traffic between VLANs",
+      "ARP cache poisoning to redirect inter-VLAN routed traffic"
+    ],
+    "answer": 1,
+    "explanation": "VLAN hopping uses two techniques: (1) Switch spoofing — the attacker configures their NIC to negotiate a trunk link using DTP (Dynamic Trunking Protocol); (2) Double tagging — the attacker sends frames with two 802.1Q VLAN tags, exploiting how some switches strip only the outer tag. Mitigation: disable DTP, use dedicated native VLANs, and restrict trunk ports. Options A, C, and D are separate attacks not specific to VLAN hopping."
+  },
+  {
+    "domain_id": 4,
+    "question": "A SYN flood attack exploits which mechanism of the TCP three-way handshake?",
+    "options": [
+      "The attacker sends crafted ACK packets that bypass firewall state tables",
+      "The attacker sends large volumes of SYN packets with spoofed source IPs, exhausting the server's half-open connection table",
+      "The attacker intercepts the SYN-ACK and modifies sequence numbers to hijack the session",
+      "The attacker sends RST packets to terminate legitimate established connections"
+    ],
+    "answer": 1,
+    "explanation": "In a SYN flood, the attacker sends many SYN packets with spoofed source IPs. The server responds with SYN-ACK and waits for the final ACK, holding each connection in a half-open state. The server's limited backlog queue fills up, denying service to legitimate clients. Mitigations include SYN cookies, rate limiting, and stateful firewall inspection. Options C and D describe different TCP attacks (session hijacking and RST injection)."
+  },
+  {
+    "domain_id": 4,
+    "question": "A DMZ (Demilitarized Zone) in network architecture BEST serves which purpose?",
+    "options": [
+      "To isolate internal servers from the internet with a single firewall",
+      "To place publicly accessible services (web, mail) in a zone with controlled access to both the internet and the internal network",
+      "To create a VPN tunnel between two remote offices",
+      "To provide wireless network isolation from the wired LAN using separate SSIDs"
+    ],
+    "answer": 1,
+    "explanation": "A DMZ places public-facing servers (web, DNS, mail, FTP) in a zone protected by firewalls on both sides — one firewall between the internet and DMZ, another between the DMZ and internal network. This limits exposure: even if a DMZ server is compromised, the attacker faces another firewall before reaching internal systems. Option A describes a basic single-firewall setup, not a DMZ. Options C and D are unrelated architectures."
+  },
+  {
+    "domain_id": 4,
+    "question": "WPA2-Enterprise differs from WPA2-Personal in that WPA2-Enterprise:",
+    "options": [
+      "Uses a stronger encryption algorithm (CCMP vs TKIP)",
+      "Requires a RADIUS server for per-user authentication via 802.1X, eliminating the shared pre-shared key",
+      "Is only available on access points with WPA3 support",
+      "Provides stronger security by using a longer pre-shared key (63 characters vs 8)"
+    ],
+    "answer": 1,
+    "explanation": "WPA2-Enterprise uses 802.1X with a RADIUS authentication server — each user authenticates with individual credentials (certificates, username/password via EAP), so there is no shared pre-shared key that can be stolen or shared. WPA2-Personal uses a PSK shared by all users. Both WPA2 modes use CCMP/AES (Option A is wrong — TKIP is WPA, not WPA2-Personal). Option D confuses PSK length with Enterprise vs Personal distinction."
+  },
+  {
+    "domain_id": 4,
+    "question": "WPA3's primary improvement over WPA2 for personal networks is the introduction of:",
+    "options": [
+      "AES-256 encryption replacing AES-128 used in WPA2",
+      "Simultaneous Authentication of Equals (SAE), which replaces PSK and provides forward secrecy",
+      "Mandatory use of RADIUS servers for all WPA3 networks",
+      "Elimination of the four-way handshake to prevent KRACK attacks"
+    ],
+    "answer": 1,
+    "explanation": "WPA3-Personal replaces the PSK handshake with SAE (Simultaneous Authentication of Equals, also called Dragonfly), which provides resistance to offline dictionary attacks and forward secrecy — compromising the session key doesn't compromise past sessions. WPA2 and WPA3 both use AES (Option A is misleading). WPA3-Personal does not require RADIUS (Option C). The four-way handshake is still used in WPA3 but SAE replaces the initial key establishment (Option D is incorrect)."
+  },
+  {
+    "domain_id": 4,
+    "question": "DNSSEC is designed to address which fundamental weakness in the DNS protocol?",
+    "options": [
+      "DNS queries are transmitted in plaintext, exposing queried domain names to eavesdroppers",
+      "DNS responses have no cryptographic integrity protection, making them vulnerable to forgery and cache poisoning",
+      "DNS servers do not require authentication before accepting zone transfer requests",
+      "DNS uses UDP which allows amplification attacks against third-party targets"
+    ],
+    "answer": 1,
+    "explanation": "DNSSEC adds cryptographic signatures (using public-key cryptography) to DNS records, allowing resolvers to verify that responses are authentic and unmodified. It prevents cache poisoning and record forgery. DNS-over-HTTPS or DNS-over-TLS (Option A) address eavesdropping, not DNSSEC. Zone transfer authentication (Option C) is a separate configuration issue. DNS amplification DDoS (Option D) is a separate problem DNSSEC does not solve."
+  },
+  {
+    "domain_id": 4,
+    "question": "TLS 1.3 removed several features present in TLS 1.2. Which removal MOST significantly improves forward secrecy?",
+    "options": [
+      "Removal of RC4 cipher suites",
+      "Removal of RSA static key exchange — all key exchanges now require ephemeral Diffie-Hellman (ECDHE)",
+      "Removal of SHA-1 for certificate signatures",
+      "Removal of renegotiation support"
+    ],
+    "answer": 1,
+    "explanation": "TLS 1.3 eliminated RSA and static DH key exchange, mandating ephemeral Diffie-Hellman (ECDHE/DHE). This ensures forward secrecy — each session uses a unique ephemeral key, so compromising the server's long-term private key cannot decrypt past sessions. Removing RC4 (Option A) and SHA-1 (Option C) improves cipher strength but not forward secrecy specifically. Renegotiation removal (Option D) closes a different attack vector."
+  },
+  {
+    "domain_id": 4,
+    "question": "Software Defined Networking (SDN) separates the network into two planes. What are these planes and what is the security implication of centralizing one of them?",
+    "options": [
+      "Data plane and management plane; centralizing management increases complexity without security benefit",
+      "Control plane and data plane; centralizing the control plane creates a high-value target — if the SDN controller is compromised, the entire network can be reconfigured",
+      "Application plane and transport plane; centralization enables better encryption of all traffic",
+      "User plane and kernel plane; SDN moves all traffic inspection to hardware"
+    ],
+    "answer": 1,
+    "explanation": "SDN separates the control plane (routing decisions, flow rules) from the data plane (packet forwarding). The SDN controller is centralized and becomes a single point of control and a critical attack target — a compromised controller can redirect or drop all traffic network-wide. This requires hardening the controller with strong authentication, access controls, and redundancy. Options A, C, and D use incorrect terminology or mischaracterize SDN architecture."
+  },
+  {
+    "domain_id": 4,
+    "question": "Network Access Control (NAC) enforces security policy BEFORE a device accesses the network. Which scenario BEST illustrates NAC's purpose?",
+    "options": [
+      "Encrypting traffic between two branch offices using IPSec tunnels",
+      "Scanning a laptop for up-to-date patches and antivirus before granting it network access, quarantining non-compliant devices",
+      "Filtering inbound internet traffic based on IP reputation lists at the perimeter firewall",
+      "Monitoring network traffic for anomalies using machine learning after devices are already connected"
+    ],
+    "answer": 1,
+    "explanation": "NAC evaluates device health (posture assessment) — checking patch levels, AV status, configuration compliance — before granting network access. Non-compliant devices are quarantined in a remediation VLAN. Option A is a VPN function. Option C is perimeter filtering (not endpoint posture). Option D describes network behavior analytics, which is post-connection monitoring, not pre-admission control."
+  },
+  {
+    "domain_id": 4,
+    "question": "An organization wants to reduce the risk of phishing emails that spoof their domain being delivered to recipients. Which combination of email security controls MOST comprehensively addresses this?",
+    "options": [
+      "Deploy antivirus on mail servers and require TLS for all inbound email",
+      "Implement SPF, DKIM, and DMARC together to authenticate message origin and instruct receiving servers on handling failures",
+      "Use end-to-end email encryption with S/MIME for all outbound messages",
+      "Configure the mail gateway to block all attachments from external senders"
+    ],
+    "answer": 1,
+    "explanation": "SPF (authorizes sending IP addresses), DKIM (cryptographically signs message headers/body), and DMARC (ties SPF and DKIM together with a policy that tells receivers to quarantine/reject failures and send reports) together provide comprehensive domain spoofing protection. TLS (Option A) encrypts transit but doesn't authenticate sender identity. S/MIME (Option C) encrypts content but doesn't prevent spoofing of unauthenticated domains. Blocking attachments (Option D) doesn't address spoofed sender identity."
+  },
+  {
+    "domain_id": 4,
+    "question": "Which IPv6 security concern does NOT exist in IPv4 networks by default?",
+    "options": [
+      "Packet fragmentation at intermediate routers",
+      "Neighbor Discovery Protocol (NDP) spoofing, analogous to ARP spoofing but with wider impact due to larger address space and new features",
+      "TCP SYN flood attacks against public-facing servers",
+      "DNS cache poisoning against recursive resolvers"
+    ],
+    "answer": 1,
+    "explanation": "IPv6 replaces ARP with the Neighbor Discovery Protocol (NDP), which like ARP lacks authentication by default, enabling NDP spoofing (neighbor advertisement spoofing). IPv6's SEND (Secure Neighbor Discovery) addresses this but is rarely deployed. IPv6 also introduces Router Advertisement attacks. Options A, C, and D exist in both IPv4 and IPv6 — they are not unique to IPv6. In fact, IPv6 prohibits fragmentation at intermediate routers (Option A) — only hosts can fragment."
+  },
+  {
+    "domain_id": 4,
+    "question": "A Content Delivery Network (CDN) improves performance by caching content at edge nodes. From a security perspective, what is the MOST significant risk introduced by using a CDN?",
+    "options": [
+      "CDN edge nodes cannot support HTTPS, leaving content unencrypted in transit",
+      "The CDN provider becomes a trusted intermediary that terminates TLS, meaning the CDN can inspect otherwise encrypted traffic between users and the origin server",
+      "CDNs eliminate the need for DDoS protection, creating a false sense of security",
+      "CDN caching makes it impossible to revoke compromised content quickly"
+    ],
+    "answer": 1,
+    "explanation": "When a CDN terminates TLS at the edge, the CDN provider has access to decrypted traffic — the organization must trust the CDN with sensitive data. This is a supply chain trust issue. Modern CDNs support HTTPS (Option A is wrong). CDNs actually provide DDoS mitigation — they do not eliminate the need for it but they help (Option C is backwards). Content purging APIs allow rapid cache invalidation (Option D is overstated)."
+  }
+]

@@ -1,0 +1,302 @@
+[
+  {
+    "domain_id": 3,
+    "question": "In the Bell-LaPadula model, what does the *-property (star property) enforce?",
+    "options": [
+      "No read up — a subject cannot read data at a higher classification",
+      "No write down — a subject cannot write data to a lower classification level",
+      "No read or write outside the subject's clearance level",
+      "Mandatory access control for all objects"
+    ],
+    "answer": 1,
+    "explanation": "The Bell-LaPadula *-property (star property) is 'no write down' — a subject cannot write information to a lower security level. The simple security property is 'no read up.' Together they protect confidentiality. Option A describes the simple security property, not the *-property. Options C and D are generic descriptions that don't capture the specific directional rule."
+  },
+  {
+    "domain_id": 3,
+    "question": "Which security model focuses on integrity and uses the rules 'no read down' and 'no write up'?",
+    "options": [
+      "Bell-LaPadula",
+      "Biba",
+      "Clark-Wilson",
+      "Brewer-Nash"
+    ],
+    "answer": 1,
+    "explanation": "The Biba model focuses on integrity with the simple integrity axiom (no read down) and the *-integrity axiom (no write up). This prevents data corruption by ensuring subjects don't read from lower integrity levels or write to higher ones. Bell-LaPadula is the inverse (confidentiality, no read up/no write down). Clark-Wilson focuses on commercial integrity using transactions and separation of duties, not lattice-based rules. Brewer-Nash (Chinese Wall) addresses conflict of interest."
+  },
+  {
+    "domain_id": 3,
+    "question": "What is the main purpose of a Trusted Platform Module (TPM)?",
+    "options": [
+      "To provide network intrusion detection",
+      "To provide hardware-based cryptographic functions and secure key storage",
+      "To manage user authentication centrally",
+      "To encrypt network traffic between devices"
+    ],
+    "answer": 1,
+    "explanation": "A TPM is a hardware security chip that provides cryptographic functions including secure key generation, storage, and platform integrity measurements. It supports full disk encryption, secure boot, and hardware-based attestation. It does not perform network intrusion detection (that is an IDS function), does not centrally manage authentication (that is an IAM/LDAP function), and does not encrypt network traffic (that is a VPN/TLS function)."
+  },
+  {
+    "domain_id": 3,
+    "question": "In cryptography, what is the key difference between symmetric and asymmetric encryption?",
+    "options": [
+      "Symmetric is faster but uses two different keys; asymmetric uses one key",
+      "Symmetric uses one shared key; asymmetric uses a public/private key pair",
+      "Symmetric provides non-repudiation; asymmetric does not",
+      "Symmetric is used only for hashing; asymmetric for encryption"
+    ],
+    "answer": 1,
+    "explanation": "Symmetric encryption uses a single shared secret key for both encryption and decryption. Asymmetric encryption uses a key pair (public and private). Symmetric is faster but has key distribution challenges; asymmetric solves key distribution but is slower. Option A has the relationship backwards. Non-repudiation (Option C) is provided by asymmetric cryptography via digital signatures, not symmetric. Option D is wrong — hashing uses neither; it is a one-way function."
+  },
+  {
+    "domain_id": 3,
+    "question": "What does the concept of 'defense in depth' mean?",
+    "options": [
+      "Using the strongest single security control available",
+      "Implementing multiple layers of security controls",
+      "Focusing all security resources on the network perimeter",
+      "Prioritizing depth of logging over breadth of coverage"
+    ],
+    "answer": 1,
+    "explanation": "Defense in depth is a strategy that uses multiple layers of security controls (physical, technical, administrative) so that if one layer fails, others continue to provide protection. No single point of failure should compromise overall security. Option A describes a single-control approach that is the opposite of the concept. Option C describes perimeter security, which is a single layer. Option D conflates 'depth' with logging strategy."
+  },
+  {
+    "domain_id": 3,
+    "question": "The Clark-Wilson integrity model is BEST suited for which environment?",
+    "options": [
+      "Military classification systems requiring confidentiality",
+      "Commercial applications requiring well-formed transactions and separation of duties",
+      "Medical databases requiring availability above all other properties",
+      "Wireless networks requiring strong authentication"
+    ],
+    "answer": 1,
+    "explanation": "Clark-Wilson is designed for commercial integrity. It uses Constrained Data Items (CDIs), Unconstrained Data Items (UDIs), Integrity Verification Procedures (IVPs), and Transformation Procedures (TPs) enforced through well-formed transactions and separation of duties. Bell-LaPadula, not Clark-Wilson, addresses military confidentiality (Option A). Options C and D describe needs outside Clark-Wilson's scope."
+  },
+  {
+    "domain_id": 3,
+    "question": "A financial advisory firm implements a policy preventing analysts who work on Company A's account from accessing Company B's confidential data. Which security model BEST describes this control?",
+    "options": [
+      "Bell-LaPadula",
+      "Biba",
+      "Clark-Wilson",
+      "Brewer-Nash (Chinese Wall)"
+    ],
+    "answer": 3,
+    "explanation": "Brewer-Nash (Chinese Wall) prevents conflict of interest by dynamically changing access rules as a subject accesses data. Once an analyst accesses Company A's data, they are blocked from Company B's competing data. Bell-LaPadula is about classification levels, Biba about integrity levels, and Clark-Wilson about transaction integrity — none address conflict of interest between competing clients."
+  },
+  {
+    "domain_id": 3,
+    "question": "An organization wants to independently evaluate a product's security assurance for procurement. Which framework assigns Evaluation Assurance Levels (EAL 1–7)?",
+    "options": [
+      "FIPS 140-2",
+      "Common Criteria (ISO/IEC 15408)",
+      "SOC 2 Type II",
+      "NIST SP 800-53"
+    ],
+    "answer": 1,
+    "explanation": "Common Criteria (CC), formalized as ISO/IEC 15408, defines EAL levels 1 (functionally tested) through 7 (formally verified design and tested). FIPS 140-2 evaluates cryptographic modules specifically. SOC 2 is an audit framework for service organizations. NIST SP 800-53 is a controls catalog — none of these assign EAL levels."
+  },
+  {
+    "domain_id": 3,
+    "question": "What is the PRIMARY difference between AES-128 and AES-256?",
+    "options": [
+      "AES-256 uses a different algorithm than AES-128",
+      "AES-256 has a longer key, providing greater resistance to brute-force attacks",
+      "AES-128 is asymmetric while AES-256 is symmetric",
+      "AES-256 is slower because it requires more rounds and is generally not recommended"
+    ],
+    "answer": 1,
+    "explanation": "Both AES-128 and AES-256 use the same Rijndael algorithm. AES-256 uses a 256-bit key (vs 128-bit) and 14 rounds (vs 10), providing greater key space and brute-force resistance. Both are symmetric (Option C is wrong). AES-256 is slower but still recommended for high-security environments — the performance trade-off is acceptable (Option D is incorrect in calling it not recommended)."
+  },
+  {
+    "domain_id": 3,
+    "question": "A developer uses MD5 to hash user passwords in a new application. What is the MOST significant security concern?",
+    "options": [
+      "MD5 produces hashes that are too short for modern storage systems",
+      "MD5 is a symmetric algorithm and requires key management",
+      "MD5 is vulnerable to collision attacks and computationally fast, making brute-force practical",
+      "MD5 does not support salting and therefore cannot prevent replay attacks"
+    ],
+    "answer": 2,
+    "explanation": "MD5 is cryptographically broken — collision attacks are well-documented, and its speed makes GPU-based brute-force attacks practical. Use bcrypt, scrypt, or Argon2 for password hashing. MD5 is not symmetric (Option B is wrong — it is a hash function). MD5 can technically be salted (Option D is factually incorrect). Hash length (Option A) is not the primary concern."
+  },
+  {
+    "domain_id": 3,
+    "question": "Digital signatures provide which THREE security properties simultaneously?",
+    "options": [
+      "Confidentiality, availability, and integrity",
+      "Authentication, integrity, and non-repudiation",
+      "Authentication, confidentiality, and authorization",
+      "Non-repudiation, availability, and accountability"
+    ],
+    "answer": 1,
+    "explanation": "A digital signature is created by hashing the message and encrypting the hash with the sender's private key. This proves: (1) Authentication — only the private key holder could sign; (2) Integrity — any tampering changes the hash; (3) Non-repudiation — the sender cannot deny signing. Digital signatures do not provide confidentiality (the message content is still readable) or availability."
+  },
+  {
+    "domain_id": 3,
+    "question": "In a PKI hierarchy, a certificate authority (CA) revokes a certificate before its expiration date. Which mechanism allows relying parties to check revocation status in near-real-time WITHOUT downloading a full CRL?",
+    "options": [
+      "Certificate Transparency (CT) logs",
+      "Online Certificate Status Protocol (OCSP)",
+      "Certificate Revocation List (CRL)",
+      "Cross-certification"
+    ],
+    "answer": 1,
+    "explanation": "OCSP allows clients to query the CA's OCSP responder for the status of a specific certificate in near-real-time, without downloading the entire CRL. CRLs (Option C) are periodically published lists that can be large and stale. CT logs (Option A) provide transparency for certificate issuance, not revocation status. Cross-certification (Option D) is about trust between different CA hierarchies."
+  },
+  {
+    "domain_id": 3,
+    "question": "An organization deploys IPSec in tunnel mode between two site-to-site VPN gateways. How does tunnel mode differ from transport mode?",
+    "options": [
+      "Tunnel mode encrypts only the payload; transport mode encrypts the entire packet including the original IP header",
+      "Tunnel mode encapsulates the entire original IP packet inside a new IP packet; transport mode protects only the payload",
+      "Transport mode is used for site-to-site VPNs; tunnel mode is used for remote access",
+      "Tunnel mode uses AH; transport mode uses ESP"
+    ],
+    "answer": 1,
+    "explanation": "In IPSec tunnel mode, the entire original IP packet (header + payload) is encapsulated within a new IP packet, hiding original addressing. Transport mode only protects the payload and keeps the original IP header intact — suitable for host-to-host communication. Tunnel mode is preferred for site-to-site VPNs. Options C and D are reversed or incorrect — both modes can use either AH or ESP."
+  },
+  {
+    "domain_id": 3,
+    "question": "What is the role of IPSec's Authentication Header (AH) compared to Encapsulating Security Payload (ESP)?",
+    "options": [
+      "AH provides encryption and authentication; ESP provides authentication only",
+      "AH provides integrity and authentication but NO encryption; ESP provides encryption and optionally authentication",
+      "AH operates at Layer 7; ESP operates at Layer 3",
+      "AH is used for tunnel mode only; ESP is used for transport mode only"
+    ],
+    "answer": 1,
+    "explanation": "AH (Authentication Header) provides integrity and origin authentication but does NOT encrypt payload — traffic is visible but tamper-evident. ESP (Encapsulating Security Payload) provides encryption and optionally authentication. Because AH provides no confidentiality, ESP is more commonly deployed. Options C and D are factually incorrect — both operate at Layer 3 and both support tunnel and transport modes."
+  },
+  {
+    "domain_id": 3,
+    "question": "During an SSL/TLS handshake, the client sends a 'ClientHello' message. What does the server use to authenticate itself to the client?",
+    "options": [
+      "A shared pre-master secret generated from a Diffie-Hellman exchange",
+      "Its digital certificate containing its public key, signed by a trusted CA",
+      "A symmetric session key encrypted with the client's public key",
+      "An OCSP stapling request proving the server's IP address is valid"
+    ],
+    "answer": 1,
+    "explanation": "During the TLS handshake, the server sends its digital certificate (containing its public key) signed by a trusted Certificate Authority. The client verifies the CA signature to authenticate the server's identity. The pre-master secret (Option A) is used for key derivation, not server authentication. Symmetric keys (Option C) are derived after authentication. OCSP stapling (Option D) checks revocation status, not identity."
+  },
+  {
+    "domain_id": 3,
+    "question": "A covert timing channel is BEST described as:",
+    "options": [
+      "An attacker physically tapping into a network cable to intercept signals",
+      "A process modulating system resource timing (e.g., CPU busy/idle) to signal information to another process",
+      "An encrypted channel hidden within legitimate HTTPS traffic",
+      "A hidden storage location on disk that bypasses access controls"
+    ],
+    "answer": 1,
+    "explanation": "A covert timing channel uses timing variations of observable system resources (CPU load, network latency, cache access times) to leak information between processes that should not communicate. Covert storage channels (Option D) use shared storage. Option C describes tunneling/steganography. Option A is a physical wiretap — none of these are covert channels in the information security model sense."
+  },
+  {
+    "domain_id": 3,
+    "question": "A side-channel attack that analyzes variations in power consumption of a cryptographic device to extract key material is called:",
+    "options": [
+      "Fault injection attack",
+      "Differential power analysis (DPA)",
+      "Timing attack",
+      "Replay attack"
+    ],
+    "answer": 1,
+    "explanation": "Differential Power Analysis (DPA) is a side-channel attack that statistically analyzes variations in the power consumption of a device (e.g., smartcard, HSM) during cryptographic operations to deduce the secret key. Fault injection (Option A) induces errors to cause exploitable failures. Timing attacks (Option C) exploit execution time variations. Replay attacks (Option D) reuse captured authentication tokens — a network-layer attack."
+  },
+  {
+    "domain_id": 3,
+    "question": "Which principle of Zero Trust Architecture MOST directly replaces the traditional network perimeter security model?",
+    "options": [
+      "All traffic inside the corporate network is implicitly trusted",
+      "Never trust, always verify — every access request is authenticated and authorized regardless of network location",
+      "Perimeter firewalls are the primary control; internal traffic is monitored but trusted",
+      "Users are granted broad access and activity is audited after the fact"
+    ],
+    "answer": 1,
+    "explanation": "Zero Trust's core principle — 'never trust, always verify' — assumes breach and requires continuous verification of every access request regardless of whether the request comes from inside or outside the traditional perimeter. Options A and C describe the old perimeter model that Zero Trust replaces. Option D describes a detect-and-respond approach, not Zero Trust."
+  },
+  {
+    "domain_id": 3,
+    "question": "In cloud computing, which model gives the customer the MOST control over the operating system, middleware, and runtime environment?",
+    "options": [
+      "Software as a Service (SaaS)",
+      "Platform as a Service (PaaS)",
+      "Infrastructure as a Service (IaaS)",
+      "Function as a Service (FaaS)"
+    ],
+    "answer": 2,
+    "explanation": "IaaS provides virtualized compute, storage, and networking — the customer manages everything from the OS upward (OS, middleware, runtime, applications). PaaS manages the OS and runtime for the customer, who only controls application code. SaaS provides the entire application stack managed by the provider. FaaS (serverless) provides even less control than PaaS."
+  },
+  {
+    "domain_id": 3,
+    "question": "A hypervisor vulnerability allows a virtual machine to access memory belonging to another VM on the same host. This attack is called:",
+    "options": [
+      "Container escape",
+      "VM escape (virtual machine breakout)",
+      "Hyperjacking",
+      "VLAN hopping"
+    ],
+    "answer": 1,
+    "explanation": "VM escape (breakout) occurs when a guest VM exploits a hypervisor vulnerability to access resources outside its isolation boundary, including memory of other VMs or the host OS. Hyperjacking (Option C) involves compromising or replacing the hypervisor itself. Container escape (Option A) is specific to container environments. VLAN hopping (Option D) is a network-layer attack."
+  },
+  {
+    "domain_id": 3,
+    "question": "Which RAID level provides both striping and mirroring, tolerates multiple drive failures, and requires a MINIMUM of four drives?",
+    "options": [
+      "RAID 0",
+      "RAID 1",
+      "RAID 5",
+      "RAID 10 (1+0)"
+    ],
+    "answer": 3,
+    "explanation": "RAID 10 combines mirroring (RAID 1) and striping (RAID 0), requiring at least 4 drives. It can tolerate multiple drive failures as long as no mirrored pair loses both drives. RAID 0 (Option A) is striping only with no redundancy. RAID 1 (Option B) is pure mirroring. RAID 5 (Option C) uses distributed parity and can only tolerate one drive failure."
+  },
+  {
+    "domain_id": 3,
+    "question": "RAID 5 requires a MINIMUM of how many drives and can tolerate the failure of how many drives?",
+    "options": [
+      "2 drives, tolerates 2 failures",
+      "3 drives, tolerates 1 failure",
+      "4 drives, tolerates 2 failures",
+      "3 drives, tolerates 2 failures"
+    ],
+    "answer": 1,
+    "explanation": "RAID 5 uses distributed parity across a minimum of 3 drives and can tolerate exactly 1 drive failure. Data is reconstructed from the remaining drives and parity. A second drive failure before rebuild completes causes total data loss. RAID 6 extends this to tolerate 2 failures by using double distributed parity, requiring a minimum of 4 drives."
+  },
+  {
+    "domain_id": 3,
+    "question": "The principle of 'fail-secure' (fail-safe) states that when a system fails, it should:",
+    "options": [
+      "Remain operational by switching to a degraded mode that allows all access",
+      "Default to a denied/closed state rather than granting access",
+      "Alert the administrator and continue processing all requests",
+      "Automatically restore from the last known good backup"
+    ],
+    "answer": 1,
+    "explanation": "Fail-secure means that upon failure, a system defaults to a secure (deny/closed) state rather than permitting access. A door that fails to a locked position is fail-secure. Option A describes fail-open, which is a security risk. Option C (alerting while continuing) describes operational continuity, not fail-secure behavior. Option D describes recovery, which is a separate availability concern."
+  },
+  {
+    "domain_id": 3,
+    "question": "A hardware security module (HSM) differs from a TPM primarily because an HSM:",
+    "options": [
+      "Is embedded directly on the motherboard and cannot be removed",
+      "Is a dedicated, network-accessible or PCIe device designed for high-volume cryptographic operations and key management at enterprise scale",
+      "Stores biometric data instead of cryptographic keys",
+      "Requires the operating system to be certified before it can generate keys"
+    ],
+    "answer": 1,
+    "explanation": "An HSM is a purpose-built, tamper-resistant device for enterprise-scale cryptographic operations — available as network-attached appliances or PCIe cards. Unlike a TPM (which is a low-cost, platform-bound chip for a single system), HSMs are designed for high throughput, multiple concurrent clients, and centralized key lifecycle management. Options A, C, and D describe TPM characteristics or are incorrect."
+  },
+  {
+    "domain_id": 3,
+    "question": "Which cryptographic algorithm is an example of elliptic curve cryptography (ECC), and what is its PRIMARY advantage over RSA at equivalent security levels?",
+    "options": [
+      "ECC requires larger key sizes than RSA for equivalent security",
+      "ECDSA provides equivalent security to RSA with significantly shorter key lengths, reducing computational overhead",
+      "ECC is a symmetric algorithm suited for bulk data encryption",
+      "RSA is preferred over ECC because RSA is standardized and ECC is not"
+    ],
+    "answer": 1,
+    "explanation": "ECDSA (Elliptic Curve Digital Signature Algorithm) is an ECC-based algorithm. ECC provides equivalent security to RSA with much smaller key sizes — a 256-bit ECC key offers roughly the same security as a 3072-bit RSA key — resulting in faster operations and lower power consumption. ECC is not symmetric (Option C). Both are standardized (Option D is false). Option A is the opposite of ECC's advantage."
+  }
+]

@@ -1,0 +1,314 @@
+[
+  {
+    "domain_id": 5,
+    "question": "Which access control model assigns permissions based on labels and classifications, and users cannot change them?",
+    "options": [
+      "Discretionary Access Control (DAC)",
+      "Mandatory Access Control (MAC)",
+      "Role-Based Access Control (RBAC)",
+      "Attribute-Based Access Control (ABAC)"
+    ],
+    "answer": 1,
+    "explanation": "MAC uses security labels/classifications to determine access, and only administrators (not users) can modify these labels. DAC allows owners to grant permissions. RBAC uses roles. ABAC uses attributes and policies."
+  },
+  {
+    "domain_id": 5,
+    "question": "What are the three factors of authentication?",
+    "options": [
+      "Username, password, and PIN",
+      "Something you know, something you have, something you are",
+      "Identification, authentication, authorization",
+      "Confidentiality, integrity, availability"
+    ],
+    "answer": 1,
+    "explanation": "The three authentication factors are: Type 1 — something you know (password, PIN), Type 2 — something you have (token, smart card), Type 3 — something you are (biometrics). MFA combines two or more different factor types."
+  },
+  {
+    "domain_id": 5,
+    "question": "In Kerberos authentication, what is the role of the Ticket Granting Ticket (TGT)?",
+    "options": [
+      "It directly grants access to a service",
+      "It allows the user to request service tickets without re-entering credentials",
+      "It encrypts all communication between client and server",
+      "It stores the user's password hash for offline authentication"
+    ],
+    "answer": 1,
+    "explanation": "After initial authentication, the KDC issues a TGT to the user. The TGT is then presented to the Ticket Granting Service (TGS) to obtain service tickets for specific resources, enabling single sign-on without repeated password entry."
+  },
+  {
+    "domain_id": 5,
+    "question": "What is the BEST description of the principle of least privilege?",
+    "options": [
+      "Users should have no access by default",
+      "Users should be granted only the minimum permissions needed to perform their job functions",
+      "Administrators should have full access to all systems",
+      "Access should be reviewed annually"
+    ],
+    "answer": 1,
+    "explanation": "Least privilege means granting users only the minimum level of access rights necessary to perform their job functions, reducing the attack surface and potential damage from compromised accounts."
+  },
+  {
+    "domain_id": 5,
+    "question": "Which SSO protocol uses XML-based assertions and is commonly used in enterprise web applications?",
+    "options": [
+      "Kerberos",
+      "SAML (Security Assertion Markup Language)",
+      "RADIUS",
+      "LDAP"
+    ],
+    "answer": 1,
+    "explanation": "SAML uses XML-based assertions to exchange authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP). It's widely used for enterprise SSO in web-based applications."
+  },
+  {
+    "domain_id": 5,
+    "question": "A Type I error in biometric systems refers to:",
+    "options": [
+      "A false acceptance — unauthorized person is granted access",
+      "A false rejection — authorized person is denied access",
+      "A system failure that locks out all users",
+      "An error in the enrollment process"
+    ],
+    "answer": 1,
+    "explanation": "Type I error = False Rejection Rate (FRR) — an authorized person is incorrectly denied access. Type II error = False Acceptance Rate (FAR) — an unauthorized person is incorrectly granted access. The Crossover Error Rate (CER) is where FRR equals FAR."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization deploys a fingerprint scanner at the entrance to a data center. Security staff complain that too many authorized employees are being denied entry. Which biometric adjustment would MOST directly address this without creating excessive security risk?",
+    "options": [
+      "Increase the sensitivity threshold to reduce FAR",
+      "Decrease the sensitivity threshold to reduce FRR",
+      "Replace fingerprint scanners with retinal scanners",
+      "Enroll all employees twice to improve template accuracy"
+    ],
+    "answer": 1,
+    "explanation": "Decreasing the sensitivity threshold reduces FRR (False Rejection Rate / Type I error), allowing more legitimate users through. However, this increases FAR (Type II error). The crossover point (CER/EER) is where both are equal and represents the optimal balance. Option A would worsen the FRR problem. Retinal scanners address a different technology. Double enrollment doesn't fix threshold tuning."
+  },
+  {
+    "domain_id": 5,
+    "question": "Which protocol provides centralized authentication, authorization, and accounting (AAA) for network access and uses UDP by default?",
+    "options": [
+      "TACACS+",
+      "RADIUS",
+      "LDAP",
+      "Kerberos"
+    ],
+    "answer": 1,
+    "explanation": "RADIUS uses UDP (ports 1812/1813) and combines authentication and authorization in a single response. TACACS+ uses TCP port 49 and separates authentication, authorization, and accounting into distinct processes, making it more flexible for device administration. LDAP is a directory protocol, not AAA. Kerberos is a ticket-based authentication protocol."
+  },
+  {
+    "domain_id": 5,
+    "question": "A developer needs temporary elevated privileges to deploy a critical patch. After the deployment, the privileges should automatically be removed. This is BEST described as:",
+    "options": [
+      "Role-based access control",
+      "Just-in-time (JIT) provisioning",
+      "Separation of duties",
+      "Federated identity management"
+    ],
+    "answer": 1,
+    "explanation": "Just-in-time provisioning grants elevated access only when needed and removes it immediately afterward, minimizing the window of exposure. RBAC grants persistent role-based permissions. Separation of duties ensures no single person controls a critical process end-to-end. Federated identity deals with cross-domain trust relationships."
+  },
+  {
+    "domain_id": 5,
+    "question": "In OAuth 2.0, what is the PRIMARY purpose of the access token?",
+    "options": [
+      "To authenticate the user's identity to the resource server",
+      "To authorize a client application to access resources on behalf of the user",
+      "To encrypt the communication channel between client and server",
+      "To replace the user's password for SSO purposes"
+    ],
+    "answer": 1,
+    "explanation": "OAuth 2.0 access tokens authorize a third-party application to access protected resources on behalf of a resource owner without exposing credentials. OAuth 2.0 is an authorization framework, not an authentication protocol. OpenID Connect (OIDC) adds identity authentication on top of OAuth 2.0 using ID tokens."
+  },
+  {
+    "domain_id": 5,
+    "question": "Which Kerberos attack involves an attacker requesting service tickets for offline cracking of weak service account passwords?",
+    "options": [
+      "Pass-the-hash",
+      "Golden ticket attack",
+      "Kerberoasting",
+      "Silver ticket attack"
+    ],
+    "answer": 2,
+    "explanation": "Kerberoasting exploits the fact that any domain user can request service tickets encrypted with the service account's NTLM hash. Attackers export these tickets and crack them offline. Pass-the-hash reuses NTLM hashes for lateral movement. A golden ticket forges a TGT using the KRBTGT account hash. A silver ticket forges a service ticket without going through the KDC."
+  },
+  {
+    "domain_id": 5,
+    "question": "An employee transfers from HR to Finance. The security team updates her RBAC role but does not remove legacy HR permissions. Six months later, she still has access to sensitive HR records. This violation of least privilege is BEST described as:",
+    "options": [
+      "Privilege escalation",
+      "Privilege creep (access creep)",
+      "Separation of duties violation",
+      "Insider threat"
+    ],
+    "answer": 1,
+    "explanation": "Privilege creep (access creep) occurs when users accumulate permissions over time through job changes, project assignments, or role additions without corresponding removals. Access reviews and formal deprovisioning processes during role transitions directly address this. Privilege escalation is actively gaining unauthorized elevated access. Separation of duties is a different concept entirely."
+  },
+  {
+    "domain_id": 5,
+    "question": "Which access control model is MOST appropriate for a cloud environment where access decisions must consider user department, time of day, device health, and resource sensitivity simultaneously?",
+    "options": [
+      "Mandatory Access Control (MAC)",
+      "Role-Based Access Control (RBAC)",
+      "Attribute-Based Access Control (ABAC)",
+      "Rule-Based Access Control"
+    ],
+    "answer": 2,
+    "explanation": "ABAC evaluates multiple attributes simultaneously (subject attributes, object attributes, environmental conditions) to make fine-grained access decisions. This is ideal for dynamic cloud environments. RBAC cannot easily incorporate contextual factors like time or device health. MAC uses labels and classification levels. Rule-based access control uses predefined rules but lacks the dynamic attribute evaluation ABAC provides."
+  },
+  {
+    "domain_id": 5,
+    "question": "A financial institution requires that no single employee can both initiate and approve wire transfers. This is an implementation of:",
+    "options": [
+      "Least privilege",
+      "Need to know",
+      "Separation of duties",
+      "Dual control"
+    ],
+    "answer": 2,
+    "explanation": "Separation of duties (SoD) divides critical tasks among multiple people so no single individual can complete a high-risk transaction alone, reducing fraud risk. Dual control requires two people to be present simultaneously (e.g., opening a safe). Least privilege limits access scope. Need to know restricts information access to job relevance."
+  },
+  {
+    "domain_id": 5,
+    "question": "During an LDAP directory query, which attribute is used as the globally unique identifier for an entry within the directory hierarchy?",
+    "options": [
+      "Common Name (CN)",
+      "Distinguished Name (DN)",
+      "Organizational Unit (OU)",
+      "Object Class"
+    ],
+    "answer": 1,
+    "explanation": "The Distinguished Name (DN) uniquely identifies an entry in the LDAP directory tree by specifying its full path (e.g., CN=John Smith,OU=Finance,DC=example,DC=com). The CN is just one component of the DN. OU is an organizational grouping. Object Class defines the type of entry."
+  },
+  {
+    "domain_id": 5,
+    "question": "OpenID Connect (OIDC) differs from SAML primarily in that OIDC:",
+    "options": [
+      "Uses XML assertions while SAML uses JSON tokens",
+      "Is built on OAuth 2.0 and uses JSON Web Tokens (JWT) for identity",
+      "Only supports mobile application authentication",
+      "Does not support single sign-on scenarios"
+    ],
+    "answer": 1,
+    "explanation": "OIDC is an identity layer built on top of OAuth 2.0, using JSON-based ID tokens (JWT) for identity assertions. SAML uses XML-based assertions and is more heavyweight, traditionally used in enterprise web SSO. OIDC is more REST/API friendly and widely adopted by consumer applications. Both support SSO. OIDC works across all application types, not just mobile."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization uses smart cards for physical and logical access. Employees who lose their card can still authenticate because the card only requires a 4-digit PIN without biometric verification. Which type of authentication is in use?",
+    "options": [
+      "Single-factor authentication",
+      "Two-factor authentication",
+      "Three-factor authentication",
+      "Multifactor authentication using three factors"
+    ],
+    "answer": 1,
+    "explanation": "Smart card (something you have) + PIN (something you know) = two-factor authentication combining two different factor types. True MFA requires two or more DIFFERENT factor types — combining two Type 1 factors (e.g., two passwords) is not MFA. Without biometrics, this is 2FA, not 3FA."
+  },
+  {
+    "domain_id": 5,
+    "question": "In a Kerberos environment, the Key Distribution Center (KDC) is compromised and the attacker extracts the KRBTGT account hash. What is the MOST severe attack this enables?",
+    "options": [
+      "Kerberoasting against service accounts",
+      "Pass-the-hash against workstations",
+      "Golden ticket attacks to forge valid TGTs for any user",
+      "Silver ticket attacks against specific services"
+    ],
+    "answer": 2,
+    "explanation": "The KRBTGT account hash is used to sign all TGTs in the domain. Possessing it allows an attacker to forge valid TGTs (golden tickets) for any user, including non-existent accounts, with any group membership — effectively granting persistent domain admin access. This is the most severe Kerberos compromise possible. Silver tickets only work for specific services. Kerberoasting doesn't require KDC compromise."
+  },
+  {
+    "domain_id": 5,
+    "question": "Which identity lifecycle management process MOST directly reduces the risk posed by former employees retaining access to systems?",
+    "options": [
+      "Periodic access reviews",
+      "Timely deprovisioning upon termination",
+      "Separation of duties enforcement",
+      "Multi-factor authentication enrollment"
+    ],
+    "answer": 1,
+    "explanation": "Timely deprovisioning — disabling or removing all access immediately upon termination — directly eliminates the risk of former employees accessing systems. Periodic access reviews catch dormant or inappropriate access but have a lag window. Separation of duties and MFA don't address the terminated user risk specifically."
+  },
+  {
+    "domain_id": 5,
+    "question": "A federated identity system allows users from Organization A to access resources in Organization B without having separate accounts in B. Which trust relationship model BEST describes this?",
+    "options": [
+      "Hierarchical trust where A is subordinate to B",
+      "Cross-certification between two PKI roots",
+      "A web of trust validated by mutual certificates",
+      "Identity federation using a trusted Identity Provider (IdP)"
+    ],
+    "answer": 3,
+    "explanation": "Federated identity uses an Identity Provider (IdP) trusted by both organizations. Organization B trusts assertions made by Organization A's IdP, allowing seamless access without duplicate accounts. This is the basis of SAML and OIDC federation. Cross-certification is a PKI concept. Hierarchical trust implies one organization controls the other. Web of trust is a PGP concept."
+  },
+  {
+    "domain_id": 5,
+    "question": "A user can read files in a directory but cannot modify or delete them, even though they created those files. Which access control model is MOST likely in use?",
+    "options": [
+      "Discretionary Access Control (DAC)",
+      "Role-Based Access Control (RBAC)",
+      "Mandatory Access Control (MAC)",
+      "Attribute-Based Access Control (ABAC)"
+    ],
+    "answer": 2,
+    "explanation": "Under MAC, access is determined by the system based on labels and classification levels — not by the object owner. Even file creators cannot grant permissions beyond their clearance level. DAC allows file owners to set permissions on their own files. RBAC grants access based on roles, but owners typically retain control. ABAC uses policy-driven attributes."
+  },
+  {
+    "domain_id": 5,
+    "question": "TACACS+ is preferred over RADIUS for network device administration primarily because:",
+    "options": [
+      "TACACS+ uses UDP for faster response times",
+      "TACACS+ separates authentication, authorization, and accounting and encrypts the entire packet",
+      "TACACS+ is an open standard supported by all vendors",
+      "TACACS+ provides stronger password hashing than RADIUS"
+    ],
+    "answer": 1,
+    "explanation": "TACACS+ separates the AAA functions (allowing independent authorization per command), encrypts the entire payload (not just the password like RADIUS), and uses TCP for reliable delivery. This granularity is essential for controlling which commands individual network administrators can execute. TACACS+ is a Cisco proprietary protocol, not an open standard. RADIUS uses UDP."
+  },
+  {
+    "domain_id": 5,
+    "question": "A security team implements a policy requiring users to reauthenticate after 30 minutes of inactivity. This PRIMARILY addresses which security concern?",
+    "options": [
+      "Preventing brute-force password attacks",
+      "Mitigating risks from unattended authenticated sessions",
+      "Reducing the impact of phishing attacks",
+      "Enforcing password complexity requirements"
+    ],
+    "answer": 1,
+    "explanation": "Session timeout and reauthentication after inactivity mitigate risks from unattended sessions — such as an attacker or unauthorized person using an already-authenticated workstation. This is a session management control. It does not prevent brute-force attacks (account lockout does), phishing (user education/MFA does), or enforce password complexity (password policy does)."
+  },
+  {
+    "domain_id": 5,
+    "question": "Location and behavioral factors are sometimes called the 4th and 5th authentication factors. Which of the following is an example of a BEHAVIORAL authentication factor?",
+    "options": [
+      "GPS coordinates of the user's mobile device",
+      "A hardware OTP token",
+      "Keystroke dynamics and typing rhythm",
+      "A retinal scan"
+    ],
+    "answer": 2,
+    "explanation": "Behavioral factors (Type 5 / 'something you do') include typing rhythm, mouse movements, gait analysis, and other patterns derived from how a person behaves. GPS coordinates represent a location factor (Type 4). A hardware OTP token is a possession factor (Type 2). A retinal scan is a biometric/inherence factor (Type 3)."
+  },
+  {
+    "domain_id": 5,
+    "question": "An organization implements an identity governance solution that automatically compares user access rights against a defined access model and flags violations for remediation. This is BEST described as:",
+    "options": [
+      "Just-in-time provisioning",
+      "Federated identity management",
+      "Access certification and recertification",
+      "Privileged access management (PAM)"
+    ],
+    "answer": 2,
+    "explanation": "Access certification (recertification) is a formal review process where managers and system owners periodically confirm that access rights remain appropriate. Automated solutions flag deviations from a defined model for remediation. JIT provisioning grants temporary access on demand. Federated identity deals with cross-domain trust. PAM specifically addresses privileged accounts."
+  },
+  {
+    "domain_id": 5,
+    "question": "Which of the following BEST explains why using the same password for both a user's corporate account and their personal email is a significant enterprise security risk?",
+    "options": [
+      "Corporate passwords are typically longer and more complex than personal passwords",
+      "Credential stuffing attacks can leverage breached personal passwords to compromise corporate systems",
+      "Personal email providers enforce stricter password policies than enterprises",
+      "The corporate account will be automatically locked after detecting dual use"
+    ],
+    "answer": 1,
+    "explanation": "Credential stuffing attacks use username/password pairs from breached databases (commonly from personal service breaches) against enterprise systems. Password reuse means a compromise of a low-security personal service can directly lead to corporate account compromise. This is why password managers and unique passwords per service are essential."
+  }
+]

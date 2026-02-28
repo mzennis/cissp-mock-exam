@@ -1,0 +1,254 @@
+[
+  {
+    "domain_id": 2,
+    "question": "Who is ultimately responsible for the protection of organizational data?",
+    "options": [
+      "Data custodian",
+      "Data owner",
+      "Security administrator",
+      "Chief Information Security Officer"
+    ],
+    "answer": 1,
+    "explanation": "The data owner (typically a senior manager) is ultimately responsible for data protection and classification. The custodian implements controls, and the CISO develops the security program, but accountability rests with the owner."
+  },
+  {
+    "domain_id": 2,
+    "question": "Which data classification level in government systems is used for information that could cause SERIOUS damage to national security if disclosed?",
+    "options": [
+      "Confidential",
+      "Secret",
+      "Top Secret",
+      "Sensitive But Unclassified"
+    ],
+    "answer": 1,
+    "explanation": "Secret: serious damage. Confidential: damage. Top Secret: exceptionally grave damage. These three levels represent the U.S. government's classification scheme based on potential impact to national security."
+  },
+  {
+    "domain_id": 2,
+    "question": "What is the primary purpose of data remanence controls?",
+    "options": [
+      "To ensure data is backed up properly",
+      "To prevent recovery of data from storage media after deletion",
+      "To maintain data integrity during transfers",
+      "To classify data according to sensitivity"
+    ],
+    "answer": 1,
+    "explanation": "Data remanence refers to residual data remaining on storage media after deletion. Controls like degaussing, cryptographic erasure, and physical destruction prevent unauthorized data recovery."
+  },
+  {
+    "domain_id": 2,
+    "question": "An organization needs to securely dispose of SSDs containing classified data. Which method is MOST appropriate?",
+    "options": [
+      "Degaussing",
+      "Overwriting with zeros three times",
+      "Physical destruction (shredding)",
+      "Reformatting the drives"
+    ],
+    "answer": 2,
+    "explanation": "SSDs cannot be reliably degaussed (they use flash memory, not magnetic media) and overwriting is unreliable due to wear leveling. Physical destruction (shredding/incineration) is the most reliable method for SSDs with classified data."
+  },
+  {
+    "domain_id": 2,
+    "question": "Which of the following BEST describes the principle of data minimization?",
+    "options": [
+      "Encrypting all data at rest",
+      "Collecting and retaining only the data necessary for a specific purpose",
+      "Storing data in the smallest possible file format",
+      "Limiting data access to senior management only"
+    ],
+    "answer": 1,
+    "explanation": "Data minimization is a privacy principle requiring organizations to collect, process, and retain only the minimum amount of personal data necessary for a stated purpose. It's a core principle in GDPR and other privacy regulations."
+  },
+  {
+    "domain_id": 2,
+    "question": "A company labels its data as 'Public', 'Internal Use Only', 'Confidential', and 'Restricted'. This is an example of:",
+    "options": [
+      "A government classification scheme",
+      "A commercial/private sector data classification scheme",
+      "A mandatory access control labeling system",
+      "A data integrity framework"
+    ],
+    "answer": 1,
+    "explanation": "Commercial organizations use their own classification schemes, commonly including labels like Public, Internal, Confidential, and Restricted/Proprietary. Government schemes use Unclassified, Confidential, Secret, and Top Secret. The commercial scheme is tailored to business risk, not national security impact."
+  },
+  {
+    "domain_id": 2,
+    "question": "Under GDPR, which role determines the purposes and means of processing personal data?",
+    "options": [
+      "Data processor",
+      "Data steward",
+      "Data controller",
+      "Data custodian"
+    ],
+    "answer": 2,
+    "explanation": "The data controller determines why (purpose) and how (means) personal data is processed, bearing primary legal accountability under GDPR. The data processor acts on behalf of the controller. The data steward manages data quality and governance. The data custodian handles day-to-day technical management."
+  },
+  {
+    "domain_id": 2,
+    "question": "An IT administrator configures backups, applies patches, and enforces access controls on a sensitive database that they do not own. This person is acting as a:",
+    "options": [
+      "Data owner",
+      "Data controller",
+      "Data custodian",
+      "Data processor"
+    ],
+    "answer": 2,
+    "explanation": "The data custodian is responsible for the technical management and safekeeping of data on behalf of the owner, including backups, patching, and access control implementation. The data owner makes classification and access decisions but does not perform technical tasks."
+  },
+  {
+    "domain_id": 2,
+    "question": "Which phase of the data lifecycle focuses on removing data that is no longer needed in a way that prevents recovery?",
+    "options": [
+      "Data creation",
+      "Data storage",
+      "Data destruction",
+      "Data archiving"
+    ],
+    "answer": 2,
+    "explanation": "Data destruction is the final phase, ensuring data is permanently and unrecoverably removed using methods such as degaussing, cryptographic erasure, or physical destruction. Data archiving moves data to long-term storage but retains it. Data storage is active retention. Data creation is generation of new data."
+  },
+  {
+    "domain_id": 2,
+    "question": "A healthcare organization decommissions old hard disk drives. They pass the drives through a strong magnetic field to destroy data. This process is called:",
+    "options": [
+      "Crypto-shredding",
+      "Degaussing",
+      "Overwriting",
+      "Sanitization"
+    ],
+    "answer": 1,
+    "explanation": "Degaussing exposes magnetic media to a strong magnetic field, randomizing magnetic domains and destroying all data. It is effective for HDDs and magnetic tapes but ineffective for SSDs or optical media. Crypto-shredding destroys encryption keys, making data unreadable. Overwriting replaces data with patterns. Sanitization is a broader term encompassing multiple methods."
+  },
+  {
+    "domain_id": 2,
+    "question": "An organization encrypts all data on a storage device and then deletes the encryption keys, making the data permanently inaccessible without physical destruction. This method is known as:",
+    "options": [
+      "Degaussing",
+      "Crypto-shredding (cryptographic erasure)",
+      "Physical destruction",
+      "Zero-fill overwrite"
+    ],
+    "answer": 1,
+    "explanation": "Crypto-shredding (cryptographic erasure) renders data unrecoverable by destroying the encryption keys. It is particularly useful for cloud storage and SSDs where physical destruction or degaussing is impractical. The data remains on the media but is computationally unrecoverable without the keys."
+  },
+  {
+    "domain_id": 2,
+    "question": "Data that is currently being processed by a CPU and temporarily held in RAM is classified as data in which state?",
+    "options": [
+      "Data at rest",
+      "Data in transit",
+      "Data in use",
+      "Data in archive"
+    ],
+    "answer": 2,
+    "explanation": "Data in use refers to data actively being processed, residing in RAM, CPU registers, or cache. Data at rest is stored on persistent media (disk, tape). Data in transit is moving across a network. Each state requires different security controls — data in use is the hardest to protect since it must be decrypted to be processed."
+  },
+  {
+    "domain_id": 2,
+    "question": "Which of the following BEST protects data in transit between a user's browser and a web server?",
+    "options": [
+      "Full-disk encryption",
+      "TLS (Transport Layer Security)",
+      "Database encryption",
+      "File-level encryption"
+    ],
+    "answer": 1,
+    "explanation": "TLS encrypts data as it travels across the network, protecting data in transit from eavesdropping and tampering. Full-disk encryption and file-level encryption protect data at rest. Database encryption protects stored data. TLS is the standard for securing HTTP (HTTPS) and other protocols in transit."
+  },
+  {
+    "domain_id": 2,
+    "question": "A security engineer takes a NIST baseline control set and removes controls that are not applicable to the organization's environment (e.g., removing mobile device controls for an organization with no mobile devices). This process is called:",
+    "options": [
+      "Tailoring",
+      "Scoping",
+      "Baselining",
+      "Hardening"
+    ],
+    "answer": 1,
+    "explanation": "Scoping involves identifying which portions of a baseline are applicable to a system and excluding those that are not relevant. Tailoring involves modifying the remaining applicable controls to fit the specific environment (e.g., adjusting parameters). Baselining establishes the minimum security configuration. Hardening reduces attack surface."
+  },
+  {
+    "domain_id": 2,
+    "question": "A financial services company maintains a comprehensive inventory of all hardware and software assets, including owner, location, and data sensitivity. This practice PRIMARILY supports which security objective?",
+    "options": [
+      "Vulnerability management",
+      "Asset management and protection of organizational assets",
+      "Network access control",
+      "Change management"
+    ],
+    "answer": 1,
+    "explanation": "Asset inventory is the foundation of asset management — you cannot protect what you do not know you have. Knowing asset location, ownership, and data sensitivity enables appropriate classification and control selection. While it supports vulnerability management and change management, the primary objective is asset protection."
+  },
+  {
+    "domain_id": 2,
+    "question": "A law firm's data retention policy requires all client matter files to be kept for 7 years after case closure, then destroyed. Which of the following is the PRIMARY driver for this policy?",
+    "options": [
+      "Storage cost reduction",
+      "Legal and regulatory compliance requirements",
+      "Security risk reduction",
+      "Business continuity planning"
+    ],
+    "answer": 1,
+    "explanation": "Data retention policies are primarily driven by legal, regulatory, and contractual obligations that dictate how long specific categories of data must be retained and when they must be destroyed. While cost reduction and risk reduction are secondary benefits, legal exposure from non-compliance is the primary driver."
+  },
+  {
+    "domain_id": 2,
+    "question": "An employee sends a large spreadsheet containing thousands of customer Social Security Numbers to their personal email account. A security tool detects and blocks this transfer. Which technology MOST directly prevented this incident?",
+    "options": [
+      "Intrusion Detection System (IDS)",
+      "Data Loss Prevention (DLP)",
+      "Security Information and Event Management (SIEM)",
+      "Web Application Firewall (WAF)"
+    ],
+    "answer": 1,
+    "explanation": "DLP tools monitor, detect, and block unauthorized transfer of sensitive data based on content inspection and policy rules. An IDS detects network intrusions. A SIEM aggregates and correlates security events. A WAF protects web applications from attacks. Only DLP is designed to detect and block data exfiltration."
+  },
+  {
+    "domain_id": 2,
+    "question": "A company stores customer data in a public cloud. The cloud provider manages the physical infrastructure but the company controls what data is stored and how it is encrypted. Regarding data ownership and accountability, which statement is MOST accurate?",
+    "options": [
+      "The cloud provider becomes the data owner once data is stored in their infrastructure",
+      "The company retains data ownership and ultimate accountability for protecting the data",
+      "Ownership transfers based on the country where the cloud servers are physically located",
+      "The company and cloud provider share equal ownership of the data"
+    ],
+    "answer": 1,
+    "explanation": "Data ownership follows the organization that created or collected the data, regardless of where it is stored. Moving data to cloud infrastructure does not transfer ownership or legal accountability to the provider. The shared responsibility model defines what each party secures, but data accountability remains with the data owner."
+  },
+  {
+    "domain_id": 2,
+    "question": "Which of the following is an example of Personally Identifiable Information (PII)?",
+    "options": [
+      "An anonymized aggregate sales report",
+      "A server's IP address on an internal network",
+      "A combination of a person's name and home address",
+      "A company's revenue figures"
+    ],
+    "answer": 2,
+    "explanation": "PII is any information that can be used to identify, contact, or locate a specific individual. A name combined with a home address directly identifies a person. Anonymized reports remove identifying information. An internal server IP is organizational information. Revenue figures are company financial data, not personal data."
+  },
+  {
+    "domain_id": 2,
+    "question": "A data steward's PRIMARY responsibility is:",
+    "options": [
+      "Implementing technical security controls on databases",
+      "Classifying data and making access decisions",
+      "Managing data quality, metadata, and ensuring data governance policies are followed",
+      "Negotiating contracts with cloud storage vendors"
+    ],
+    "answer": 2,
+    "explanation": "The data steward focuses on data governance, quality, lineage, and metadata management to ensure data is accurate, accessible, and compliant with policies. The data custodian implements technical controls. The data owner classifies data and approves access. Vendor contracts are a procurement function."
+  },
+  {
+    "domain_id": 2,
+    "question": "A government agency classifies a document such that only personnel with appropriate clearance AND a demonstrated need to know the specific information may access it. The 'need to know' requirement illustrates which principle?",
+    "options": [
+      "Mandatory access control",
+      "Least privilege applied to information access",
+      "Discretionary access control",
+      "Role-based access control"
+    ],
+    "answer": 1,
+    "explanation": "Need to know is the application of least privilege to information: even if a person has the appropriate clearance level, they may only access specific information required for their current duties. A clearance grants the maximum level of access; need to know further restricts it. MAC uses labels/clearances; DAC lets owners decide; RBAC uses job roles."
+  }
+]

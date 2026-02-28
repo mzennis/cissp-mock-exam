@@ -1,0 +1,290 @@
+[
+  {
+    "domain_id": 7,
+    "question": "What is the FIRST step in incident response according to most frameworks?",
+    "options": [
+      "Containment",
+      "Preparation",
+      "Identification/Detection",
+      "Eradication"
+    ],
+    "answer": 1,
+    "explanation": "Preparation is the first phase of incident response. The typical IR lifecycle is: (1) Preparation, (2) Detection/Identification, (3) Containment, (4) Eradication, (5) Recovery, (6) Lessons Learned/Post-Incident Activity."
+  },
+  {
+    "domain_id": 7,
+    "question": "In digital forensics, why is maintaining chain of custody critical?",
+    "options": [
+      "To speed up the investigation process",
+      "To ensure evidence is admissible in court by documenting who handled it and when",
+      "To prevent the need for expert testimony",
+      "To comply with data retention policies"
+    ],
+    "answer": 1,
+    "explanation": "Chain of custody documents who collected, handled, transferred, and stored evidence, along with timestamps. This ensures evidence integrity and admissibility in legal proceedings by proving it wasn't tampered with."
+  },
+  {
+    "domain_id": 7,
+    "question": "What is the PRIMARY purpose of a hot site in disaster recovery?",
+    "options": [
+      "A location to store backup tapes",
+      "A fully operational duplicate of the primary site that can take over immediately",
+      "A site with basic utilities but no equipment",
+      "A mobile command center for incident response"
+    ],
+    "answer": 1,
+    "explanation": "A hot site is a fully equipped, operational duplicate that can take over within minutes to hours. A warm site has equipment but needs configuration. A cold site has basic infrastructure but no equipment — the cheapest but slowest to activate."
+  },
+  {
+    "domain_id": 7,
+    "question": "Which of the following BEST describes the concept of 'need to know'?",
+    "options": [
+      "All employees need to know about security policies",
+      "Access to information is restricted to those who require it for their specific duties",
+      "Management needs to know about all security incidents",
+      "Security teams need to know all system passwords"
+    ],
+    "answer": 1,
+    "explanation": "Need to know restricts access to information beyond having the right clearance level — even with proper clearance, a person should only access information directly relevant to their current job duties. It complements least privilege."
+  },
+  {
+    "domain_id": 7,
+    "question": "What type of backup captures only the data that has changed since the last FULL backup?",
+    "options": [
+      "Incremental backup",
+      "Differential backup",
+      "Full backup",
+      "Mirror backup"
+    ],
+    "answer": 1,
+    "explanation": "Differential backups capture all changes since the last full backup (growing larger over time). Incremental backups capture changes since the last backup of any type (smaller but requires all incrementals for restore). Differential restores are faster."
+  },
+  {
+    "domain_id": 7,
+    "question": "During which phase of incident response should you create forensic images of affected systems?",
+    "options": [
+      "Preparation",
+      "Detection/Identification",
+      "Containment",
+      "Recovery"
+    ],
+    "answer": 2,
+    "explanation": "Forensic images should be created during the containment phase to preserve evidence before eradication steps modify or destroy it. This ensures a pristine copy exists for investigation while allowing remediation to proceed."
+  },
+  {
+    "domain_id": 7,
+    "question": "A RAID 5 array uses 4 drives of 2 TB each. What is the TOTAL usable storage capacity and what is the fault tolerance?",
+    "options": [
+      "8 TB usable, tolerates 2 drive failures",
+      "6 TB usable, tolerates 1 drive failure",
+      "4 TB usable, tolerates 1 drive failure",
+      "8 TB usable, tolerates 1 drive failure"
+    ],
+    "answer": 1,
+    "explanation": "RAID 5 uses distributed parity across all drives. With N drives, usable capacity is (N-1) × drive size. For 4 × 2 TB drives: (4-1) × 2 TB = 6 TB usable. RAID 5 tolerates exactly 1 drive failure. RAID 6 adds a second parity block, tolerating 2 failures but with less usable space. RAID 1 mirrors data with 50% usable capacity."
+  },
+  {
+    "domain_id": 7,
+    "question": "During a security investigation involving potential employee fraud, the HR team requests that IT immediately disable and delete the suspect's accounts and email. As the security investigator, your FIRST response should be to:",
+    "options": [
+      "Comply with the HR request immediately to prevent ongoing harm",
+      "Preserve all relevant evidence and forensic images before any account modifications",
+      "Notify law enforcement before taking any action",
+      "Escalate to the legal team to determine jurisdiction"
+    ],
+    "answer": 1,
+    "explanation": "Evidence preservation must occur before any destructive actions. Deleting accounts destroys forensic evidence needed for investigation and potential prosecution. The investigator should image mailboxes, capture access logs, and preserve artifacts first. Legal hold should be placed on all relevant data. HR and legal should be involved, but evidence preservation is the immediate technical priority."
+  },
+  {
+    "domain_id": 7,
+    "question": "An organization's recovery time objective (RTO) is 4 hours for its ERP system. A warm site can be operational in 6 hours. Which action BEST addresses this gap?",
+    "options": [
+      "Upgrade to a hot site to meet the 4-hour RTO",
+      "Accept the risk since 2 hours is a minor variance",
+      "Reduce the RTO to 6 hours to match warm site capabilities",
+      "Implement additional tape backup systems at the warm site"
+    ],
+    "answer": 0,
+    "explanation": "When a warm site's recovery time (6 hours) exceeds the RTO (4 hours), the organization must upgrade to a solution that meets the RTO — a hot site (near-instantaneous failover) would satisfy the 4-hour requirement. Accepting the risk means accepting that business impact will exceed what management approved. Changing the RTO requires business sign-off and may not be acceptable. Tape backups would worsen recovery time, not improve it."
+  },
+  {
+    "domain_id": 7,
+    "question": "A forensic investigator needs to acquire evidence from a suspect's laptop that is powered on. What is the MOST important consideration before shutting down the device?",
+    "options": [
+      "Connect the device to a network share to back up files",
+      "Capture volatile memory (RAM) before shutdown, as it contains running processes, encryption keys, and network connections",
+      "Take photographs of the screen and connected peripherals",
+      "Remove the hard drive and image it in a write-blocked forensic workstation"
+    ],
+    "answer": 1,
+    "explanation": "Volatile memory (RAM) contains data that is lost upon shutdown — including running processes, decryption keys (e.g., BitLocker keys), active network connections, and cached credentials. RAM acquisition must occur before shutdown. Photographs are important documentation but don't capture volatile evidence. Hard drive imaging should follow RAM capture. Connecting to a network could contaminate evidence and potentially alert the suspect."
+  },
+  {
+    "domain_id": 7,
+    "question": "Which type of evidence in a digital investigation consists of data extracted from electronic devices, such as emails, logs, and database records?",
+    "options": [
+      "Real (physical) evidence",
+      "Testimonial evidence",
+      "Documentary evidence",
+      "Demonstrative evidence"
+    ],
+    "answer": 2,
+    "explanation": "Documentary evidence includes documents, records, emails, and digital files that contain information relevant to the case. Real evidence is physical (the actual hard drive). Testimonial evidence is provided by witnesses under oath. Demonstrative evidence includes charts, diagrams, and models that help explain other evidence (e.g., a timeline created from log data)."
+  },
+  {
+    "domain_id": 7,
+    "question": "An organization's SIEM generates an alert that a workstation is communicating with a known command-and-control IP address. According to the NIST incident response lifecycle, the security team is currently in which phase?",
+    "options": [
+      "Preparation",
+      "Detection and Analysis",
+      "Containment, Eradication, and Recovery",
+      "Post-Incident Activity"
+    ],
+    "answer": 1,
+    "explanation": "Receiving and analyzing the SIEM alert to determine if it's a true positive constitutes the Detection and Analysis phase. Preparation occurs before incidents. Containment begins after the incident is confirmed and assessed. Post-Incident Activity (lessons learned) occurs after recovery is complete. The NIST SP 800-61 lifecycle has four phases: Preparation; Detection and Analysis; Containment, Eradication, and Recovery; Post-Incident Activity."
+  },
+  {
+    "domain_id": 7,
+    "question": "A company cannot afford a dedicated DR site and instead has a reciprocal agreement with a partner organization to use their data center in the event of a disaster. What is the PRIMARY risk of this arrangement?",
+    "options": [
+      "The partner site will always be too geographically close to the primary site",
+      "Both organizations may experience the same disaster simultaneously, or the partner's capacity may be insufficient",
+      "Reciprocal agreements are illegal without regulatory approval",
+      "The partner's equipment will be incompatible with the company's systems"
+    ],
+    "answer": 1,
+    "explanation": "Reciprocal agreements have significant risks: both organizations may be affected by the same regional disaster (geographic proximity), and the partner's available capacity may be fully utilized for their own operations during a large-scale event. Additionally, there's no guaranteed SLA. While geographic and capacity risks are primary concerns, equipment compatibility and legal issues are manageable but secondary risks."
+  },
+  {
+    "domain_id": 7,
+    "question": "An organization deploys patches only after testing in a staging environment, following a defined change management process with CAB approval. A zero-day vulnerability is actively exploited in the wild. The MOST appropriate response is to:",
+    "options": [
+      "Follow the standard change management process regardless of urgency",
+      "Apply the emergency change process to expedite patching with appropriate risk acceptance documentation",
+      "Wait for the next scheduled maintenance window to apply the patch",
+      "Disable the affected system until the next CAB meeting"
+    ],
+    "answer": 1,
+    "explanation": "Mature change management processes include an emergency change procedure for exactly this scenario — active exploitation requires speed, but changes should still be documented, authorized (typically by reduced approval authority), and risk-accepted. Skipping the process entirely creates untracked changes. Disabling systems may cause business disruption disproportionate to the risk. Waiting for a CAB meeting during active exploitation is unacceptable."
+  },
+  {
+    "domain_id": 7,
+    "question": "When sanitizing hard drives containing classified data for reuse within the same classification level, which method is MOST appropriate?",
+    "options": [
+      "Deletion of files using the operating system",
+      "Quick format of the drive",
+      "Overwriting the drive using a DoD-approved multi-pass pattern",
+      "Physical destruction of the drive"
+    ],
+    "answer": 2,
+    "explanation": "For reuse within the same classification level, overwriting (purging) using approved patterns (NIST SP 800-88 defines clearing and purging) is appropriate. Simple deletion or formatting only removes file system references; data remains recoverable. Physical destruction (degaussing, shredding) is required when drives leave the classification environment permanently and cannot be reused. NIST SP 800-88 recommends overwrite for clearing and cryptographic erase or degaussing for purging."
+  },
+  {
+    "domain_id": 7,
+    "question": "A law enforcement agency serves a legal hold notice to an organization regarding litigation. Which action is MOST critical immediately upon receiving this notice?",
+    "options": [
+      "Begin collecting and producing all requested data immediately",
+      "Suspend automated data deletion and retention policies for covered data to prevent spoliation",
+      "Notify all employees that their communications may be reviewed",
+      "Transfer all potentially relevant data to external legal counsel"
+    ],
+    "answer": 1,
+    "explanation": "A legal hold (litigation hold) requires the organization to immediately suspend any automated deletion, backup rotation, or retention policies that could destroy potentially relevant evidence. Spoliation — destruction of evidence subject to a legal hold — can result in severe legal sanctions. Data collection for eDiscovery follows the hold. Broad employee notification may not be appropriate and could compromise the investigation."
+  },
+  {
+    "domain_id": 7,
+    "question": "Which disaster recovery test involves actually failing over to the DR site and running production operations from it, rather than just simulating the scenario?",
+    "options": [
+      "Tabletop exercise",
+      "Walk-through (checklist) test",
+      "Parallel test",
+      "Full interruption test"
+    ],
+    "answer": 3,
+    "explanation": "A full interruption test actually shuts down the primary site and transfers operations to the DR site, providing the most realistic validation of DR capabilities. A parallel test runs the DR site simultaneously with production without switching over. A tabletop exercise is a discussion-based scenario review. A walk-through (checklist) test reviews procedures without any technical execution. Full interruption tests carry real operational risk but provide the highest assurance."
+  },
+  {
+    "domain_id": 7,
+    "question": "A security operations center uses a SIEM that correlates events from 50 different log sources. An analyst notices that firewall logs have stopped ingesting for the past 2 hours. This MOST directly creates which risk?",
+    "options": [
+      "Increased false positive alerts from remaining log sources",
+      "A blind spot in detection — network-based attacks may go undetected during the gap",
+      "Violation of least privilege by allowing unauthorized SIEM access",
+      "Automatic triggering of the incident response plan"
+    ],
+    "answer": 1,
+    "explanation": "A gap in log ingestion creates a detection blind spot. Any network-based attacks occurring during the 2-hour window would not be visible in the SIEM for correlation, potentially missing indicators of compromise. SIEM coverage depends on completeness of log sources. This should trigger an immediate investigation into why the source stopped (agent failure, network issue, or deliberate disabling by an attacker)."
+  },
+  {
+    "domain_id": 7,
+    "question": "The concept of 'order of volatility' in digital forensics refers to:",
+    "options": [
+      "The legal order in which evidence must be collected per jurisdiction",
+      "Collecting evidence from the most volatile (easily lost) sources first, such as RAM before disk",
+      "The chain of custody documentation order",
+      "The priority order for restoring systems after an incident"
+    ],
+    "answer": 1,
+    "explanation": "Order of volatility (RFC 3227) dictates collecting evidence from most to least volatile: (1) CPU registers and cache, (2) RAM, (3) running processes/network state, (4) disk, (5) remote logging, (6) physical configuration/topology. Volatile data is irretrievably lost when power is removed. Chain of custody is separate documentation. Legal collection order varies by jurisdiction. System restoration priority is a DR/IR concern, not forensic evidence ordering."
+  },
+  {
+    "domain_id": 7,
+    "question": "A Service Level Agreement (SLA) between a company and its cloud provider guarantees 99.9% uptime. What is the maximum allowable downtime per year under this SLA?",
+    "options": [
+      "Approximately 8.7 hours per year",
+      "Approximately 52.6 minutes per year",
+      "Approximately 5.26 minutes per year",
+      "Approximately 26.3 hours per year"
+    ],
+    "answer": 0,
+    "explanation": "99.9% uptime = 0.1% downtime. 0.1% of 8,760 hours/year = 8.76 hours (~8 hours 46 minutes). 99.99% (four nines) = ~52.6 minutes/year. 99.999% (five nines) = ~5.26 minutes/year. Understanding uptime SLA math is essential for DR planning — the SLA must align with the RTO and business impact tolerance."
+  },
+  {
+    "domain_id": 7,
+    "question": "During the post-incident 'lessons learned' phase, the team discovers that the incident could have been detected 3 days earlier if alerts had been configured correctly. The PRIMARY output of this phase should be:",
+    "options": [
+      "Termination of the analyst who missed the alert",
+      "Updated incident response procedures, improved detection rules, and tracking of corrective actions",
+      "A formal report submitted only to executive management",
+      "Immediate reconfiguration of all SIEM rules without further testing"
+    ],
+    "answer": 1,
+    "explanation": "The lessons learned phase (post-incident activity) should produce documented improvements: updated playbooks, corrected detection rules, training enhancements, and tracked action items. Blame-focused responses harm security culture and reduce future reporting. Executive-only reporting misses the operational improvements needed. Immediately reconfiguring all SIEM rules without testing could introduce new problems or excessive false positives."
+  },
+  {
+    "domain_id": 7,
+    "question": "What distinguishes a criminal investigation from a civil investigation in the context of security incidents?",
+    "options": [
+      "Criminal investigations use digital evidence; civil investigations use only physical evidence",
+      "Criminal investigations require proof beyond reasonable doubt; civil cases require preponderance of the evidence",
+      "Civil investigations are conducted by law enforcement; criminal cases are handled internally",
+      "Criminal investigations have no discovery process; civil cases require full disclosure"
+    ],
+    "answer": 1,
+    "explanation": "The burden of proof differs significantly: criminal cases require guilt 'beyond reasonable doubt' (highest standard), while civil cases use 'preponderance of the evidence' (more likely than not). Both use digital evidence. Law enforcement handles criminal cases; civil cases are typically plaintiff vs. defendant. Both civil and criminal proceedings involve discovery processes. This distinction affects how security professionals should handle evidence and cooperate with investigations."
+  },
+  {
+    "domain_id": 7,
+    "question": "An organization's backup strategy uses full backups every Sunday and incremental backups Monday through Saturday. On Thursday afternoon, a ransomware attack encrypts all data. How many backup sets are needed to fully restore to Wednesday's state?",
+    "options": [
+      "1 — only Wednesday's incremental backup",
+      "4 — Sunday full backup plus Monday, Tuesday, and Wednesday incrementals",
+      "2 — Sunday full backup and Wednesday's incremental only",
+      "7 — all backups from the previous week"
+    ],
+    "answer": 1,
+    "explanation": "Incremental backups each capture only changes since the previous backup (of any type). To restore to Wednesday's state: (1) Sunday's full backup, then (2) Monday's incremental, then (3) Tuesday's incremental, then (4) Wednesday's incremental — each must be applied in sequence. This is the restore complexity tradeoff of incrementals vs. differentials (which would only require Sunday full + Wednesday differential)."
+  },
+  {
+    "domain_id": 7,
+    "question": "A RAID 1 array consists of two 4 TB drives. One drive fails and is replaced with a new drive. During the rebuild process, a second drive failure occurs. What is the outcome?",
+    "options": [
+      "Data is preserved because RAID 1 can tolerate two simultaneous failures",
+      "Data is lost because RAID 1 only tolerates one drive failure at a time",
+      "Data is recovered from the parity block on the replacement drive",
+      "The RAID controller automatically switches to RAID 5 mode"
+    ],
+    "answer": 1,
+    "explanation": "RAID 1 (mirroring) can tolerate only one drive failure. During rebuild, the surviving drive is under stress (100% read load) and at elevated failure risk. A second failure before rebuild completes causes total data loss. This is why 3-2-1 backup strategies are critical — RAID is not a backup. RAID 6 can tolerate 2 simultaneous failures. RAID controllers cannot dynamically switch RAID levels."
+  }
+]

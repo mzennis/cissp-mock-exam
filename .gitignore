@@ -32,9 +32,19 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
+
+# resources (PDFs, not for deployment)
+/resources/
+
+# legacy
+cissp-mock-exam.jsx
+
+# supabase temp
+supabase/.temp/
 
 # typescript
 *.tsbuildinfo

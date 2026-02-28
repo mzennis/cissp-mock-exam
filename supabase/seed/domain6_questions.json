@@ -1,0 +1,254 @@
+[
+  {
+    "domain_id": 6,
+    "question": "What is the PRIMARY difference between a vulnerability scan and a penetration test?",
+    "options": [
+      "Vulnerability scans are manual; penetration tests are automated",
+      "Vulnerability scans identify weaknesses; penetration tests actively exploit them",
+      "Vulnerability scans are more expensive than penetration tests",
+      "There is no real difference between the two"
+    ],
+    "answer": 1,
+    "explanation": "Vulnerability scans use automated tools to identify potential weaknesses in systems. Penetration tests go further by actively attempting to exploit those vulnerabilities to determine actual risk and impact. Pen tests require explicit authorization."
+  },
+  {
+    "domain_id": 6,
+    "question": "Which type of penetration test gives the tester NO prior knowledge of the target environment?",
+    "options": [
+      "White box (crystal box)",
+      "Gray box",
+      "Black box (blind)",
+      "Red box"
+    ],
+    "answer": 2,
+    "explanation": "Black box (blind) testing provides the tester with no prior knowledge of the target, simulating an external attacker. White box provides full knowledge. Gray box provides partial knowledge. These test different threat scenarios."
+  },
+  {
+    "domain_id": 6,
+    "question": "What does a SOC 2 Type II audit evaluate?",
+    "options": [
+      "The design of controls at a specific point in time",
+      "The operating effectiveness of controls over a period of time (typically 6-12 months)",
+      "Financial reporting controls only",
+      "Physical security controls only"
+    ],
+    "answer": 1,
+    "explanation": "SOC 2 Type II evaluates the operating effectiveness of controls over a period of time (typically 6-12 months). Type I evaluates the design of controls at a specific point in time. SOC 2 focuses on the Trust Service Criteria (security, availability, etc.)."
+  },
+  {
+    "domain_id": 6,
+    "question": "What is the purpose of fuzzing in software security testing?",
+    "options": [
+      "To test encryption strength",
+      "To send random or malformed input to find vulnerabilities",
+      "To review source code line by line",
+      "To test network bandwidth under load"
+    ],
+    "answer": 1,
+    "explanation": "Fuzzing (fuzz testing) involves sending random, unexpected, or malformed data as input to a program to discover vulnerabilities like buffer overflows, crashes, or unhandled exceptions that could be exploited."
+  },
+  {
+    "domain_id": 6,
+    "question": "During a security audit, the auditor discovers that logs are not being reviewed. This is a finding related to which type of control deficiency?",
+    "options": [
+      "Preventive control failure",
+      "Detective control failure",
+      "Corrective control failure",
+      "Physical control failure"
+    ],
+    "answer": 1,
+    "explanation": "Log review is a detective control — it's designed to identify security events and anomalies. Failure to review logs means potential security incidents go undetected, which is a detective control deficiency."
+  },
+  {
+    "domain_id": 6,
+    "question": "A penetration tester is given network diagrams, IP ranges, and application architecture documentation before starting the engagement. This is BEST described as which type of test?",
+    "options": [
+      "Black box penetration test",
+      "Gray box penetration test",
+      "White box penetration test",
+      "Red team assessment"
+    ],
+    "answer": 2,
+    "explanation": "White box (crystal box) testing provides the tester with full knowledge of the target environment including architecture, source code, and credentials. Black box provides no prior knowledge. Gray box provides partial knowledge (e.g., user credentials but not architecture). Red team is an adversarial simulation that typically uses black or gray box approaches with broader scope."
+  },
+  {
+    "domain_id": 6,
+    "question": "Which penetration testing phase involves the tester using tools like Nmap, Nessus, or Metasploit to actively probe discovered systems for open ports and potential vulnerabilities?",
+    "options": [
+      "Reconnaissance",
+      "Scanning and enumeration",
+      "Exploitation",
+      "Post-exploitation"
+    ],
+    "answer": 1,
+    "explanation": "The scanning and enumeration phase uses active techniques to probe systems for open ports, services, OS versions, and potential vulnerabilities. Reconnaissance (passive or active) gathers information without directly probing targets. Exploitation actively leverages identified vulnerabilities. Post-exploitation occurs after gaining access (pivoting, data exfiltration, persistence)."
+  },
+  {
+    "domain_id": 6,
+    "question": "A company wants to verify that its cloud service provider's controls are operating effectively over time to support its own SOC 2 audit. Which report type should the company request from the CSP?",
+    "options": [
+      "SOC 1 Type I",
+      "SOC 2 Type I",
+      "SOC 2 Type II",
+      "SOC 3"
+    ],
+    "answer": 2,
+    "explanation": "SOC 2 Type II covers the operating effectiveness of controls over a defined period (usually 6-12 months), which is what downstream customers need to rely on for their own compliance programs. SOC 2 Type I only covers design at a point in time. SOC 1 focuses on financial reporting controls. SOC 3 is a public-facing summary without the detailed control descriptions needed for assurance purposes."
+  },
+  {
+    "domain_id": 6,
+    "question": "Static Application Security Testing (SAST) differs from Dynamic Application Security Testing (DAST) in that SAST:",
+    "options": [
+      "Tests the running application by sending crafted HTTP requests",
+      "Analyzes source code or binaries without executing the application",
+      "Requires production access to function correctly",
+      "Can only identify runtime errors and memory corruption"
+    ],
+    "answer": 1,
+    "explanation": "SAST analyzes source code, bytecode, or binaries statically — without executing the application — enabling early detection in the SDLC (shift left). DAST tests the running application by interacting with it as an attacker would, finding runtime issues SAST misses. DAST does not require source code access. Both are complementary and together with SCA (software composition analysis) form a comprehensive AppSec testing approach."
+  },
+  {
+    "domain_id": 6,
+    "question": "A SIEM system generates 10,000 alerts per day, but only 50 are investigated. What security metric BEST describes the proportion of actionable alerts to total alerts?",
+    "options": [
+      "Mean Time to Detect (MTTD)",
+      "False positive rate",
+      "Alert fatigue index",
+      "Key Risk Indicator (KRI)"
+    ],
+    "answer": 1,
+    "explanation": "The false positive rate measures the proportion of alerts that are not true security events. A high false positive rate causes alert fatigue, where analysts miss real threats amid noise. MTTD measures how long it takes to detect an incident. KRIs are forward-looking metrics indicating increasing risk. Alert fatigue is the consequence of high false positive rates, not itself a formal metric."
+  },
+  {
+    "domain_id": 6,
+    "question": "An organization wants to continuously test its security controls by simulating real-world attack techniques mapped to the MITRE ATT&CK framework without the cost of a full manual penetration test. Which approach BEST fits this need?",
+    "options": [
+      "Annual vulnerability scanning",
+      "Breach and Attack Simulation (BAS)",
+      "Bug bounty program",
+      "SOC 2 Type II audit"
+    ],
+    "answer": 1,
+    "explanation": "Breach and Attack Simulation (BAS) tools continuously and safely simulate attack scenarios mapped to frameworks like MITRE ATT&CK to validate whether security controls detect and respond correctly. Unlike annual pen tests, BAS provides ongoing testing. Bug bounty programs use external researchers to find vulnerabilities but are not continuous automated simulations. SOC 2 audits are compliance assessments, not active attack simulations."
+  },
+  {
+    "domain_id": 6,
+    "question": "During a security assessment, a tester discovers that the web application's error messages reveal the underlying database type and version. This finding MOST directly enables which type of attack?",
+    "options": [
+      "Cross-site scripting (XSS)",
+      "Information disclosure enabling targeted SQL injection",
+      "Buffer overflow against the web server",
+      "Session hijacking via cookie theft"
+    ],
+    "answer": 1,
+    "explanation": "Verbose error messages revealing database type (e.g., MySQL 8.0) enable attackers to craft targeted SQL injection payloads specific to that database's syntax and known vulnerabilities. This is an information disclosure vulnerability that reduces the attacker's reconnaissance burden. Error messages should return generic messages to users while logging detailed information server-side."
+  },
+  {
+    "domain_id": 6,
+    "question": "A company's internal audit team conducts quarterly reviews of access rights, patch compliance, and firewall rule sets. This is BEST described as:",
+    "options": [
+      "External penetration testing",
+      "Internal security audit",
+      "Vulnerability scanning",
+      "Compliance testing"
+    ],
+    "answer": 1,
+    "explanation": "An internal security audit uses the organization's own staff to assess controls, policies, and procedures. External audits use independent third parties, providing greater objectivity. Vulnerability scanning is a technical tool, not a comprehensive audit. Compliance testing verifies adherence to specific standards (PCI DSS, HIPAA) and may be a component of an audit."
+  },
+  {
+    "domain_id": 6,
+    "question": "Which of the following is a Key Risk Indicator (KRI) rather than a Key Performance Indicator (KPI)?",
+    "options": [
+      "Percentage of systems with current patches applied",
+      "Number of security incidents resolved within SLA",
+      "Percentage increase in phishing attempts targeting the organization",
+      "Average time to complete employee security awareness training"
+    ],
+    "answer": 2,
+    "explanation": "KRIs are forward-looking metrics that signal increasing risk levels — a spike in phishing attempts is a leading indicator of elevated threat exposure. KPIs measure performance against objectives (patch compliance, SLA adherence, training completion). KRIs help management anticipate and respond to emerging risks before they become incidents."
+  },
+  {
+    "domain_id": 6,
+    "question": "A security team wants to test whether their web application properly handles malformed XML input that could trigger an XXE (XML External Entity) injection. Which testing method is MOST appropriate?",
+    "options": [
+      "Static code review of the XML parser configuration",
+      "Dynamic application testing with crafted malformed XML payloads",
+      "Manual review of application logs",
+      "Network-level vulnerability scanning"
+    ],
+    "answer": 1,
+    "explanation": "XXE testing requires dynamically sending crafted XML payloads to the running application to observe its behavior — a DAST approach. While SAST can flag insecure XML parser configurations, confirming exploitability requires sending malformed input and observing responses. Log review is detective, not testing. Network scanners typically cannot test application-layer XML processing."
+  },
+  {
+    "domain_id": 6,
+    "question": "A penetration tester gains initial access to a system and discovers they can access other systems on a network segment that should be isolated. This post-exploitation technique is called:",
+    "options": [
+      "Privilege escalation",
+      "Lateral movement and pivoting",
+      "Persistence establishment",
+      "Reconnaissance"
+    ],
+    "answer": 1,
+    "explanation": "Lateral movement (pivoting) involves using a compromised system as a stepping stone to reach other systems in the environment, particularly those on otherwise inaccessible network segments. Privilege escalation is gaining higher permissions on the current system. Persistence involves maintaining access after reboots. Reconnaissance is information gathering before initial access."
+  },
+  {
+    "domain_id": 6,
+    "question": "An organization runs a bug bounty program where external researchers report vulnerabilities in exchange for monetary rewards. Which is the MOST important program element to prevent legal issues?",
+    "options": [
+      "A maximum payout cap to control costs",
+      "Clear scope definition and safe harbor provisions for authorized testing",
+      "Requiring researchers to sign employment contracts",
+      "Restricting participation to researchers in the same country"
+    ],
+    "answer": 1,
+    "explanation": "Clear scope definition (what systems are in/out of scope) and safe harbor provisions (legal protection for good-faith testing within scope) are critical to protect both the organization and researchers from legal liability under laws like the CFAA. Without these, researchers risk prosecution even for authorized testing. Payout caps and geographic restrictions affect program quality but not legal protection."
+  },
+  {
+    "domain_id": 6,
+    "question": "During a compliance assessment, an auditor finds that a financial services firm stores credit card numbers in plaintext in their database. Under PCI DSS, this is MOST accurately classified as:",
+    "options": [
+      "A control deficiency requiring a compensating control",
+      "A critical finding requiring immediate remediation — storing PANs unencrypted violates PCI DSS Requirement 3",
+      "An acceptable practice if the database is behind a firewall",
+      "A low-risk finding because the database is internal only"
+    ],
+    "answer": 1,
+    "explanation": "PCI DSS Requirement 3 mandates that stored Primary Account Numbers (PANs) must be rendered unreadable using encryption, truncation, tokenization, or hashing. Storing PANs in plaintext is a critical violation regardless of network location. Defense in depth (firewalls) does not satisfy data protection requirements. This finding would likely result in non-compliance status and potential fines."
+  },
+  {
+    "domain_id": 6,
+    "question": "A manual code review identifies that a function does not validate the length of user-supplied input before copying it to a fixed-size buffer. Which tool would MOST efficiently find similar patterns across a 500,000-line codebase?",
+    "options": [
+      "Dynamic Application Security Testing (DAST)",
+      "Penetration testing",
+      "Static Application Security Testing (SAST)",
+      "Fuzzing"
+    ],
+    "answer": 2,
+    "explanation": "SAST tools scan source code at scale to find patterns like missing bounds checks, insecure function calls (strcpy, gets), and other coding flaws across the entire codebase efficiently. Manual review of 500,000 lines is impractical. DAST and fuzzing test the running application and are better at finding runtime vulnerabilities. SAST is the correct tool for systematic code-level vulnerability discovery at scale."
+  },
+  {
+    "domain_id": 6,
+    "question": "Which of the following BEST describes the objective of the 'reporting' phase in a penetration test?",
+    "options": [
+      "To provide documentation for regulatory compliance filing only",
+      "To deliver findings with severity ratings, evidence, and remediation recommendations to enable risk-informed decisions",
+      "To summarize the number of systems compromised for executive metrics",
+      "To provide a list of tools used during the engagement"
+    ],
+    "answer": 1,
+    "explanation": "Penetration test reports should include an executive summary (business risk), technical findings with severity ratings (CVSS scores), proof-of-concept evidence, and actionable remediation recommendations. The report enables both technical teams (remediation) and executives (risk decisions) to act. A count of compromised systems alone is insufficient. Compliance documentation may use the report but is not its primary purpose."
+  },
+  {
+    "domain_id": 6,
+    "question": "An organization's security team reviews authentication logs and discovers multiple failed login attempts from a single IP address targeting many different usernames. This pattern MOST likely indicates:",
+    "options": [
+      "A brute-force attack against a single account",
+      "A password spraying attack",
+      "A credential stuffing attack using breached credentials",
+      "A denial-of-service attack against the authentication service"
+    ],
+    "answer": 1,
+    "explanation": "Password spraying involves trying a small number of common passwords against many different accounts from the same source, avoiding account lockout thresholds. Brute-force attacks repeatedly try many passwords against one account. Credential stuffing uses specific username/password pairs from breached databases. A DoS attack would target availability, not authentication attempts."
+  }
+]
