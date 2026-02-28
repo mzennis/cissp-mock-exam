@@ -46,6 +46,12 @@ export function Navbar() {
               >
                 Review
               </Link>
+              <Link
+                href="/import"
+                className="text-xs text-cissp-text-secondary hover:text-white transition-colors"
+              >
+                Import
+              </Link>
               <button
                 onClick={handleLogout}
                 className="text-xs text-cissp-text-muted hover:text-cissp-red transition-colors cursor-pointer"
