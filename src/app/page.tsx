@@ -4,6 +4,21 @@ import { ScoreBadge } from "@/components/ScoreBadge";
 
 type RecentScore = { score_pct: number; passed: boolean };
 
+async function getUserQuestionCount(): Promise<number> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return 0;
+
+  const { count } = await supabase
+    .from("user_questions")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", user.id);
+
+  return count ?? 0;
+}
+
 async function getDomains() {
   const supabase = await createClient();
   const { data: domains } = await supabase
@@ -63,7 +78,11 @@ async function getRecentScores(): Promise<{
 }
 
 export default async function Home() {
-  const [domains, scores] = await Promise.all([getDomains(), getRecentScores()]);
+  const [domains, scores, userQuestionCount] = await Promise.all([
+    getDomains(),
+    getRecentScores(),
+    getUserQuestionCount(),
+  ]);
   const totalQuestions = domains.reduce(
     (acc, d) => acc + (d.question_count || 0),
     0
@@ -137,6 +156,27 @@ export default async function Home() {
             </Link>
           ))}
         </div>
+
+        {userQuestionCount > 0 && (
+          <div className="mt-6">
+            <Link
+              href="/quiz/custom"
+              className="w-full p-4 bg-cissp-card border border-cissp-border rounded-lg flex items-center justify-between hover:bg-cissp-card-hover hover:border-cissp-border-hover transition-all group"
+            >
+              <div>
+                <span className="text-xs font-bold tracking-wider text-cissp-teal">
+                  MY QUESTIONS
+                </span>
+                <div className="text-sm font-medium text-cissp-text group-hover:text-white transition-colors mt-0.5">
+                  Practice imported questions
+                </div>
+              </div>
+              <span className="text-xs text-cissp-text-muted bg-white/5 px-2 py-0.5 rounded-full">
+                {userQuestionCount}Q
+              </span>
+            </Link>
+          </div>
+        )}
 
         <div className="mt-8 p-4 bg-white/[0.03] rounded-lg border border-cissp-border">
           <div className="text-xs text-cissp-text-muted leading-relaxed">

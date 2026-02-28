@@ -24,7 +24,7 @@ export interface AnswerRecord {
 export interface ExamAttempt {
   id: string;
   user_id: string;
-  mode: "quiz" | "full_exam";
+  mode: "quiz" | "full_exam" | "custom_quiz";
   domain_id: number | null;
   total_questions: number;
   correct_answers: number;
