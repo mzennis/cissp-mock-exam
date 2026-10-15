@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 import { ImportForm } from "@/components/ImportForm";
+import { ButtonLink, Card, Icons, LoadingState, PageContainer, PageHeader } from "@/components/ui";
 import type { Domain } from "@/lib/types";
 
 export default function ImportPage() {
@@ -57,43 +57,34 @@ export default function ImportPage() {
     setImportedCount(questions.length);
   };
 
-  if (authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-cissp-text-muted">Loading...</div>
-      </div>
-    );
-  }
+  if (authLoading) return <LoadingState />;
 
   return (
-    <div className="px-6 py-8">
-      <div className="mx-auto max-w-2xl">
-        <h1 className="text-2xl font-bold text-white mb-2">Import Questions</h1>
-        <p className="text-sm text-cissp-text-secondary mb-6">
-          Upload a JSON file with your own CISSP practice questions.
-        </p>
+    <PageContainer width="max-w-2xl">
+      <PageHeader
+        title="Import Questions"
+        subtitle="Upload a JSON file with your own CISSP practice questions."
+      />
 
-        <ImportForm onImport={handleImport} domains={domains} />
+      <ImportForm onImport={handleImport} domains={domains} />
 
-        {importedCount !== null && (
-          <div className="mt-6 p-4 bg-cissp-card border border-cissp-border rounded-lg flex items-center justify-between">
-            <span className="text-sm text-cissp-text-secondary">
-              {importedCount} question{importedCount !== 1 ? "s" : ""} imported
-            </span>
-            <Link
-              href="/quiz/custom"
-              className="text-sm text-cissp-teal hover:text-white transition-colors"
-            >
-              Practice now &rarr;
-            </Link>
-          </div>
-        )}
+      {importedCount !== null && (
+        <Card className="mt-6 p-4 flex items-center justify-between gap-4">
+          <span className="text-sm text-cissp-text-secondary">
+            {importedCount} question{importedCount !== 1 ? "s" : ""} imported
+          </span>
+          <ButtonLink href="/quiz/custom" variant="primary" size="sm">
+            Practice now <Icons.ArrowRight size={15} />
+          </ButtonLink>
+        </Card>
+      )}
 
-        <div className="mt-8 p-4 bg-white/[0.03] rounded-lg border border-cissp-border">
-          <div className="text-xs font-semibold text-cissp-text-secondary mb-2">
-            Expected JSON format
-          </div>
-          <pre className="text-xs text-cissp-text-muted overflow-x-auto">
+      <Card className="mt-8 overflow-hidden">
+        <div className="px-4 py-2.5 border-b border-cissp-border flex items-center justify-between">
+          <span className="text-xs font-semibold text-cissp-text-secondary">Expected JSON format</span>
+          <span className="text-[11px] text-cissp-text-dim font-mono">questions.json</span>
+        </div>
+        <pre className="p-4 text-xs leading-relaxed text-cissp-text-secondary font-mono overflow-x-auto bg-cissp-dark/40">
 {`[
   {
     "domain_id": 1,
@@ -103,9 +94,8 @@ export default function ImportPage() {
     "explanation": "..."    // optional
   }
 ]`}
-          </pre>
-        </div>
-      </div>
-    </div>
+        </pre>
+      </Card>
+    </PageContainer>
   );
 }

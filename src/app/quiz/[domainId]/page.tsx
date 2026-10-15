@@ -6,8 +6,10 @@ import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 import { QuestionCard } from "@/components/QuestionCard";
 import { ProgressBar } from "@/components/ProgressBar";
+import { QuizTopBar, QuizNav, LiveScore, QuestionMap } from "@/components/QuizChrome";
+import { ButtonLink, EmptyState, Icons, LoadingState, PageContainer } from "@/components/ui";
 import type { Question, Domain, AnswerRecord } from "@/lib/types";
-import { PASSING_SCORE } from "@/lib/constants";
+import { PASSING_SCORE, domainColor } from "@/lib/constants";
 
 export default function QuizPage() {
   const params = useParams();
@@ -168,83 +170,68 @@ export default function QuizPage() {
     [user, bookmarks]
   );
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-cissp-text-muted">Loading questions...</div>
-      </div>
-    );
-  }
+  if (loading) return <LoadingState label="Loading questions..." />;
 
   if (!domain || questions.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-cissp-text-muted">No questions found for this domain.</div>
-      </div>
+      <PageContainer>
+        <EmptyState
+          icon={<Icons.File />}
+          title="No questions found"
+          description="This domain doesn't have any questions yet."
+          action={<ButtonLink href="/">Back to domains</ButtonLink>}
+        />
+      </PageContainer>
     );
   }
 
   const q = questions[currentQ];
+  const color = domainColor(domain.id);
+  const isLast = currentQ === questions.length - 1;
 
   return (
-    <div className="px-6 py-6">
-      <div className="mx-auto max-w-3xl">
-        <div className="flex justify-between items-center mb-6">
-          <button
-            onClick={() => router.push("/")}
-            className="bg-cissp-card border border-cissp-border rounded-lg text-cissp-text-secondary px-3.5 py-2 text-[13px] cursor-pointer hover:bg-cissp-card-hover transition-colors"
-          >
-            &larr; Back
-          </button>
-          <span className="text-[13px] text-cissp-text-muted">
-            {Object.values(answers).filter((a) => a.correct).length}/
-            {Object.keys(answers).length} correct
-          </span>
-        </div>
-
-        <ProgressBar
-          current={currentQ + 1}
-          total={questions.length}
-          color={domain.color}
-          label={`Domain ${domain.id}: ${domain.name}`}
+    <PageContainer>
+      <QuizTopBar onBack={() => router.push("/")} title={`Domain ${domain.id} Quiz`}>
+        <LiveScore
+          correct={Object.values(answers).filter((a) => a.correct).length}
+          answered={Object.keys(answers).length}
         />
+      </QuizTopBar>
 
-        <QuestionCard
-          question={q}
-          domainColor={domain.color}
-          selectedAnswer={selectedAnswer}
-          isAnswered={isAnswered}
-          onAnswer={handleAnswer}
-          isBookmarked={bookmarks.has(q.id)}
-          onToggleBookmark={() => toggleBookmark(q.id)}
-          showBookmark={!!user}
-        />
+      <ProgressBar
+        current={currentQ + 1}
+        total={questions.length}
+        color={color}
+        label={domain.name}
+      />
 
-        <div className="flex justify-between">
-          <button
-            onClick={() => navigateTo(currentQ - 1)}
-            disabled={currentQ === 0}
-            className={`px-5 py-2.5 rounded-lg border border-cissp-border text-sm ${
-              currentQ === 0
-                ? "bg-white/[0.02] text-[#4A5A6A] cursor-default"
-                : "bg-cissp-card text-cissp-text-secondary cursor-pointer hover:bg-cissp-card-hover"
-            }`}
-          >
-            &larr; Previous
-          </button>
-          <button
-            onClick={() =>
-              currentQ === questions.length - 1
-                ? finishQuiz()
-                : navigateTo(currentQ + 1)
-            }
-            className="px-5 py-2.5 rounded-lg text-white text-sm font-semibold cursor-pointer"
-            style={{ backgroundColor: domain.color }}
-          >
-            {currentQ === questions.length - 1 ? "Finish Quiz \u2192" : "Next \u2192"}
-          </button>
-        </div>
-      </div>
-    </div>
+      <QuestionCard
+        question={q}
+        domainColor={color}
+        selectedAnswer={selectedAnswer}
+        isAnswered={isAnswered}
+        onAnswer={handleAnswer}
+        isBookmarked={bookmarks.has(q.id)}
+        onToggleBookmark={() => toggleBookmark(q.id)}
+        showBookmark={!!user}
+      />
+
+      <QuizNav
+        onPrev={() => navigateTo(currentQ - 1)}
+        onNext={() => (isLast ? finishQuiz() : navigateTo(currentQ + 1))}
+        prevDisabled={currentQ === 0}
+        isFinal={isLast}
+        nextLabel={isLast ? "Finish Quiz" : "Next"}
+        color={color}
+      />
+
+      <QuestionMap
+        total={questions.length}
+        current={currentQ}
+        isAnswered={(i) => !!answers[questions[i].id]}
+        isBookmarked={user ? (i) => bookmarks.has(questions[i].id) : undefined}
+        onSelect={navigateTo}
+      />
+    </PageContainer>
   );
 }
