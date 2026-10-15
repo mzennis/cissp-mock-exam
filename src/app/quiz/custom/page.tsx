@@ -6,8 +6,10 @@ import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 import { QuestionCard } from "@/components/QuestionCard";
 import { ProgressBar } from "@/components/ProgressBar";
+import { QuizTopBar, QuizNav, LiveScore, QuestionMap } from "@/components/QuizChrome";
+import { ButtonLink, EmptyState, Icons, LoadingState, PageContainer } from "@/components/ui";
 import type { Question, AnswerRecord } from "@/lib/types";
-import { PASSING_SCORE } from "@/lib/constants";
+import { PASSING_SCORE, CUSTOM_QUIZ_COLOR } from "@/lib/constants";
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -104,88 +106,67 @@ export default function CustomQuizPage() {
     router.push("/results");
   }, [answers, questions, user, router]);
 
-  if (loading || authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-cissp-text-muted">Loading questions...</div>
-      </div>
-    );
-  }
+  if (loading || authLoading) return <LoadingState label="Loading questions..." />;
 
   if (questions.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-cissp-text-muted">No imported questions found.</div>
-        <button
-          onClick={() => router.push("/import")}
-          className="text-sm text-cissp-teal hover:text-white transition-colors cursor-pointer"
-        >
-          Import questions &rarr;
-        </button>
-      </div>
+      <PageContainer>
+        <EmptyState
+          icon={<Icons.Upload />}
+          title="No imported questions yet"
+          description="Upload a JSON file of your own practice questions to build a custom quiz."
+          action={
+            <ButtonLink href="/import" variant="primary">
+              Import questions
+            </ButtonLink>
+          }
+        />
+      </PageContainer>
     );
   }
 
   const q = questions[currentQ];
+  const isLast = currentQ === questions.length - 1;
 
   return (
-    <div className="px-6 py-6">
-      <div className="mx-auto max-w-3xl">
-        <div className="flex justify-between items-center mb-6">
-          <button
-            onClick={() => router.push("/")}
-            className="bg-cissp-card border border-cissp-border rounded-lg text-cissp-text-secondary px-3.5 py-2 text-[13px] cursor-pointer hover:bg-cissp-card-hover transition-colors"
-          >
-            &larr; Back
-          </button>
-          <span className="text-[13px] text-cissp-text-muted">
-            {Object.values(answers).filter((a) => a.correct).length}/
-            {Object.keys(answers).length} correct
-          </span>
-        </div>
-
-        <ProgressBar
-          current={currentQ + 1}
-          total={questions.length}
-          color="#4FD1C5"
-          label="My Questions"
+    <PageContainer>
+      <QuizTopBar onBack={() => router.push("/")} title="My Questions">
+        <LiveScore
+          correct={Object.values(answers).filter((a) => a.correct).length}
+          answered={Object.keys(answers).length}
         />
+      </QuizTopBar>
 
-        <QuestionCard
-          question={q}
-          domainColor="#4FD1C5"
-          selectedAnswer={selectedAnswer}
-          isAnswered={isAnswered}
-          onAnswer={handleAnswer}
-          isBookmarked={false}
-          onToggleBookmark={() => {}}
-          showBookmark={false}
-        />
+      <ProgressBar
+        current={currentQ + 1}
+        total={questions.length}
+        color={CUSTOM_QUIZ_COLOR}
+        label="Imported questions"
+      />
 
-        <div className="flex justify-between">
-          <button
-            onClick={() => navigateTo(currentQ - 1)}
-            disabled={currentQ === 0}
-            className={`px-5 py-2.5 rounded-lg border border-cissp-border text-sm ${
-              currentQ === 0
-                ? "bg-white/[0.02] text-[#4A5A6A] cursor-default"
-                : "bg-cissp-card text-cissp-text-secondary cursor-pointer hover:bg-cissp-card-hover"
-            }`}
-          >
-            &larr; Previous
-          </button>
-          <button
-            onClick={() =>
-              currentQ === questions.length - 1
-                ? finishQuiz()
-                : navigateTo(currentQ + 1)
-            }
-            className="px-5 py-2.5 rounded-lg text-white text-sm font-semibold cursor-pointer bg-cissp-teal hover:bg-cissp-teal/80 transition-colors"
-          >
-            {currentQ === questions.length - 1 ? "Finish Quiz \u2192" : "Next \u2192"}
-          </button>
-        </div>
-      </div>
-    </div>
+      <QuestionCard
+        question={q}
+        domainColor={CUSTOM_QUIZ_COLOR}
+        selectedAnswer={selectedAnswer}
+        isAnswered={isAnswered}
+        onAnswer={handleAnswer}
+      />
+
+      <QuizNav
+        onPrev={() => navigateTo(currentQ - 1)}
+        onNext={() => (isLast ? finishQuiz() : navigateTo(currentQ + 1))}
+        prevDisabled={currentQ === 0}
+        isFinal={isLast}
+        nextLabel={isLast ? "Finish Quiz" : "Next"}
+        color={CUSTOM_QUIZ_COLOR}
+      />
+
+      <QuestionMap
+        total={questions.length}
+        current={currentQ}
+        isAnswered={(i) => !!answers[questions[i].id]}
+        onSelect={navigateTo}
+      />
+    </PageContainer>
   );
 }

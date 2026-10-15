@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 import { QuestionCard } from "@/components/QuestionCard";
+import { ProgressBar } from "@/components/ProgressBar";
+import { QuizTopBar, QuizNav } from "@/components/QuizChrome";
+import { ButtonLink, EmptyState, Icons, LoadingState, PageContainer, PageHeader } from "@/components/ui";
+import { domainColor } from "@/lib/constants";
 import type { Question, Domain } from "@/lib/types";
 
 interface WrongAnswerQuestion extends Question {
@@ -89,104 +93,67 @@ export default function ReviewPage() {
     setIsAnswered(false);
   }, []);
 
-  if (loading || authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-cissp-text-muted">Loading review questions...</div>
-      </div>
-    );
-  }
+  if (loading || authLoading) return <LoadingState label="Loading review queue..." />;
 
   if (questions.length === 0) {
     return (
-      <div className="px-6 py-8">
-        <div className="mx-auto max-w-3xl text-center py-16">
-          <div className="text-4xl mb-4">&#x1F389;</div>
-          <div className="text-white font-semibold text-lg mb-2">
-            No wrong answers to review!
-          </div>
-          <div className="text-cissp-text-muted text-sm mb-4">
-            Take more quizzes to build your review queue.
-          </div>
-          <button
-            onClick={() => router.push("/")}
-            className="text-cissp-teal hover:text-white transition-colors cursor-pointer"
-          >
-            Start practicing &rarr;
-          </button>
-        </div>
-      </div>
+      <PageContainer>
+        <PageHeader title="Review" subtitle="Questions you've answered incorrectly." />
+        <EmptyState
+          icon={<Icons.Check />}
+          title="Your review queue is clear"
+          description="Questions you miss in quizzes and exams appear here until you answer them correctly."
+          action={
+            <ButtonLink href="/" variant="primary">
+              Start practicing
+            </ButtonLink>
+          }
+        />
+      </PageContainer>
     );
   }
 
   const q = questions[currentQ];
   const domain = q.domains;
-  const color = domain?.color || "#6AB1C2";
+  const color = domainColor(domain?.id);
 
   return (
-    <div className="px-6 py-6">
-      <div className="mx-auto max-w-3xl">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-xl font-bold text-white">Wrong Answer Review</h1>
-            <span className="text-xs text-cissp-text-muted">
-              {questions.length} questions to review &bull; Q{currentQ + 1}
-            </span>
-          </div>
-          <button
-            onClick={() => router.push("/")}
-            className="bg-cissp-card border border-cissp-border rounded-lg text-cissp-text-secondary px-3.5 py-2 text-[13px] cursor-pointer hover:bg-cissp-card-hover transition-colors"
-          >
-            &larr; Home
-          </button>
-        </div>
-
+    <PageContainer>
+      <QuizTopBar
+        onBack={() => router.push("/")}
+        backLabel="Home"
+        title="Review"
+        subtitle={`${questions.length} question${questions.length === 1 ? "" : "s"} to master`}
+      >
         {q.attempt_count > 1 && (
-          <div className="bg-cissp-red/10 border border-cissp-red/30 rounded-lg px-4 py-2 mb-4 text-xs text-cissp-red">
-            Missed {q.attempt_count} times
-          </div>
+          <span className="text-xs font-semibold text-cissp-red bg-cissp-red/10 border border-cissp-red/30 rounded-lg px-3 py-1.5">
+            Missed {q.attempt_count}×
+          </span>
         )}
+      </QuizTopBar>
 
-        <QuestionCard
-          question={q}
-          domainColor={color}
-          selectedAnswer={selectedAnswer}
-          isAnswered={isAnswered}
-          onAnswer={handleAnswer}
-        />
+      <ProgressBar
+        current={currentQ + 1}
+        total={questions.length}
+        color={color}
+        label={domain ? `Domain ${domain.id} · ${domain.name}` : undefined}
+      />
 
-        <div className="flex justify-between">
-          <button
-            onClick={() => navigateTo(currentQ - 1)}
-            disabled={currentQ === 0}
-            className={`px-5 py-2.5 rounded-lg border border-cissp-border text-sm ${
-              currentQ === 0
-                ? "bg-white/[0.02] text-[#4A5A6A] cursor-default"
-                : "bg-cissp-card text-cissp-text-secondary cursor-pointer hover:bg-cissp-card-hover"
-            }`}
-          >
-            &larr; Previous
-          </button>
-          <button
-            onClick={() =>
-              currentQ < questions.length - 1 && navigateTo(currentQ + 1)
-            }
-            disabled={currentQ >= questions.length - 1}
-            className={`px-5 py-2.5 rounded-lg text-sm font-semibold ${
-              currentQ >= questions.length - 1
-                ? "bg-white/[0.02] text-[#4A5A6A] cursor-default"
-                : "text-white cursor-pointer"
-            }`}
-            style={
-              currentQ < questions.length - 1
-                ? { backgroundColor: color }
-                : undefined
-            }
-          >
-            Next &rarr;
-          </button>
-        </div>
-      </div>
-    </div>
+      <QuestionCard
+        question={q}
+        domainColor={color}
+        selectedAnswer={selectedAnswer}
+        isAnswered={isAnswered}
+        onAnswer={handleAnswer}
+      />
+
+      <QuizNav
+        onPrev={() => navigateTo(currentQ - 1)}
+        onNext={() => navigateTo(currentQ + 1)}
+        prevDisabled={currentQ === 0}
+        nextDisabled={currentQ >= questions.length - 1}
+        color={color}
+      />
+    </PageContainer>
   );
 }

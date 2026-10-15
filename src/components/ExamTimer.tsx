@@ -33,10 +33,18 @@ export function ExamTimer({ timeLeft, onTick, onTimeUp, active }: ExamTimerProps
 
   return (
     <span
-      className={`text-sm font-semibold px-3.5 py-1.5 rounded-lg bg-black/30 ${
-        isWarning ? "text-cissp-red" : "text-cissp-teal"
+      className={`inline-flex items-center gap-1.5 font-mono text-sm font-semibold tabular-nums px-3 py-1.5 rounded-lg border ${
+        isWarning
+          ? "text-cissp-red bg-cissp-red/10 border-cissp-red/30"
+          : "text-cissp-teal bg-cissp-teal/[0.08] border-cissp-teal/20"
       }`}
+      role="timer"
+      aria-label="Time remaining"
     >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+      </svg>
       {formatted}
     </span>
   );

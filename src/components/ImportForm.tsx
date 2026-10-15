@@ -2,6 +2,8 @@
 
 import { useState, useCallback } from "react";
 import type { Domain } from "@/lib/types";
+import { domainColor } from "@/lib/constants";
+import { Button, Icons } from "./ui";
 
 interface ImportQuestion {
   domain_id: number;
@@ -102,35 +104,39 @@ export function ImportForm({ onImport, domains }: ImportFormProps) {
   const [parsed, setParsed] = useState<ImportQuestion[] | null>(null);
   const [errors, setErrors] = useState<ValidationError[]>([]);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [dragging, setDragging] = useState(false);
   const [importing, setImporting] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  const processFile = useCallback(async (file: File | undefined) => {
+    setParsed(null);
+    setErrors([]);
+    setFileError(null);
+    setSuccess(false);
+    setFileName(file?.name ?? null);
+
+    if (!file) return;
+
+    if (!file.name.endsWith(".json")) {
+      setFileError("File must be a .json file");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      const { valid, errors: validationErrors } = validateQuestions(data);
+      setErrors(validationErrors);
+      if (valid.length > 0) setParsed(valid);
+    } catch {
+      setFileError("Invalid JSON file");
+    }
+  }, []);
+
   const handleFile = useCallback(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      setParsed(null);
-      setErrors([]);
-      setFileError(null);
-      setSuccess(false);
-
-      const file = e.target.files?.[0];
-      if (!file) return;
-
-      if (!file.name.endsWith(".json")) {
-        setFileError("File must be a .json file");
-        return;
-      }
-
-      try {
-        const text = await file.text();
-        const data = JSON.parse(text);
-        const { valid, errors: validationErrors } = validateQuestions(data);
-        setErrors(validationErrors);
-        if (valid.length > 0) setParsed(valid);
-      } catch {
-        setFileError("Invalid JSON file");
-      }
-    },
-    []
+    (e: React.ChangeEvent<HTMLInputElement>) => processFile(e.target.files?.[0]),
+    [processFile]
   );
 
   const handleConfirm = useCallback(async () => {
@@ -155,68 +161,101 @@ export function ImportForm({ onImport, domains }: ImportFormProps) {
     : null;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <label htmlFor="import-file" className="block text-sm text-cissp-text-secondary mb-2">
-          Upload JSON file
-        </label>
+    <div className="space-y-5">
+      <label
+        htmlFor="import-file"
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragging(true);
+        }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setDragging(false);
+          processFile(e.dataTransfer.files?.[0]);
+        }}
+        className={`flex flex-col items-center justify-center text-center gap-3 px-6 py-10 rounded-2xl border-2 border-dashed cursor-pointer transition-colors ${
+          dragging
+            ? "border-cissp-teal bg-cissp-teal/[0.08]"
+            : "border-cissp-border bg-cissp-card hover:border-cissp-teal/50 hover:bg-cissp-card-hover"
+        }`}
+      >
+        <span className="h-12 w-12 rounded-xl bg-cissp-teal/10 border border-cissp-teal/20 text-cissp-teal flex items-center justify-center">
+          <Icons.Upload size={20} />
+        </span>
+        <span>
+          <span className="block text-sm font-semibold text-white">Upload JSON file</span>
+          <span className="block text-xs text-cissp-text-muted mt-1">
+            {fileName ? fileName : "Drag and drop, or click to browse"}
+          </span>
+        </span>
         <input
           id="import-file"
           type="file"
           accept=".json"
           onChange={handleFile}
-          className="block w-full text-sm text-cissp-text-muted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:border-cissp-border file:text-sm file:bg-cissp-card file:text-cissp-text-secondary file:cursor-pointer hover:file:bg-cissp-card-hover"
+          className="sr-only"
         />
-      </div>
+      </label>
 
       {fileError && (
-        <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-sm text-red-400">
+        <div role="alert" className="p-3.5 bg-cissp-red/10 border border-cissp-red/30 rounded-xl text-sm text-cissp-red">
           {fileError}
         </div>
       )}
 
       {errors.length > 0 && (
-        <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-sm text-red-400 space-y-1">
+        <div role="alert" className="p-3.5 bg-cissp-red/10 border border-cissp-red/30 rounded-xl text-sm text-cissp-red space-y-1">
           <div className="font-semibold">Validation errors:</div>
-          {errors.map((err, i) => (
-            <div key={i}>
-              {err.index >= 0 ? `Item ${err.index}: ` : ""}
-              {err.message}
-            </div>
-          ))}
+          <ul className="space-y-0.5 max-h-48 overflow-y-auto text-cissp-red-light">
+            {errors.map((err, i) => (
+              <li key={i}>
+                {err.index >= 0 ? `Item ${err.index}: ` : ""}
+                {err.message}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
       {summary && parsed && (
-        <div className="p-4 bg-cissp-card border border-cissp-border rounded-lg space-y-3">
-          <div className="text-sm font-semibold text-white">
+        <div className="p-5 bg-cissp-card border border-cissp-border rounded-2xl space-y-4 animate-fade-up">
+          <div className="flex items-center gap-2 text-sm font-semibold text-white">
+            <span className="text-cissp-green">
+              <Icons.Check size={16} />
+            </span>
             Preview: {parsed.length} valid question{parsed.length !== 1 ? "s" : ""}
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid sm:grid-cols-2 gap-2">
             {Object.entries(summary)
               .sort(([a], [b]) => Number(a) - Number(b))
               .map(([domainId, count]) => (
                 <div
                   key={domainId}
-                  className="text-xs text-cissp-text-secondary flex justify-between bg-white/5 px-3 py-1.5 rounded"
+                  className="text-xs text-cissp-text-secondary flex items-center justify-between gap-3 bg-white/[0.04] px-3 py-2 rounded-lg"
                 >
-                  <span>Domain {domainId}: {domainMap[Number(domainId)] || "Unknown"}</span>
-                  <span className="text-cissp-text-muted">{count}Q</span>
+                  <span className="flex items-center gap-2 min-w-0">
+                    <span
+                      className="h-2 w-2 rounded-full shrink-0"
+                      style={{ backgroundColor: domainColor(Number(domainId)) }}
+                    />
+                    <span className="truncate">
+                      Domain {domainId}: {domainMap[Number(domainId)] || "Unknown"}
+                    </span>
+                  </span>
+                  <span className="text-cissp-text-muted tabular-nums">{count}Q</span>
                 </div>
               ))}
           </div>
-          <button
-            onClick={handleConfirm}
-            disabled={importing}
-            className="w-full py-2.5 rounded-lg bg-cissp-teal text-white text-sm font-semibold cursor-pointer hover:bg-cissp-teal/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+          <Button variant="primary" className="w-full" onClick={handleConfirm} disabled={importing}>
             {importing ? "Importing..." : `Import ${parsed.length} Questions`}
-          </button>
+          </Button>
         </div>
       )}
 
       {success && (
-        <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-sm text-green-400">
+        <div role="status" className="flex items-center gap-2 p-3.5 bg-cissp-green/10 border border-cissp-green/30 rounded-xl text-sm text-cissp-green">
+          <Icons.Check size={16} />
           Questions imported successfully!
         </div>
       )}

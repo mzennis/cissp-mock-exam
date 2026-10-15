@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 import { QuestionCard } from "@/components/QuestionCard";
+import { ProgressBar } from "@/components/ProgressBar";
+import { QuizTopBar, QuizNav } from "@/components/QuizChrome";
+import { ButtonLink, EmptyState, Icons, LoadingState, PageContainer, PageHeader } from "@/components/ui";
+import { domainColor } from "@/lib/constants";
 import type { Question, Domain } from "@/lib/types";
 
 interface BookmarkedQuestion extends Question {
@@ -84,97 +88,64 @@ export default function BookmarksPage() {
     [user, questions, currentQ, navigateTo]
   );
 
-  if (loading || authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-cissp-text-muted">Loading bookmarks...</div>
-      </div>
-    );
-  }
+  if (loading || authLoading) return <LoadingState label="Loading bookmarks..." />;
 
   if (questions.length === 0) {
     return (
-      <div className="px-6 py-8">
-        <div className="mx-auto max-w-3xl text-center py-16">
-          <div className="text-cissp-text-muted mb-4">
-            No bookmarked questions.
-          </div>
-          <button
-            onClick={() => router.push("/")}
-            className="text-cissp-teal hover:text-white transition-colors cursor-pointer"
-          >
-            Start practicing &rarr;
-          </button>
-        </div>
-      </div>
+      <PageContainer>
+        <PageHeader title="Bookmarks" subtitle="Questions you've saved for later." />
+        <EmptyState
+          icon={<Icons.Bookmark />}
+          title="No bookmarked questions"
+          description="Tap the bookmark icon on any question during a quiz to save it here."
+          action={
+            <ButtonLink href="/" variant="primary">
+              Start practicing
+            </ButtonLink>
+          }
+        />
+      </PageContainer>
     );
   }
 
   const q = questions[currentQ];
   const domain = q.domains;
-  const color = domain?.color || "#6AB1C2";
+  const color = domainColor(domain?.id);
 
   return (
-    <div className="px-6 py-6">
-      <div className="mx-auto max-w-3xl">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-xl font-bold text-white">Bookmarked Questions</h1>
-            <span className="text-xs text-cissp-text-muted">
-              {currentQ + 1} of {questions.length}
-            </span>
-          </div>
-          <button
-            onClick={() => router.push("/")}
-            className="bg-cissp-card border border-cissp-border rounded-lg text-cissp-text-secondary px-3.5 py-2 text-[13px] cursor-pointer hover:bg-cissp-card-hover transition-colors"
-          >
-            &larr; Home
-          </button>
-        </div>
+    <PageContainer>
+      <QuizTopBar
+        onBack={() => router.push("/")}
+        backLabel="Home"
+        title="Bookmarks"
+        subtitle={`${questions.length} saved question${questions.length === 1 ? "" : "s"}`}
+      />
 
-        <QuestionCard
-          question={q}
-          domainColor={color}
-          selectedAnswer={selectedAnswer}
-          isAnswered={isAnswered}
-          onAnswer={handleAnswer}
-          isBookmarked={true}
-          onToggleBookmark={() => removeBookmark(q.id)}
-          showBookmark={true}
-        />
+      <ProgressBar
+        current={currentQ + 1}
+        total={questions.length}
+        color={color}
+        label={domain ? `Domain ${domain.id} · ${domain.name}` : undefined}
+      />
 
-        <div className="flex justify-between">
-          <button
-            onClick={() => navigateTo(currentQ - 1)}
-            disabled={currentQ === 0}
-            className={`px-5 py-2.5 rounded-lg border border-cissp-border text-sm ${
-              currentQ === 0
-                ? "bg-white/[0.02] text-[#4A5A6A] cursor-default"
-                : "bg-cissp-card text-cissp-text-secondary cursor-pointer hover:bg-cissp-card-hover"
-            }`}
-          >
-            &larr; Previous
-          </button>
-          <button
-            onClick={() =>
-              currentQ < questions.length - 1 && navigateTo(currentQ + 1)
-            }
-            disabled={currentQ >= questions.length - 1}
-            className={`px-5 py-2.5 rounded-lg text-sm font-semibold ${
-              currentQ >= questions.length - 1
-                ? "bg-white/[0.02] text-[#4A5A6A] cursor-default"
-                : "text-white cursor-pointer"
-            }`}
-            style={
-              currentQ < questions.length - 1
-                ? { backgroundColor: color }
-                : undefined
-            }
-          >
-            Next &rarr;
-          </button>
-        </div>
-      </div>
-    </div>
+      <QuestionCard
+        question={q}
+        domainColor={color}
+        selectedAnswer={selectedAnswer}
+        isAnswered={isAnswered}
+        onAnswer={handleAnswer}
+        isBookmarked={true}
+        onToggleBookmark={() => removeBookmark(q.id)}
+        showBookmark={true}
+      />
+
+      <QuizNav
+        onPrev={() => navigateTo(currentQ - 1)}
+        onNext={() => navigateTo(currentQ + 1)}
+        prevDisabled={currentQ === 0}
+        nextDisabled={currentQ >= questions.length - 1}
+        color={color}
+      />
+    </PageContainer>
   );
 }

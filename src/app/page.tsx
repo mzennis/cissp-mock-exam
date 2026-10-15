@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { ScoreBadge } from "@/components/ScoreBadge";
+import { Card, Icons, PageContainer, SectionLabel, buttonClass } from "@/components/ui";
+import { PASSING_SCORE, SECONDS_PER_QUESTION, domainColor } from "@/lib/constants";
 
 type RecentScore = { score_pct: number; passed: boolean };
 
@@ -88,112 +90,198 @@ export default async function Home() {
     (acc, d) => acc + (d.question_count || 0),
     0
   );
+  const examMinutes = Math.round((totalQuestions * SECONDS_PER_QUESTION) / 60);
+  const attemptedDomains = Object.keys(scores.byDomain).length;
+
+  const stats = [
+    { label: "Questions", value: totalQuestions },
+    { label: "Domains", value: domains.length },
+    { label: "Pass mark", value: `${PASSING_SCORE}%` },
+    {
+      label: "Domains practiced",
+      value: `${attemptedDomains}/${domains.length}`,
+    },
+  ];
 
   return (
-    <div className="px-6 py-8">
-      <div className="mx-auto max-w-4xl">
-        <div className="text-center mb-10 pt-4">
-          <div className="inline-block px-4 py-1.5 bg-cissp-teal/15 border border-cissp-teal/30 rounded-full text-xs tracking-[0.15em] uppercase text-cissp-teal mb-4">
-            CISSP Exam Prep
+    <PageContainer width="max-w-5xl">
+      <section className="pt-4 sm:pt-8 mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-cissp-teal/10 border border-cissp-teal/25 rounded-full text-[11px] font-semibold tracking-[0.14em] uppercase text-cissp-teal mb-5">
+          <span className="h-1.5 w-1.5 rounded-full bg-cissp-teal animate-pulse" />
+          CISSP Exam Prep
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-[1.1] max-w-2xl">
+          Practice smarter for the{" "}
+          <span className="bg-gradient-to-r from-cissp-teal to-[#818CF8] bg-clip-text text-transparent">
+            CISSP exam
+          </span>
+        </h1>
+        <p className="text-cissp-text-secondary text-base mt-4 max-w-xl leading-relaxed">
+          Drill each of the 8 domains, then test yourself under timed
+          conditions. Missed questions are saved for focused review.
+        </p>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
+          {stats.map((s) => (
+            <Card key={s.label} className="px-4 py-3.5">
+              <div className="text-2xl font-bold text-white tabular-nums">{s.value}</div>
+              <div className="text-xs text-cissp-text-muted mt-0.5">{s.label}</div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <Link
+        href="/exam"
+        className="group relative block overflow-hidden rounded-2xl border border-cissp-teal/30 bg-gradient-to-br from-[#123448] via-[#0F2A3B] to-[#0C1624] p-6 sm:p-8 mb-12 transition-all hover:border-cissp-teal/60 hover:shadow-[0_20px_60px_-20px_rgba(95,195,212,0.45)]"
+      >
+        <div
+          className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cissp-teal/20 blur-3xl"
+          aria-hidden="true"
+        />
+        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-cissp-teal">
+                Full Mock Exam
+              </span>
+              {scores.fullExam && (
+                <span className="flex items-center gap-1.5 text-xs text-cissp-text-muted">
+                  Last score
+                  <ScoreBadge
+                    score={scores.fullExam.score_pct}
+                    passed={scores.fullExam.passed}
+                  />
+                </span>
+              )}
+            </div>
+            <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              {totalQuestions} questions, all domains
+            </div>
+            <div className="flex flex-wrap gap-x-5 gap-y-1 mt-3 text-sm text-cissp-text-secondary">
+              <span className="flex items-center gap-1.5">
+                <Icons.Clock size={15} /> ~{Math.floor(examMinutes / 60)}h {examMinutes % 60}m timed
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Icons.Refresh size={15} /> Randomized order
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Icons.History size={15} /> Per-domain breakdown
+              </span>
+            </div>
           </div>
-          <h1 className="text-4xl font-bold text-white tracking-tight mb-2">
-            Mock Exam Practice
-          </h1>
-          <p className="text-cissp-text-secondary text-sm max-w-lg mx-auto">
-            {totalQuestions} questions across all 8 domains. Practice by domain
-            or take the full exam.
+          <span className={buttonClass("primary", "lg", "shrink-0 group-hover:gap-3")}>
+            Start exam <Icons.ArrowRight size={16} />
+          </span>
+        </div>
+      </Link>
+
+      <div className="flex items-end justify-between mb-4">
+        <div>
+          <SectionLabel>Practice by domain</SectionLabel>
+          <p className="text-sm text-cissp-text-muted mt-1">
+            Untimed quizzes with instant feedback and explanations.
           </p>
         </div>
+      </div>
 
-        <Link
-          href="/exam"
-          className="w-full p-5 bg-gradient-to-r from-cissp-accent to-[#2B6777] border border-cissp-teal/30 rounded-xl text-white text-lg font-semibold flex items-center justify-between hover:-translate-y-0.5 transition-transform mb-8"
-        >
-          <span>Full Mock Exam — {totalQuestions} Questions</span>
-          <span className="text-sm text-cissp-text-secondary flex items-center gap-3">
-            Timed &bull; Randomized &bull; All Domains
-            {scores.fullExam && (
-              <ScoreBadge
-                score={scores.fullExam.score_pct}
-                passed={scores.fullExam.passed}
-              />
-            )}
-          </span>
-        </Link>
-
-        <div className="text-xs uppercase tracking-[0.15em] text-cissp-text-dim font-semibold mb-4">
-          Practice by Domain
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {domains.map((d) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {domains.map((d) => {
+          const color = domainColor(d.id);
+          const recent = scores.byDomain[d.id];
+          return (
             <Link
               key={d.id}
               href={`/quiz/${d.id}`}
-              className="p-4 bg-cissp-card border border-cissp-border rounded-lg hover:bg-cissp-card-hover hover:border-cissp-border-hover transition-all flex flex-col gap-1.5 group"
+              className="group relative overflow-hidden p-5 bg-cissp-card border border-cissp-border rounded-2xl hover:bg-cissp-card-hover hover:border-cissp-border-hover hover:-translate-y-0.5 transition-all flex flex-col gap-3"
             >
-              <div className="flex justify-between items-center w-full">
+              <div
+                className="absolute inset-x-0 top-0 h-px opacity-60 group-hover:opacity-100 transition-opacity"
+                style={{ background: `linear-gradient(90deg, transparent, ${color}, transparent)` }}
+                aria-hidden="true"
+              />
+              <div className="flex items-start gap-4">
                 <span
-                  className="text-xs font-bold tracking-wider"
-                  style={{ color: d.color }}
+                  className="h-10 w-10 shrink-0 rounded-xl flex items-center justify-center text-sm font-bold border"
+                  style={{
+                    color,
+                    backgroundColor: `${color}1A`,
+                    borderColor: `${color}40`,
+                  }}
                 >
-                  DOMAIN {d.id}
+                  {d.id}
                 </span>
-                <span className="flex items-center gap-2">
-                  {scores.byDomain[d.id] && (
-                    <ScoreBadge
-                      score={scores.byDomain[d.id].score_pct}
-                      passed={scores.byDomain[d.id].passed}
+                <div className="min-w-0 flex-1">
+                  <div className="text-[15px] font-semibold text-cissp-text group-hover:text-white transition-colors leading-snug">
+                    {d.name}
+                  </div>
+                  <div className="text-xs text-cissp-text-muted mt-1">
+                    {d.weight} of exam · {d.question_count} questions
+                  </div>
+                </div>
+                <span className="text-cissp-text-dim group-hover:text-cissp-teal group-hover:translate-x-0.5 transition-all">
+                  <Icons.ArrowRight size={16} />
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                  {recent && (
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: `${recent.score_pct}%`,
+                        backgroundColor: recent.passed ? "var(--color-cissp-green)" : "var(--color-cissp-red)",
+                      }}
                     />
                   )}
-                  <span className="text-xs text-cissp-text-muted bg-white/5 px-2 py-0.5 rounded-full">
-                    {d.weight} &bull; {d.question_count}Q
-                  </span>
-                </span>
-              </div>
-              <span className="text-sm font-medium text-cissp-text group-hover:text-white transition-colors">
-                {d.name}
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        {userQuestionCount > 0 && (
-          <div className="mt-6">
-            <Link
-              href="/quiz/custom"
-              className="w-full p-4 bg-cissp-card border border-cissp-border rounded-lg flex items-center justify-between hover:bg-cissp-card-hover hover:border-cissp-border-hover transition-all group"
-            >
-              <div>
-                <span className="text-xs font-bold tracking-wider text-cissp-teal">
-                  MY QUESTIONS
-                </span>
-                <div className="text-sm font-medium text-cissp-text group-hover:text-white transition-colors mt-0.5">
-                  Practice imported questions
                 </div>
+                {recent ? (
+                  <ScoreBadge score={recent.score_pct} passed={recent.passed} />
+                ) : (
+                  <span className="text-[11px] text-cissp-text-dim">Not started</span>
+                )}
               </div>
-              <span className="text-xs text-cissp-text-muted bg-white/5 px-2 py-0.5 rounded-full">
-                {userQuestionCount}Q
-              </span>
             </Link>
-          </div>
-        )}
-
-        <div className="mt-8 p-4 bg-white/[0.03] rounded-lg border border-cissp-border">
-          <div className="text-xs text-cissp-text-muted leading-relaxed">
-            <strong className="text-cissp-text-secondary">
-              Passing Score:
-            </strong>{" "}
-            700/1000 (~70%) &nbsp;&bull;&nbsp;
-            <strong className="text-cissp-text-secondary">
-              Real Exam:
-            </strong>{" "}
-            125-175 questions, 4 hours, CAT format &nbsp;&bull;&nbsp;
-            <strong className="text-cissp-text-secondary">Tip:</strong> Focus on
-            domains where you score below 70%
-          </div>
-        </div>
+          );
+        })}
       </div>
-    </div>
+
+      {userQuestionCount > 0 && (
+        <Link
+          href="/quiz/custom"
+          className="mt-3 p-5 bg-cissp-card border border-cissp-border rounded-2xl flex items-center gap-4 hover:bg-cissp-card-hover hover:border-cissp-border-hover transition-all group"
+        >
+          <span className="h-10 w-10 shrink-0 rounded-xl flex items-center justify-center bg-[#2DD4BF]/10 border border-[#2DD4BF]/25 text-[#2DD4BF]">
+            <Icons.Upload size={17} />
+          </span>
+          <div className="flex-1">
+            <div className="text-[15px] font-semibold text-cissp-text group-hover:text-white transition-colors">
+              My Questions
+            </div>
+            <div className="text-xs text-cissp-text-muted mt-0.5">
+              {userQuestionCount} imported question{userQuestionCount === 1 ? "" : "s"}
+            </div>
+          </div>
+          <span className="text-cissp-text-dim group-hover:text-cissp-teal transition-colors">
+            <Icons.ArrowRight size={16} />
+          </span>
+        </Link>
+      )}
+
+      <Card className="mt-12 p-5 grid gap-4 sm:grid-cols-3 text-sm">
+        <div>
+          <div className="text-xs font-semibold text-cissp-text-secondary mb-1">Passing score</div>
+          <div className="text-cissp-text-muted">700/1000 (~70%) on the real exam</div>
+        </div>
+        <div>
+          <div className="text-xs font-semibold text-cissp-text-secondary mb-1">Real exam format</div>
+          <div className="text-cissp-text-muted">100–150 questions, 3 hours, CAT</div>
+        </div>
+        <div>
+          <div className="text-xs font-semibold text-cissp-text-secondary mb-1">Study tip</div>
+          <div className="text-cissp-text-muted">Focus on domains where you score below 70%</div>
+        </div>
+      </Card>
+    </PageContainer>
   );
 }

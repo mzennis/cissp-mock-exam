@@ -7,8 +7,10 @@ import { useAuth } from "@/components/AuthProvider";
 import { QuestionCard } from "@/components/QuestionCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { ExamTimer } from "@/components/ExamTimer";
+import { QuizTopBar, QuizNav, LiveScore, QuestionMap } from "@/components/QuizChrome";
+import { Button, EmptyState, Icons, LoadingState, PageContainer } from "@/components/ui";
 import type { Question, Domain, AnswerRecord } from "@/lib/types";
-import { PASSING_SCORE, SECONDS_PER_QUESTION } from "@/lib/constants";
+import { PASSING_SCORE, SECONDS_PER_QUESTION, domainColor } from "@/lib/constants";
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -181,6 +183,8 @@ export default function ExamPage() {
     router.push("/results");
   }, [answers, questions, user, startTime, getDomainForQuestion, router]);
 
+  const tick = useCallback(() => setTimeLeft((t) => t - 1), []);
+
   const toggleBookmark = useCallback(
     async (questionId: string) => {
       if (!user) return;
@@ -209,100 +213,97 @@ export default function ExamPage() {
     [user, bookmarks]
   );
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-cissp-text-muted">Loading exam...</div>
-      </div>
-    );
-  }
+  if (loading) return <LoadingState label="Preparing your exam..." />;
 
   if (questions.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-cissp-text-muted">No questions available.</div>
-      </div>
+      <PageContainer>
+        <EmptyState
+          icon={<Icons.File />}
+          title="No questions available"
+          description="The question bank is empty. Seed the database and try again."
+        />
+      </PageContainer>
     );
   }
 
   const q = questions[currentQ];
   const domain = getDomainForQuestion(q);
-  const color = domain?.color || "#6AB1C2";
+  const color = domainColor(domain?.id);
+  const answeredCount = Object.keys(answers).length;
+  const correctCount = Object.values(answers).filter((a) => a.correct).length;
+  const isLast = currentQ === questions.length - 1;
 
   return (
-    <div className="px-6 py-6">
-      <div className="mx-auto max-w-3xl">
-        <div className="flex justify-between items-center mb-6">
-          <button
-            onClick={() => {
-              setTimerActive(false);
-              router.push("/");
-            }}
-            className="bg-cissp-card border border-cissp-border rounded-lg text-cissp-text-secondary px-3.5 py-2 text-[13px] cursor-pointer hover:bg-cissp-card-hover transition-colors"
-          >
-            &larr; Back
-          </button>
-          <div className="flex gap-4 items-center">
-            <ExamTimer
-              timeLeft={timeLeft}
-              onTick={() => setTimeLeft((t) => t - 1)}
-              onTimeUp={finishExam}
-              active={timerActive}
-            />
-            <span className="text-[13px] text-cissp-text-muted">
-              {Object.values(answers).filter((a) => a.correct).length}/
-              {Object.keys(answers).length} correct
-            </span>
-          </div>
-        </div>
-
-        <ProgressBar
-          current={currentQ + 1}
-          total={questions.length}
-          color={color}
-          label={
-            domain
-              ? `Domain ${domain.id}: ${domain.name}`
-              : undefined
-          }
+    <PageContainer>
+      <QuizTopBar
+        onBack={() => {
+          setTimerActive(false);
+          router.push("/");
+        }}
+        backLabel="Exit"
+        title="Full Mock Exam"
+      >
+        <ExamTimer
+          timeLeft={timeLeft}
+          onTick={tick}
+          onTimeUp={finishExam}
+          active={timerActive}
         />
+        <LiveScore correct={correctCount} answered={answeredCount} />
+      </QuizTopBar>
 
-        <QuestionCard
-          question={q}
-          domainColor={color}
-          selectedAnswer={selectedAnswer}
-          isAnswered={isAnswered}
-          onAnswer={handleAnswer}
-          isBookmarked={bookmarks.has(q.id)}
-          onToggleBookmark={() => toggleBookmark(q.id)}
-          showBookmark={!!user}
-        />
+      <ProgressBar
+        current={currentQ + 1}
+        total={questions.length}
+        color={color}
+        label={domain ? `Domain ${domain.id} · ${domain.name}` : undefined}
+      />
 
-        <div className="flex justify-between">
-          <button
-            onClick={() => navigateTo(currentQ - 1)}
-            disabled={currentQ === 0}
-            className={`px-5 py-2.5 rounded-lg border border-cissp-border text-sm ${
-              currentQ === 0
-                ? "bg-white/[0.02] text-[#4A5A6A] cursor-default"
-                : "bg-cissp-card text-cissp-text-secondary cursor-pointer hover:bg-cissp-card-hover"
-            }`}
-          >
-            &larr; Previous
-          </button>
-          <button
-            onClick={() =>
-              currentQ === questions.length - 1
-                ? finishExam()
-                : navigateTo(currentQ + 1)
-            }
-            className="px-5 py-2.5 rounded-lg text-white text-sm font-semibold cursor-pointer"
-            style={{ backgroundColor: color }}
-          >
-            {currentQ === questions.length - 1 ? "Finish Exam \u2192" : "Next \u2192"}
-          </button>
-        </div>
-      </div>
-    </div>
+      <QuestionCard
+        question={q}
+        domainColor={color}
+        selectedAnswer={selectedAnswer}
+        isAnswered={isAnswered}
+        onAnswer={handleAnswer}
+        isBookmarked={bookmarks.has(q.id)}
+        onToggleBookmark={() => toggleBookmark(q.id)}
+        showBookmark={!!user}
+      />
+
+      <QuizNav
+        onPrev={() => navigateTo(currentQ - 1)}
+        onNext={() => (isLast ? finishExam() : navigateTo(currentQ + 1))}
+        prevDisabled={currentQ === 0}
+        isFinal={isLast}
+        nextLabel={isLast ? "Finish Exam" : "Next"}
+        color={color}
+        center={
+          !isLast && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hidden sm:inline-flex"
+              onClick={() => {
+                const unanswered = questions.length - answeredCount;
+                if (window.confirm(`Submit the exam now? ${unanswered} unanswered question${unanswered === 1 ? "" : "s"} will be marked incorrect.`)) {
+                  finishExam();
+                }
+              }}
+            >
+              Submit early
+            </Button>
+          )
+        }
+      />
+
+      <QuestionMap
+        total={questions.length}
+        current={currentQ}
+        isAnswered={(i) => !!answers[questions[i].id]}
+        isBookmarked={user ? (i) => bookmarks.has(questions[i].id) : undefined}
+        onSelect={navigateTo}
+      />
+    </PageContainer>
   );
 }

@@ -1,27 +1,74 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-cissp-dark: #0D1B2A;
-  --color-cissp-mid: #1B2838;
+  --color-cissp-dark: #070D17;
+  --color-cissp-mid: #0C1624;
+  --color-cissp-surface: #111D2E;
   --color-cissp-accent: #1B4965;
-  --color-cissp-teal: #6AB1C2;
-  --color-cissp-green: #4CAF50;
-  --color-cissp-green-light: #A5D6A7;
-  --color-cissp-red: #E57373;
-  --color-cissp-red-light: #EF9A9A;
-  --color-cissp-text: #F0F0F0;
-  --color-cissp-text-secondary: #8BA4B5;
-  --color-cissp-text-muted: #6A8A9A;
-  --color-cissp-text-dim: #5A7A8A;
-  --color-cissp-card: rgba(255, 255, 255, 0.04);
-  --color-cissp-card-hover: rgba(255, 255, 255, 0.08);
+  --color-cissp-teal: #5FC3D4;
+  --color-cissp-teal-strong: #2FA7BC;
+  --color-cissp-green: #4ADE80;
+  --color-cissp-green-light: #A7F3C0;
+  --color-cissp-red: #F87171;
+  --color-cissp-red-light: #FCA5A5;
+  --color-cissp-amber: #FBBF24;
+  --color-cissp-text: #E8EEF4;
+  --color-cissp-text-secondary: #9DB2C3;
+  --color-cissp-text-muted: #6F8799;
+  --color-cissp-text-dim: #50677A;
+  --color-cissp-card: rgba(255, 255, 255, 0.035);
+  --color-cissp-card-hover: rgba(255, 255, 255, 0.065);
   --color-cissp-border: rgba(255, 255, 255, 0.08);
-  --color-cissp-border-hover: rgba(255, 255, 255, 0.15);
+  --color-cissp-border-hover: rgba(255, 255, 255, 0.16);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
 }
 
 body {
   background: var(--color-cissp-dark);
   color: var(--color-cissp-text);
+}
+
+::selection {
+  background: rgba(95, 195, 212, 0.3);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cissp-teal);
+  outline-offset: 2px;
+}
+
+.bg-app {
+  background-color: var(--color-cissp-dark);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(47, 167, 188, 0.16), transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  background-attachment: fixed;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.3s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
 }

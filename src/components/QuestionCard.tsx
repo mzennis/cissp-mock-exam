@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import type { Question } from "@/lib/types";
 import { BookmarkButton } from "./BookmarkButton";
+import { Icons } from "./ui";
 
 interface QuestionCardProps {
   question: Question;
@@ -14,6 +16,13 @@ interface QuestionCardProps {
   showBookmark?: boolean;
 }
 
+function isTypingTarget(target: EventTarget | null) {
+  return (
+    target instanceof HTMLElement &&
+    (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)
+  );
+}
+
 export function QuestionCard({
   question,
   domainColor,
@@ -24,91 +33,130 @@ export function QuestionCard({
   onToggleBookmark,
   showBookmark = false,
 }: QuestionCardProps) {
+  // Keyboard shortcuts: A-F or 1-6 to pick an option
+  useEffect(() => {
+    if (isAnswered) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || isTypingTarget(e.target)) return;
+      const key = e.key.toLowerCase();
+      let idx = -1;
+      if (key >= "a" && key <= "f") idx = key.charCodeAt(0) - 97;
+      else if (key >= "1" && key <= "6") idx = Number(key) - 1;
+      if (idx >= 0 && idx < question.options.length) {
+        e.preventDefault();
+        onAnswer(idx);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isAnswered, question.options.length, onAnswer]);
+
+  const hasKey = question.answer != null;
+  const isCorrect = isAnswered && hasKey && selectedAnswer === question.answer;
+
   return (
-    <div>
-      <div className="bg-white/5 border border-cissp-border rounded-xl p-7 mb-4 relative">
-        <p className="text-[17px] font-medium leading-relaxed text-cissp-text">
+    <div key={question.id} className="animate-fade-up">
+      <div
+        className="relative bg-cissp-surface/70 border border-cissp-border rounded-2xl p-6 sm:p-8 mb-4 overflow-hidden"
+      >
+        <div
+          className="absolute inset-y-0 left-0 w-1"
+          style={{ backgroundColor: domainColor }}
+          aria-hidden="true"
+        />
+        <p className="text-[17px] sm:text-lg font-medium leading-relaxed text-cissp-text pr-10">
           {question.question}
         </p>
         {showBookmark && onToggleBookmark && (
           <div className="absolute top-4 right-4">
-            <BookmarkButton
-              isBookmarked={isBookmarked}
-              onClick={onToggleBookmark}
-            />
+            <BookmarkButton isBookmarked={isBookmarked} onClick={onToggleBookmark} />
           </div>
         )}
       </div>
 
-      <div className="flex flex-col gap-2.5 mb-5">
+      <div className="flex flex-col gap-2.5 mb-5" role="group" aria-label="Answer options">
         {question.options.map((opt, i) => {
-          let bg = "bg-cissp-card";
-          let border = "border-cissp-border";
-          let text = "text-[#D0D0D0]";
-          let indicator = String.fromCharCode(65 + i);
-          let indicatorBg = "bg-white/[0.08]";
-          let indicatorText = "text-cissp-text-secondary";
+          const letter = String.fromCharCode(65 + i);
+          let state: "idle" | "correct" | "wrong" | "chosen" | "dimmed" = "idle";
 
           if (isAnswered) {
-            if (question.answer != null && i === question.answer) {
-              bg = "bg-cissp-green/[0.12]";
-              border = "border-cissp-green/40";
-              text = "text-cissp-green-light";
-              indicatorBg = "bg-cissp-green/30";
-              indicatorText = "text-cissp-green-light";
-              indicator = "\u2713";
-            } else if (i === selectedAnswer && (question.answer == null || i !== question.answer)) {
-              if (question.answer != null) {
-                bg = "bg-cissp-red/[0.12]";
-                border = "border-cissp-red/40";
-                text = "text-cissp-red-light";
-                indicatorBg = "bg-cissp-red/30";
-                indicatorText = "text-cissp-red-light";
-                indicator = "\u2717";
-              } else {
-                bg = "bg-white/[0.08]";
-                border = "border-cissp-text-muted/30";
-                text = "text-cissp-text";
-              }
-            }
+            if (hasKey && i === question.answer) state = "correct";
+            else if (i === selectedAnswer) state = hasKey ? "wrong" : "chosen";
+            else state = "dimmed";
           }
+
+          const styles = {
+            idle: "bg-cissp-card border-cissp-border text-cissp-text hover:bg-cissp-card-hover hover:border-cissp-teal/40 cursor-pointer",
+            correct: "bg-cissp-green/10 border-cissp-green/50 text-cissp-green-light",
+            wrong: "bg-cissp-red/10 border-cissp-red/50 text-cissp-red-light",
+            chosen: "bg-cissp-teal/10 border-cissp-teal/50 text-cissp-text",
+            dimmed: "bg-cissp-card border-cissp-border text-cissp-text-muted",
+          }[state];
+
+          const indicatorStyles = {
+            idle: "bg-white/[0.06] border-cissp-border text-cissp-text-secondary group-hover:border-cissp-teal/50 group-hover:text-cissp-teal",
+            correct: "bg-cissp-green/20 border-cissp-green/50 text-cissp-green",
+            wrong: "bg-cissp-red/20 border-cissp-red/50 text-cissp-red",
+            chosen: "bg-cissp-teal/20 border-cissp-teal/50 text-cissp-teal",
+            dimmed: "bg-white/[0.03] border-cissp-border text-cissp-text-dim",
+          }[state];
 
           return (
             <button
               key={i}
               onClick={() => onAnswer(i)}
               disabled={isAnswered}
-              className={`flex items-start gap-3.5 p-3.5 ${bg} border ${border} rounded-lg ${text} text-[15px] text-left leading-relaxed transition-all ${
-                !isAnswered
-                  ? "cursor-pointer hover:bg-cissp-card-hover"
-                  : "cursor-default"
-              }`}
-              style={
-                !isAnswered
-                  ? {}
-                  : undefined
-              }
+              className={`group flex items-start gap-3.5 p-3.5 sm:p-4 border rounded-xl text-[15px] text-left leading-relaxed transition-all disabled:cursor-default ${styles}`}
             >
               <span
-                className={`min-w-7 h-7 flex items-center justify-center rounded-md ${indicatorBg} ${indicatorText} text-[13px] font-bold shrink-0`}
+                className={`min-w-8 h-8 flex items-center justify-center rounded-lg border text-[13px] font-bold shrink-0 transition-colors ${indicatorStyles}`}
               >
-                {indicator}
+                {state === "correct" ? (
+                  <Icons.Check size={15} />
+                ) : state === "wrong" ? (
+                  <Icons.X size={15} />
+                ) : (
+                  letter
+                )}
               </span>
-              <span>{opt}</span>
+              <span className="pt-0.5">{opt}</span>
             </button>
           );
         })}
       </div>
 
+      {isAnswered && hasKey && (
+        <div
+          className={`flex items-center gap-2 text-sm font-semibold mb-3 ${
+            isCorrect ? "text-cissp-green" : "text-cissp-red"
+          }`}
+        >
+          {isCorrect ? <Icons.Check size={16} /> : <Icons.X size={16} />}
+          {isCorrect ? "Correct" : `Incorrect — the answer is ${String.fromCharCode(65 + question.answer!)}`}
+        </div>
+      )}
+
       {isAnswered && question.explanation && (
-        <div className="bg-cissp-teal/[0.08] border border-cissp-teal/20 rounded-xl p-5 mb-5">
-          <div className="text-[11px] font-bold text-cissp-teal uppercase tracking-[0.1em] mb-2">
+        <div className="bg-cissp-teal/[0.06] border border-cissp-teal/20 rounded-2xl p-5 mb-5 animate-fade-up">
+          <div className="flex items-center gap-2 text-[11px] font-bold text-cissp-teal uppercase tracking-[0.12em] mb-2">
+            <Icons.Lightbulb size={14} />
             Explanation
           </div>
-          <p className="text-sm leading-relaxed text-[#B0C8D4]">
+          <p className="text-sm leading-relaxed text-cissp-text-secondary">
             {question.explanation}
           </p>
         </div>
+      )}
+
+      {!isAnswered && (
+        <p className="hidden sm:block text-[11px] text-cissp-text-dim mb-4">
+          Tip: press <kbd className="px-1 rounded border border-cissp-border">A</kbd>–
+          <kbd className="px-1 rounded border border-cissp-border">
+            {String.fromCharCode(64 + question.options.length)}
+          </kbd>{" "}
+          to answer, <kbd className="px-1 rounded border border-cissp-border">←</kbd>{" "}
+          <kbd className="px-1 rounded border border-cissp-border">→</kbd> to navigate
+        </p>
       )}
     </div>
   );

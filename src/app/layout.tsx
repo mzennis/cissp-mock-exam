@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <AuthProvider>
-          <div className="min-h-screen bg-gradient-to-br from-cissp-dark via-cissp-mid to-cissp-accent">
+          <div className="min-h-screen bg-app">
             <Navbar />
             {children}
           </div>
